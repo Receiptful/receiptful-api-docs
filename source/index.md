@@ -1,13 +1,11 @@
 ---
-title: API Reference
+title: Receiptful V1 API
 
 language_tabs:
   - shell
-  - ruby
-  - python
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://app.receiptful.com'>Sign Up for an API Key</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -16,153 +14,467 @@ includes:
 search: true
 ---
 
-# Introduction
-
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
 # Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
 
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Your API Key can be found on the profile page in your Receiptful control panel
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+All paths should prefixed with http://app.recieptful.com/api/v1 and will need the following HTTP header:
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`X-ApiKey: YOUR_API_KEY`
 
 <aside class="notice">
-You must replace `meowmeowmeow` with your personal API key.
+Your API Key can be found on the profile page in your Receiptful control panel
 </aside>
 
-# Kittens
+# Receipts
+Services related to sending using the **Receipts API**
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Reciept Collection
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+# EXAMPLE REQUEST
+curl "http://app.receipftul.com/api/v1/receipts"
+  -H "X-ApiKey: YOUR_API_KEY"
+  -d page=1
+  -d limit=10
+  -g
 ```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
+> Example Response
 
 ```json
 {
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+   "meta":{
+      "_links":{
+         "first":"http://app.receiptful.com/api/v1/receipts?page=1",
+         "next":"http://app.receiptful.com/api/v1/receipts?page=3",
+         "prev":"http://app.receiptful.com/api/v1/receipts?page=1",
+         "last":"http://app.receiptful.com/api/v1/receipts?page=5"
+      }
+   },
+   "data":[
+      {
+         "_id":"1e23df04",
+         "reference":"c_1e23d",
+         "currency":"USD",
+         "amount":"0.00",
+         "to":"customer@email.com",
+         "from":"me@mybusiness.com",
+         "card":{
+            "type":"VISA",
+            "last4":4242
+         },
+         "items":[
+            {
+               "reference":123,
+               "description":"Receiptful subscription",
+               "quantity":1,
+               "amount":"39.99"
+            }
+         ],
+         "subtotals":[
+            {
+               "description":"Delivery",
+               "amount":"9.00"
+            }
+         ],
+         "billing":{
+            "address":{
+               "firstName":"John",
+               "lastName":"Doe",
+               "company":"Acme Widgets",
+               "addressLine1":"111 Main",
+               "addressLine2":"Suite 101",
+               "city":"New York",
+               "state":"NY",
+               "postcode":"10012",
+               "country":"US"
+            },
+            "phone":"444-555-6464",
+            "email":"john@acmewidgets.com"
+         },
+         "shipping":{
+            "firstName":"John",
+            "lastName":"Doe",
+            "company":"Acme Widgets",
+            "addressLine1":"111 Main",
+            "addressLine2":"Suite 101",
+            "city":"New York",
+            "state":"NY",
+            "postcode":"10012",
+            "country":"US"
+         },
+         "customerIp":"145.145.145.145",
+         "status":"sent",
+         "sentAt":1410788324,
+         "upsell":{
+            "upsellType":"coupon",
+            "active":true,
+            "title":"Lorem ipsum",
+            "freeShipping":true,
+            "amount":"10",
+            "couponCode":"55G2-DHM0-50NN"
+         }
+      },
+      {
+         "_id":"1e23df04",
+         "reference":"c_1e23d",
+         "currency":"USD",
+         "amount":"0.00",
+         "to":"customer@email.com",
+         "from":"me@mybusiness.com",
+         "card":{
+            "type":"VISA",
+            "last4":4242
+         },
+         "items":[
+            {
+               "reference":123,
+               "description":"Receiptful subscription",
+               "quantity":1,
+               "amount":"39.99"
+            }
+         ],
+         "subtotals":[
+            {
+               "description":"Delivery",
+               "amount":"9.00"
+            }
+         ],
+         "billing":{
+            "address":{
+               "firstName":"John",
+               "lastName":"Doe",
+               "company":"Acme Widgets",
+               "addressLine1":"111 Main",
+               "addressLine2":"Suite 101",
+               "city":"New York",
+               "state":"NY",
+               "postcode":"10012",
+               "country":"US"
+            },
+            "phone":"444-555-6464",
+            "email":"john@acmewidgets.com"
+         },
+         "shipping":{
+            "firstName":"John",
+            "lastName":"Doe",
+            "company":"Acme Widgets",
+            "addressLine1":"111 Main",
+            "addressLine2":"Suite 101",
+            "city":"New York",
+            "state":"NY",
+            "postcode":"10012",
+            "country":"US"
+         },
+         "customerIp":"145.145.145.145",
+         "status":"sent",
+         "sentAt":1410788324,
+         "upsell":{
+            "upsellType":"coupon",
+            "active":true,
+            "title":"Lorem ipsum",
+            "freeShipping":true,
+            "amount":"10",
+            "couponCode":"55G2-DHM0-50NN"
+         }
+      }
+   ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+### List all Receipts [GET]
 
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+`http://app.receipftul.com/api/v1/receipts`
 
-### HTTP Request
+### Query Parameters
 
-`GET http://example.com/kittens/<ID>`
+Parameter|Type|Required|Description
+---------|----|--------|-----------
+page|integer|optional|The page number
+limit|integer|optional|Number of results per page
 
-### URL Parameters
+<aside class="success">
+Response 200 (application/json)
+</aside>
+    
+        
 
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
+## Send [/receipts]
+### Create a new receipt. It will send an email notification. [POST]
++ Request (application/json)
 
+        {
+            "reference": "c_1e23d",
+            "currency": "USD",
+            "amount": "0.00",
+            "to": "customer@email.com",
+            "from": "me@mybusiness.com",
+            "card": {
+                  "type": "VISA",
+                  "last4": 4242
+            },
+            "items": [
+                {
+                    "reference": 123,
+                    "description": "Receiptful subscription",
+                    "quantity": 1,
+                    "amount": "39.99"
+                }
+            ],
+            "subtotals": [
+                {
+                    "description": "Delivery",
+                    "amount": "9.00"
+                }
+            ],
+            "billing": {
+                "address": {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "company": "Acme Widgets",
+                    "addressLine1": "111 Main",
+                    "addressLine2": "Suite 101",
+                    "city": "New York",
+                    "state": "NY",
+                    "postcode": "10012",
+                    "country": "US"
+                },
+                "phone": "444-555-6464",
+                "email": "john@acmewidgets.com"
+            }
+            "shipping": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "company": "Acme Widgets",
+                "addressLine1": "111 Main",
+                "addressLine2": "Suite 101",
+                "city": "New York",
+                "state": "NY",
+                "postcode": "10012",
+                "country": "US"
+            },
+            "customerIp": "145.145.145.145"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "_id": "1e23df04",
+            "reference": "c_1e23d",
+            "currency": "USD",
+            "amount": "0.00",
+            "to": "customer@email.com",
+            "from": "me@mybusiness.com",
+            "card": {
+                  "type": "VISA",
+                  "last4": 4242
+            },
+            "items": [
+                {
+                    "reference": 123,
+                    "description": "Receiptful subscription",
+                    "quantity": 1,
+                    "amount": "39.99"
+                }
+            ],
+            "subtotals": [
+                {
+                    "description": "Delivery",
+                    "amount": "9.00"
+                }
+            ],
+            "billing": {
+                "address": {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "company": "Acme Widgets",
+                    "addressLine1": "111 Main",
+                    "addressLine2": "Suite 101",
+                    "city": "New York",
+                    "state": "NY",
+                    "postcode": "10012",
+                    "country": "US"
+                },
+                "phone": "444-555-6464",
+                "email": "john@acmewidgets.com"
+            },
+            "shipping": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "company": "Acme Widgets",
+                "addressLine1": "111 Main",
+                "addressLine2": "Suite 101",
+                "city": "New York",
+                "state": "NY",
+                "postcode": "10012",
+                "country": "US"
+            },
+            "customerIp": "145.145.145.145",
+            "status": "sent",
+            "sentAt": 1410788324,
+            "upsell": {
+                "upsellType": "coupon",
+                "active": true,
+                "title": "Lorem ipsum",
+                "freeShipping": true,
+                "amount": "10",
+                "couponCode": "55G2-DHM0-50NN"
+            }
+        }
+        
+## Reciept [/reciepts/{id}]
+A single Reciept with all of its details
+
++ Parameters
+    + id (required, string, `1enfk2k4nf`) ... String based `id` of the receipt supplied in the response from the send of a receipt. 
+
++ Model (application/json)
+    
+    + Body 
+            
+            {
+                "_id": "1e23df04",
+                "reference": "c_1e23d",
+                "currency": "USD",
+                "amount": "0.00",
+                "to": "customer@email.com",
+                "from": "me@mybusiness.com",
+                "card": {
+                      "type": "VISA",
+                      "last4": 4242
+                },
+                "items": [
+                    {
+                        "reference": 123,
+                        "description": "Receiptful subscription",
+                        "quantity": 1,
+                        "amount": "39.99"
+                    }
+                ],
+                "subtotals": [
+                    {
+                        "description": "Delivery",
+                        "amount": "9.00"
+                    }
+                ],
+                "billing": {
+                    "address": {
+                        "firstName": "John",
+                        "lastName": "Doe",
+                        "company": "Acme Widgets",
+                        "addressLine1": "111 Main",
+                        "addressLine2": "Suite 101",
+                        "city": "New York",
+                        "state": "NY",
+                        "postcode": "10012",
+                        "country": "US"
+                    },
+                    "phone": "444-555-6464",
+                    "email": "john@acmewidgets.com"
+                },
+                "shipping": {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "company": "Acme Widgets",
+                    "addressLine1": "111 Main",
+                    "addressLine2": "Suite 101",
+                    "city": "New York",
+                    "state": "NY",
+                    "postcode": "10012",
+                    "country": "US"
+                },
+                "customerIp": "145.145.145.145",
+                "status": "sent",
+                "sentAt": 1410788324,
+                "upsell": {
+                    "upsellType": "coupon",
+                    "active": true,
+                    "title": "Lorem ipsum",
+                    "freeShipping": true,
+                    "amount": "10",
+                    "couponCode": "55G2-DHM0-50NN"
+                }
+            }
+
+### Retrieve a Reciept [GET]
++ Response 200
+    
+    [Reciept][]
+
+## Resend Receipt [/receipts/{id}/send]
+Resend a receipt using the id.
+
++ Parameters
+    + id (required, string, `1enfk2k4nf`) ... String based `id` of the receipt supplied in the response from the send of a receipt. 
+
+### Resend a Reciept [POST]
++ Response 200
+    
+    [Reciept][]
+
+# Group Coupons
+Services related to retreiving coupons using the **Coupons API**
+
+## Coupons Collection [/coupons]
+### List all Coupons [GET]
++  Response 200 (application/json)
+    
+        {
+            "meta": {
+                "_links": {
+                    "next": "...",
+                    "prev": "...",
+                    "last": "...",
+                    "first": "..."
+                }
+            },
+            "data": [{
+                "upsellType": "coupon",
+                "active": true,
+                "title": "Lorem ipsum",
+                "freeShipping": true,
+                "amount": "10",
+                "couponCode": "55G2-DHM0-50NN"
+            },
+            {
+                "upsellType": "coupon",
+                "active": true,
+                "title": "Lorem ipsum",
+                "freeShipping": true,
+                "amount": "10",
+                "couponCode": "54G2-DHM0-50NL"
+            }]
+        }
+
+## Coupon [/coupons/{id}]
+A single coupon with all of its details
+
++ Parameters
+    + id (required, string, `1enfk2k4nf`) ... String based `_id` of the coupon supplied in the response from the send of a receipt. 
+
++ Model (application/json)
+    
+    + Body
+
+            {
+                "upsellType": "coupon",
+                "active": true,
+                "title": "Lorem ipsum",
+                "freeShipping": true,
+                "amount": "10",
+                "couponCode": "55G2-DHM0-50NN"
+            }
+
+### Retrieve a Coupon [GET]
++ Response 200
+    
+    [Coupon][]
+
+### Delete a Coupon [DELETE]
++ Response 204

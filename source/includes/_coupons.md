@@ -5,8 +5,8 @@ Services related to retreiving coupons using the **Coupons API**
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipt/coupons" \
-  -H "X-ApiKey: YOUR_API_KEY" \
+$ curl "https://app.receipftul.com/api/v1/coupons" \
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -42,9 +42,7 @@ $ curl "https://app.receiptful.com/api/v1/receipt/coupons" \
 }
 ```
 
-### List all Coupons [GET]
-
-`https://app.receiptful.com/api/v1/coupons`
+`https://app.receipftul.com/api/v1/coupons`
 
 Get a list of all coupons
 
@@ -52,12 +50,12 @@ Get a list of all coupons
 Response 200 (application/json)
 </aside>
 
-## Coupon
+## Get a coupon
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipt/coupon/1a2b3c4d" \
-  -H "X-ApiKey: YOUR_API_KEY" \
+$ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d" \
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -73,9 +71,7 @@ $ curl "https://app.receiptful.com/api/v1/receipt/coupon/1a2b3c4d" \
 }
 ```
 
-### Retrieve A Coupon [GET]
-
-`https://app.receiptful.com/api/v1/coupon/{COUPON_ID}`
+`https://app.receipftul.com/api/v1/coupons/{COUPON_ID}`
 
 A single coupon with all of its details
 
@@ -90,9 +86,16 @@ A single coupon with all of its details
 Response 200 (application/json)
 </aside>
 
-### Delete a Coupon [DELETE]
+## Delete a coupon
 
-`https://app.receiptful.com/api/v1/coupon/{COUPON_ID}`
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -X DELETE
+```
+
+`https://app.receipftul.com/api/v1/coupons/{COUPON_ID}`
 
 ### Arguments
 
@@ -103,4 +106,54 @@ Response 200 (application/json)
 
 <aside class="success">
 Response 204 (application/json)
+</aside>
+
+## Mark coupon as used
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d/use" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -X PUT
+  -d '{
+    "reference": "1234",
+    "amount": 123
+  }'
+```
+
+> EXAMPLE RESPONSE
+
+```json
+{
+   "upsellType":"coupon",
+   "active":true,
+   "title":"Lorem ipsum",
+   "freeShipping":true,
+   "amount":"10",
+   "couponCode":"55G2-DHM0-50NN",
+   "usage": {
+     "usedAt": "1410788324",
+     "order": {
+       "reference": "1234",
+       "amount": 123
+     }
+   }
+}
+```
+
+`https://app.receipftul.com/api/v1/coupons/{COUPON_ID}/use`
+
+### Arguments
+
+|Argument|Details|
+|-------:|-----------|
+|**id:**|**string, required**|
+||String based `id` of the coupon supplied in the response from the send of a receipt.|
+|**reference:**|**string, required**|
+||String based `id` of the generated order by the coupon.|
+|**amount:**|**float, required**|
+||Amount of the generated order.|
+
+<aside class="success">
+Response 200 (application/json)
 </aside>

@@ -1,11 +1,11 @@
 # Receipts
 Services related to sending using the **Receipts API**
 
-## All Reciepts
+## All Receipts
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipts?page=1&limit=10" \
+$ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 > Example Response
@@ -14,10 +14,10 @@ $ curl "http://app.receipftul.com/api/v1/receipts?page=1&limit=10" \
 {
    "meta":{
       "_links":{
-         "first":"http://app.receiptful.com/api/v1/receipts?page=1",
-         "next":"http://app.receiptful.com/api/v1/receipts?page=3",
-         "prev":"http://app.receiptful.com/api/v1/receipts?page=1",
-         "last":"http://app.receiptful.com/api/v1/receipts?page=5"
+         "first":"https://app.receiptful.com/api/v1/receipts?page=1",
+         "next":"https://app.receiptful.com/api/v1/receipts?page=3",
+         "prev":"https://app.receiptful.com/api/v1/receipts?page=1",
+         "last":"https://app.receiptful.com/api/v1/receipts?page=5"
       }
    },
    "data":[
@@ -153,7 +153,7 @@ $ curl "http://app.receipftul.com/api/v1/receipts?page=1&limit=10" \
 
 ### List all Receipts [GET]
 
-`http://app.receipftul.com/api/v1/receipts`
+`https://app.receiptful.com/api/v1/receipts`
 
 ### Arguments
 
@@ -172,7 +172,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipts" \
+$ curl "https://app.receiptful.com/api/v1/receipts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -299,7 +299,7 @@ $ curl "http://app.receipftul.com/api/v1/receipts" \
 
 ### Create a new receipt [POST]
 
-`http://app.receipftul.com/api/v1/receipts`
+`https://app.receiptful.com/api/v1/receipts`
 
 ### Arguments
 
@@ -332,11 +332,11 @@ $ curl "http://app.receipftul.com/api/v1/receipts" \
 Response 201 (application/json)
 </aside>
         
-## Reciept
+## Receipt
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipt/a1b2c3d4" \
+$ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
   -H "X-ApiKey: YOUR_API_KEY" \
 ```
 
@@ -410,9 +410,9 @@ $ curl "http://app.receipftul.com/api/v1/receipt/a1b2c3d4" \
 
 ### Retrieve a receipt [GET]
 
-`http://app.receipftul.com/api/v1/receipt/{RECEIPT_ID}`
+`https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}`
 
-A single Reciept with all of its details
+A single Receipt with all of its details
 
 ### Arguments
 
@@ -429,7 +429,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipt/1a2b3c4d/send" \
+$ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
   -H "X-ApiKey: YOUR_API_KEY" \
 ```
 
@@ -503,7 +503,7 @@ $ curl "http://app.receipftul.com/api/v1/receipt/1a2b3c4d/send" \
 
 ### Resend a Receipt [POST]
 
-`http://app.receipftul.com/api/v1/receipt/{RECEIPT_ID}/send`
+`https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}/send`
 
 Resend a receipt using the id.
 

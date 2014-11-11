@@ -5,7 +5,7 @@ Services related to retreiving coupons using the **Coupons API**
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipt/coupons" \
+$ curl "https://app.receiptful.com/api/v1/receipt/coupons" \
   -H "X-ApiKey: YOUR_API_KEY" \
 ```
 
@@ -44,7 +44,7 @@ $ curl "http://app.receipftul.com/api/v1/receipt/coupons" \
 
 ### List all Coupons [GET]
 
-`http://app.receipftul.com/api/v1/coupons`
+`https://app.receiptful.com/api/v1/coupons`
 
 Get a list of all coupons
 
@@ -56,7 +56,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "http://app.receipftul.com/api/v1/receipt/coupon/1a2b3c4d" \
+$ curl "https://app.receiptful.com/api/v1/receipt/coupon/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY" \
 ```
 
@@ -75,7 +75,7 @@ $ curl "http://app.receipftul.com/api/v1/receipt/coupon/1a2b3c4d" \
 
 ### Retrieve A Coupon [GET]
 
-`http://app.receipftul.com/api/v1/coupon/{COUPON_ID}`
+`https://app.receiptful.com/api/v1/coupon/{COUPON_ID}`
 
 A single coupon with all of its details
 
@@ -92,7 +92,7 @@ Response 200 (application/json)
 
 ### Delete a Coupon [DELETE]
 
-`http://app.receipftul.com/api/v1/coupon/{COUPON_ID}`
+`https://app.receiptful.com/api/v1/coupon/{COUPON_ID}`
 
 ### Arguments
 

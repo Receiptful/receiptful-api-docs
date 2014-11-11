@@ -8,7 +8,7 @@ $ curl "api_endpoint_here" \
 
 > Your API Key can be found on the profile page in your Receiptful control panel
 
-All paths should prefixed with http://app.recieptful.com/api/v1 and will need the following HTTP header:
+All paths should prefixed with https://app.recieptful.com/api/v1 and will need the following HTTP header:
 
 `X-ApiKey: YOUR_API_KEY`
 

@@ -1,7 +1,7 @@
 # Receipts
 Services related to sending using the **Receipts API**
 
-## All Reciepts
+## All Receipts
 
 ```shell
 # EXAMPLE REQUEST
@@ -332,7 +332,7 @@ $ curl "http://app.receipftul.com/api/v1/receipts" \
 Response 201 (application/json)
 </aside>
         
-## Reciept
+## Receipt
 
 ```shell
 # EXAMPLE REQUEST
@@ -412,7 +412,7 @@ $ curl "http://app.receipftul.com/api/v1/receipt/a1b2c3d4" \
 
 `http://app.receipftul.com/api/v1/receipt/{RECEIPT_ID}`
 
-A single Reciept with all of its details
+A single Receipt with all of its details
 
 ### Arguments
 

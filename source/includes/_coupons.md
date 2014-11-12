@@ -4,6 +4,9 @@ Services related to retreiving coupons using the **Coupons API**
 ## All Coupons
 
 ```shell
+# DEFINITION
+GET https://app.receipftul.com/api/v1/coupons
+
 # EXAMPLE REQUEST
 $ curl "https://app.receipftul.com/api/v1/coupons" \
   -H "X-ApiKey: YOUR_API_KEY"
@@ -53,6 +56,9 @@ Response 200 (application/json)
 ## Get a coupon
 
 ```shell
+# DEFINITION
+GET https://app.receipftul.com/api/v1/coupons/1a2b3c4d
+
 # EXAMPLE REQUEST
 $ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY"
@@ -89,6 +95,9 @@ Response 200 (application/json)
 ## Delete a coupon
 
 ```shell
+# DEFINITION
+DELETE https://app.receipftul.com/api/v1/coupons/1a2b3c4d
+
 # EXAMPLE REQUEST
 $ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY" \
@@ -111,6 +120,9 @@ Response 204 (application/json)
 ## Mark coupon as used
 
 ```shell
+# DEFINITION
+PUT https://app.receipftul.com/api/v1/coupons/1a2b3c4d/use
+
 # EXAMPLE REQUEST
 $ curl "https://app.receipftul.com/api/v1/coupons/1a2b3c4d/use" \
   -H "X-ApiKey: YOUR_API_KEY" \

@@ -65,7 +65,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
           <h1 id='receipts'>Receipts</h1>
 <p>Services related to sending using the <strong>Receipts API</strong></p>
 <h2 id='all-receipts'>All Receipts</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipts?page=1&amp;limit=10"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1&amp;limit=10"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -75,10 +75,10 @@ Your API Key can be found on the profile page in your Receiptful control panel
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"_links"</span><span class="p">:{</span><span class="w">
-         </span><span class="s2">"first"</span><span class="p">:</span><span class="s2">"http://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"http://app.receiptful.com/api/v1/receipts?page=3"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"prev"</span><span class="p">:</span><span class="s2">"http://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"last"</span><span class="p">:</span><span class="s2">"http://app.receiptful.com/api/v1/receipts?page=5"</span><span class="w">
+         </span><span class="s2">"first"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=3"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"prev"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"last"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=5"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
@@ -212,7 +212,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-receipts-get'>List all Receipts [GET]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/receipts</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -242,9 +242,10 @@ Your API Key can be found on the profile page in your Receiptful control panel
 Response 200 (application/json)
 </aside></p>
 <h2 id='send'>Send</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipts"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST
   -d <span class="s1">'{
        "reference":"c_1e23d",
        "currency":"USD",
@@ -367,7 +368,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-a-new-receipt-post'>Create a new receipt [POST]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/receipts</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -456,6 +457,14 @@ Response 200 (application/json)
 <td>the customer&rsquo;s shipping details. Children:<ul><li><strong>firstName</strong>, <em>Joe</em></li><li><strong>lastName</strong>, <em>Smith</em></li><li><strong>company</strong>, <em>Receiptful</em></li><li><strong>addressLine1</strong>, <em>30 Broadway</em></li><li><strong>AddressLine2</strong>, <em>Manhattan</em></li><li><strong>city</strong>, <em>New York</em></li><li><strong>state</strong>, <em>New York</em></li><li><strong>postcode</strong>, <em>10001</em></li><li><strong>country</strong>, <em>USA</em></li></ul></td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>upsell:</strong></td>
+<td><strong>object, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>details related to the upsell. Children:<ul><li><strong>products</strong><ul><li>array of<ul><li><strong>title</strong>, Product 1</li><li><strong>description</strong>, Lorem ipsum</li><li><strong>image</strong>, http://foo/image.jpg</li><li><strong>actionUrl</strong>, http://foo/product-1/</li></ul></li></ul></td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>customerIp:</strong></td>
 <td><strong>string, optional</strong></td>
 </tr>
@@ -469,7 +478,7 @@ Response 200 (application/json)
 Response 201 (application/json)
 </aside></p>
 <h2 id='receipt'>Receipt</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipt/a1b2c3d4"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/a1b2c3d4"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
 </code></pre>
 
@@ -541,7 +550,7 @@ Response 201 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='retrieve-a-receipt-get'>Retrieve a receipt [GET]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/receipt/{RECEIPT_ID}</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}</code></p>
 
 <p>A single Receipt with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -565,8 +574,9 @@ Response 201 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='resend'>Resend</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipt/1a2b3c4d/send"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -X POST
 </code></pre>
 
 <blockquote>
@@ -637,7 +647,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='resend-a-receipt-post'>Resend a Receipt [POST]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/receipt/{RECEIPT_ID}/send</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}/send</code></p>
 
 <p>Resend a receipt using the id.</p>
 <h3 id='arguments'>Arguments</h3>
@@ -664,7 +674,7 @@ Response 200 (application/json)
           <h1 id='coupons'>Coupons</h1>
 <p>Services related to retreiving coupons using the <strong>Coupons API</strong></p>
 <h2 id='all-coupons'>All Coupons</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipt/coupons"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/coupons"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
 </code></pre>
 
@@ -701,7 +711,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-coupons-get'>List all Coupons [GET]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/coupons</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons</code></p>
 
 <p>Get a list of all coupons</p>
 
@@ -709,7 +719,7 @@ Response 200 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='coupon'>Coupon</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"http://app.receipftul.com/api/v1/receipt/coupon/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/coupon/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
 </code></pre>
 
@@ -726,7 +736,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='retrieve-a-coupon-get'>Retrieve A Coupon [GET]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/coupon/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupon/{COUPON_ID}</code></p>
 
 <p>A single coupon with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -750,7 +760,7 @@ Response 200 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h3 id='delete-a-coupon-delete'>Delete a Coupon [DELETE]</h3>
-<p><code class="prettyprint">http://app.receipftul.com/api/v1/coupon/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupon/{COUPON_ID}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>

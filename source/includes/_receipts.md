@@ -175,6 +175,7 @@ Response 200 (application/json)
 $ curl "https://app.receiptful.com/api/v1/receipts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
+  -X POST
   -d '{
        "reference":"c_1e23d",
        "currency":"USD",
@@ -325,6 +326,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||the customer's billing details. Children:<ul><li>**address**<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Receiptful*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul></li><li>**phone**, *518-111-1111*</li><li>**email**, *help@receiptful.com*</li></ul>|
 |**shipping:**|**object, optional**|
 ||the customer's shipping details. Children:<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Receiptful*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul>|
+|**upsell:**|**object, optional**|
+||details related to the upsell. Children:<ul><li>**products**<ul><li>array of<ul><li>**title**, Product 1</li><li>**description**, Lorem ipsum</li><li>**image**, http://foo/image.jpg</li><li>**actionUrl**, http://foo/product-1/</li></ul></li></ul>|
 |**customerIp:**|**string, optional**|
 ||the IP Address of the connection that completed the sale|
 
@@ -430,7 +433,8 @@ Response 200 (application/json)
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
-  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "X-ApiKey: YOUR_API_KEY"
+  -X POST
 ```
 
 > EXAMPLE RESPONSE

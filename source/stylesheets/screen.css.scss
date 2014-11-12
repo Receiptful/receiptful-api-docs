@@ -76,7 +76,7 @@ html, body {
   left: 0;
   bottom: 0;
   width: $nav-width;
-  background-color: $nav-bg;
+  background-color: $darknavy;
   font-size: 13px;
   font-weight: bold;
 
@@ -98,7 +98,7 @@ html, body {
     position: relative;
 
     input {
-      background: $nav-bg;
+      background: $navy;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
       padding: 6px 0 6px 20px;
@@ -183,8 +183,8 @@ html, body {
   // This is the currently selected ToC entry
   .tocify-focus {
     @include box-shadow(0px 1px 0px $nav-active-shadow);
-    background-color: $nav-active-bg;
-    color: $nav-active-text;
+    background-color: $green;
+    color: $navy;
   }
 
   // Subheaders are the submenus that slide open
@@ -270,7 +270,7 @@ html, body {
   margin-left: $nav-width;
   position: relative;
   z-index: 10;
-  background-color: $main-bg;
+  background-color: $background;
   min-height: 100%;
 
   padding-bottom: 1px; // prevent margin overflow
@@ -282,7 +282,7 @@ html, body {
   // half of the content always this background color.
   .dark-box {
     width: $examples-width;
-    background-color: $examples-bg;
+    background-color: $navy;
     position: absolute;
     right: 0;
     top: 0;
@@ -292,12 +292,12 @@ html, body {
   .lang-selector {
     position: fixed;
     z-index: 50;
-    border-bottom: 5px solid $lang-select-active-bg;
+    border-bottom: 5px solid $navy;
   }
 }
 
 .lang-selector {
-  background-color: $lang-select-bg;
+  background-color: $darknavy;
   width: 100%;
   font-weight: bold;
   a {
@@ -309,12 +309,12 @@ html, body {
     line-height: 30px;
 
     &:active {
-      background-color: $lang-select-pressed-bg;
+      background-color: $navy;
       color: $lang-select-pressed-text;
     }
 
     &.active {
-      background-color: $lang-select-active-bg;
+      background-color: $navy;
       color: $lang-select-active-text;
     }
   }
@@ -486,7 +486,7 @@ html, body {
     text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: $aside-notice-bg;
+    background: #6bc0d2;
     line-height: 1.6;
 
     &.warning {
@@ -495,7 +495,7 @@ html, body {
     }
 
     &.success {
-      background-color: $aside-success-bg;
+      background-color: $green;
       text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
     }
   }
@@ -535,7 +535,7 @@ html, body {
 
 .content {
   pre, blockquote {
-    background-color: $code-bg;
+    background-color: $darknavy;
     color: #fff;
 
     padding: 2em $main-padding;
@@ -565,7 +565,7 @@ html, body {
 
   blockquote {
     &>p {
-      background-color: $code-annotation-bg;
+      background-color: $navy;
       border-radius: 5px;
       padding: $code-annotation-padding;
       color: #ccc;

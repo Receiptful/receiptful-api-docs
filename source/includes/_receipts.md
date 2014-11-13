@@ -81,7 +81,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
             "title":"Lorem ipsum",
             "freeShipping":true,
             "amount":"10",
-            "couponCode":"55G2-DHM0-50NN"
+            "couponCode":"55G2-DHM0-50NN",
+            "emailLimit":true
          }
       },
       {
@@ -144,7 +145,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
             "title":"Lorem ipsum",
             "freeShipping":true,
             "amount":"10",
-            "couponCode":"55G2-DHM0-50NN"
+            "couponCode":"55G2-DHM0-50NN",
+            "emailLimit":false
          }
       }
    ]
@@ -293,7 +295,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
       "title":"Lorem ipsum",
       "freeShipping":true,
       "amount":"10",
-      "couponCode":"55G2-DHM0-50NN"
+      "couponCode":"55G2-DHM0-50NN",
+      "emailLimit":true
    }
 }
 ```
@@ -406,7 +409,8 @@ $ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
       "title":"Lorem ipsum",
       "freeShipping":true,
       "amount":"10",
-      "couponCode":"55G2-DHM0-50NN"
+      "couponCode":"55G2-DHM0-50NN",
+      "emailLimit":true
    }
 }
 ```
@@ -500,7 +504,8 @@ $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
       "title":"Lorem ipsum",
       "freeShipping":true,
       "amount":"10",
-      "couponCode":"55G2-DHM0-50NN"
+      "couponCode":"55G2-DHM0-50NN",
+      "emailLimit":true
    }
 }
 ```

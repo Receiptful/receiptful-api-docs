@@ -678,9 +678,12 @@ Response 200 (application/json)
 
           <h1 id='coupons'>Coupons</h1>
 <p>Services related to retreiving coupons using the <strong>Coupons API</strong></p>
-<h2 id='all-coupons'>All Coupons</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/coupons"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+<h2 id='all-coupons'>All Coupons</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
+GET https://app.receiptful.com/api/v1/coupons
+
+<span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -715,7 +718,7 @@ Response 200 (application/json)
    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id='list-all-coupons-get'>List all Coupons [GET]</h3>
+
 <p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons</code></p>
 
 <p>Get a list of all coupons</p>
@@ -723,9 +726,12 @@ Response 200 (application/json)
 <p><aside class="success">
 Response 200 (application/json)
 </aside></p>
-<h2 id='coupon'>Coupon</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/coupon/1a2b3c4d"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+<h2 id='get-a-coupon'>Get a coupon</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
+GET https://app.receiptful.com/api/v1/coupons/1a2b3c4d
+
+<span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -740,8 +746,8 @@ Response 200 (application/json)
    </span><span class="s2">"couponCode"</span><span class="p">:</span><span class="s2">"55G2-DHM0-50NN"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3 id='retrieve-a-coupon-get'>Retrieve A Coupon [GET]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupon/{COUPON_ID}</code></p>
+
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}</code></p>
 
 <p>A single coupon with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -764,8 +770,16 @@ Response 200 (application/json)
 <p><aside class="success">
 Response 200 (application/json)
 </aside></p>
-<h3 id='delete-a-coupon-delete'>Delete a Coupon [DELETE]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupon/{COUPON_ID}</code></p>
+<h2 id='delete-a-coupon'>Delete a coupon</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
+DELETE https://app.receiptful.com/api/v1/coupons/1a2b3c4d
+
+<span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -785,6 +799,76 @@ Response 200 (application/json)
 
 <p><aside class="success">
 Response 204 (application/json)
+</aside></p>
+<h2 id='mark-coupon-as-used'>Mark coupon as used</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
+PUT https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use
+
+<span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -X PUT
+  -d <span class="s1">'{
+    "reference": "1234",
+    "amount": 123
+  }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+   </span><span class="s2">"upsellType"</span><span class="p">:</span><span class="s2">"coupon"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"active"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"Lorem ipsum"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"freeShipping"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"couponCode"</span><span class="p">:</span><span class="s2">"55G2-DHM0-50NN"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"usage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"usedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1410788324"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}/use</code></p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>String based <code class="prettyprint">id</code> of the coupon supplied in the response from the send of a receipt.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>reference:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>String based <code class="prettyprint">id</code> of the generated order by the coupon.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>amount:</strong></td>
+<td><strong>float, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Amount of the generated order.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+Response 200 (application/json)
 </aside></p>
 
           <h1 id='errors'>Errors</h1>

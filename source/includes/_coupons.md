@@ -129,7 +129,8 @@ $ curl "https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use" \
   -X PUT
   -d '{
     "reference": "1234",
-    "amount": 123
+    "amount": 123,
+    "currency": "USD"
   }'
 ```
 
@@ -147,7 +148,8 @@ $ curl "https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use" \
      "usedAt": "1410788324",
      "order": {
        "reference": "1234",
-       "amount": 123
+       "amount": 123,
+       "currency": "USD"
      }
    }
 }
@@ -165,6 +167,8 @@ $ curl "https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use" \
 ||String based `id` of the generated order by the coupon.|
 |**amount:**|**float, required**|
 ||Amount of the generated order.|
+|**currency:**|**string, required**|
+||Currency of the amount generated.|
 
 <aside class="success">
 Response 200 (application/json)

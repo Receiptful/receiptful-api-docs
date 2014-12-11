@@ -263,7 +263,11 @@ Response 200 (application/json)
              "reference":123,
              "description":"Receiptful subscription",
              "quantity":1,
-             "amount":"39.99"
+             "amount":"39.99",
+             "metas": [{
+               "key": "Color",
+               "value": "Red"
+             }]
           }
        ],
        "subtotals":[
@@ -433,7 +437,7 @@ Response 200 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Receiptful Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://receiptful.com/download/123</em></li></ul></td>
+<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Receiptful Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://receiptful.com/download/123</em></li><li><strong>metas</strong>, <em>optional, [{ &ldquo;key&rdquo;: &ldquo;Color&rdquo;, &ldquo;value&rdquo;: &ldquo;Red&rdquo; }]</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>subtotals:</strong></td>

@@ -50,10 +50,6 @@
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
-<blockquote>
-<p>Your API Key can be found on the profile page in your Receiptful control panel</p>
-</blockquote>
-
 <p>All paths should prefixed with https://app.receiptful.com/api/v1 and will need the following HTTP header:</p>
 
 <p><code class="prettyprint">X-ApiKey: YOUR_API_KEY</code></p>
@@ -89,7 +85,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"card"</span><span class="p">:{</span><span class="w">
+         </span><span class="s2">"payment"</span><span class="p">:{</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"last4"</span><span class="p">:</span><span class="mi">4242</span><span class="w">
          </span><span class="p">},</span><span class="w">
@@ -153,7 +149,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"card"</span><span class="p">:{</span><span class="w">
+         </span><span class="s2">"payment"</span><span class="p">:{</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"last4"</span><span class="p">:</span><span class="mi">4242</span><span class="w">
          </span><span class="p">},</span><span class="w">
@@ -254,7 +250,7 @@ Response 200 (application/json)
        "amount":"0.00",
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
-       "card":{
+       "payment":{
           "type":"VISA",
           "last4":4242
        },
@@ -316,7 +312,7 @@ Response 200 (application/json)
    </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"card"</span><span class="p">:{</span><span class="w">
+   </span><span class="s2">"payment"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"last4"</span><span class="p">:</span><span class="mi">4242</span><span class="w">
    </span><span class="p">},</span><span class="w">
@@ -424,12 +420,12 @@ Response 200 (application/json)
 <td>The email address to be displayed in the from field</td>
 </tr>
 <tr>
-<td style="text-align: right"><strong>card:</strong></td>
+<td style="text-align: right"><strong>payment:</strong></td>
 <td><strong>object, optional</strong>, <em>default is null</em></td>
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>The display details of the card that completed the sale. Children:<ul><li><strong>Type</strong>, <em>VISA</em></li><li><strong>Last4</strong>, <em>4242</em></li></ul></td>
+<td>The display details of the payment that completed the sale. Children:<ul><li><strong>Type</strong>, <em>VISA</em></li><li><strong>Last4</strong>, <em>4242</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>items:</strong></td>
@@ -499,7 +495,7 @@ Response 201 (application/json)
    </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"card"</span><span class="p">:{</span><span class="w">
+   </span><span class="s2">"payment"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"last4"</span><span class="p">:</span><span class="mi">4242</span><span class="w">
    </span><span class="p">},</span><span class="w">
@@ -597,7 +593,7 @@ Response 200 (application/json)
    </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"card"</span><span class="p">:{</span><span class="w">
+   </span><span class="s2">"payment"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"last4"</span><span class="p">:</span><span class="mi">4242</span><span class="w">
    </span><span class="p">},</span><span class="w">

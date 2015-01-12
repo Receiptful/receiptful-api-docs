@@ -28,6 +28,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "amount":"0.00",
          "to":"customer@email.com",
          "from":"me@mybusiness.com",
+         "createdAt":"2015-01-07T10:02:13.915Z",
+         "date":"2015-01-07T10:02:13.915Z",
          "payment":{
             "type":"VISA",
             "last4":4242
@@ -74,7 +76,6 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          },
          "customerIp":"145.145.145.145",
          "status":"sent",
-         "sentAt":1410788324,
          "upsell":{
             "upsellType":"coupon",
             "active":true,
@@ -92,6 +93,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "amount":"0.00",
          "to":"customer@email.com",
          "from":"me@mybusiness.com",
+         "createdAt":"2015-01-07T10:02:13.915Z",
+         "date":"2015-01-07T10:02:13.915Z",
          "payment":{
             "type":"VISA",
             "last4":4242
@@ -138,7 +141,6 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          },
          "customerIp":"145.145.145.145",
          "status":"sent",
-         "sentAt":1410788324,
          "upsell":{
             "upsellType":"coupon",
             "active":true,
@@ -184,6 +186,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
        "amount":"0.00",
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
+       "date":1410715640,
        "payment":{
           "type":"VISA",
           "last4":4242
@@ -246,6 +249,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
+   "createdAt":"2015-01-07T10:02:13.915Z",
+   "date":"2015-01-07T10:02:13.915Z",
    "payment":{
       "type":"VISA",
       "last4":4242
@@ -292,7 +297,6 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
    },
    "customerIp":"145.145.145.145",
    "status":"sent",
-   "sentAt":1410788324,
    "upsell":{
       "upsellType":"coupon",
       "active":true,
@@ -323,6 +327,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||Receipt recipient's email address|
 |**from:**|**string, required**|
 ||The email address to be displayed in the from field|
+|**date:**|**number/string, optional**, *default is now*|
+||The date the order was completed, can be a unix timestamp or UTC date. e.g. '2013-02-04T10:35:24-08:00' or 1410715640|
 |**payment:**|**object, optional**, *default is null*|
 ||The display details of the payment that completed the sale. Children:<ul><li>**Type**, *VISA*</li><li>**Last4**, *4242*</li></ul>|
 |**items:**|**array, required**|
@@ -360,6 +366,8 @@ $ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
+   "createdAt":"2015-01-07T10:02:13.915Z",
+   "date":"2015-01-07T10:02:13.915Z",
    "payment":{
       "type":"VISA",
       "last4":4242
@@ -406,7 +414,6 @@ $ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
    },
    "customerIp":"145.145.145.145",
    "status":"sent",
-   "sentAt":1410788324,
    "upsell":{
       "upsellType":"coupon",
       "active":true,
@@ -455,6 +462,8 @@ $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
+   "createdAt":"2015-01-07T10:02:13.915Z",
+   "date":"2015-01-07T10:02:13.915Z",
    "payment":{
       "type":"VISA",
       "last4":4242
@@ -501,7 +510,6 @@ $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
    },
    "customerIp":"145.145.145.145",
    "status":"sent",
-   "sentAt":1410788324,
    "upsell":{
       "upsellType":"coupon",
       "active":true,

@@ -28,7 +28,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "amount":"0.00",
          "to":"customer@email.com",
          "from":"me@mybusiness.com",
-         "card":{
+         "payment":{
             "type":"VISA",
             "last4":4242
          },
@@ -92,7 +92,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "amount":"0.00",
          "to":"customer@email.com",
          "from":"me@mybusiness.com",
-         "card":{
+         "payment":{
             "type":"VISA",
             "last4":4242
          },
@@ -184,7 +184,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
        "amount":"0.00",
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
-       "card":{
+       "payment":{
           "type":"VISA",
           "last4":4242
        },
@@ -246,7 +246,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
-   "card":{
+   "payment":{
       "type":"VISA",
       "last4":4242
    },
@@ -323,8 +323,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||Receipt recipient's email address|
 |**from:**|**string, required**|
 ||The email address to be displayed in the from field|
-|**card:**|**object, optional**, *default is null*|
-||The display details of the card that completed the sale. Children:<ul><li>**Type**, *VISA*</li><li>**Last4**, *4242*</li></ul>|
+|**payment:**|**object, optional**, *default is null*|
+||The display details of the payment that completed the sale. Children:<ul><li>**Type**, *VISA*</li><li>**Last4**, *4242*</li></ul>|
 |**items:**|**array, required**|
 ||The items sold. Children:<ul><li>**reference**, *optional, c_123*</li><li>**description**, *Receiptful Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li><li>**url**, *http://receiptful.com/download/123*</li><li>**metas**, *optional, [{ "key": "Color", "value": "Red" }]*</li></ul>|
 |**subtotals:**|**array, optional**|
@@ -360,7 +360,7 @@ $ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
-   "card":{
+   "payment":{
       "type":"VISA",
       "last4":4242
    },
@@ -455,7 +455,7 @@ $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
    "amount":"0.00",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
-   "card":{
+   "payment":{
       "type":"VISA",
       "last4":4242
    },

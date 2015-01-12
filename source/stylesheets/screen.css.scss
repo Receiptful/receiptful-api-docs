@@ -101,7 +101,7 @@ html, body {
       background: $navy;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      padding: 6px 0 6px 25px;
       @include box-sizing(border-box);
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - 30;
@@ -113,7 +113,7 @@ html, body {
     &:before {
       position: absolute;
       top: 17px;
-      left: $nav-padding;
+      left: 21px;
       color: $nav-text;
       @extend %icon-search;
     }
@@ -564,13 +564,31 @@ html, body {
   }
 
   blockquote {
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    & + pre {
+      padding-top: 2px;
+    }
+
+    &:before {
+      content: "#";
+      color: #909090;
+      font-size: 12px;
+      @extend %code-font;
+    }
     &>p {
-      background-color: $navy;
-      border-radius: 5px;
+      background-color: transparent;
+      border-radius: 0px;
       padding: $code-annotation-padding;
-      color: #ccc;
-      border-top: 1px solid #000;
-      border-bottom: 1px solid #404040;
+      color: #909090;
+      border: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      display: inline;
+      padding: 0 0 0 5px;
+
+      @extend %code-font;
     }
   }
 }

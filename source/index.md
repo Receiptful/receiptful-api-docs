@@ -12,6 +12,7 @@ includes:
   - authentication
   - receipts
   - coupons
+  - products
   - errors
 
 search: true

@@ -38,7 +38,7 @@ $ curl "https://app.receiptful.com/api/v1/products" \
   }'
 ```
 
-`POST https://app.receiptful.com/api/v1/receipts`
+`POST https://app.receiptful.com/api/v1/products`
 
 ### Arguments
 

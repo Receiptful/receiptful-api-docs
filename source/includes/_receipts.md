@@ -26,6 +26,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "reference":"c_1e23d",
          "currency":"USD",
          "amount":"0.00",
+         "amountNotes":"Includes 19$ VAT",
          "to":"customer@email.com",
          "from":"me@mybusiness.com",
          "createdAt":"2015-01-07T10:02:13.915Z",
@@ -171,7 +172,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
 <aside class="success">
 Response 200 (application/json)
 </aside>
-        
+
 ## Send
 
 ```shell
@@ -184,6 +185,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
        "reference":"c_1e23d",
        "currency":"USD",
        "amount":"0.00",
+       "amountNotes":"Includes 19$ VAT",
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
@@ -247,6 +249,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
    "reference":"c_1e23d",
    "currency":"USD",
    "amount":"0.00",
+   "amountNotes":"Includes 19$ VAT",
    "to":"customer@email.com",
    "from":"me@mybusiness.com",
    "createdAt":"2015-01-07T10:02:13.915Z",
@@ -323,6 +326,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||ISO 4217 currency code|
 |**amount:**|**string, required**|
 ||Receipt total, including deductions|
+|**amountNotes:**|**string**|
+||Notes to add close to receipt amount (eg. "Includes taxes")|
 |**to:**|**string, required**|
 ||Receipt recipient's email address|
 |**from:**|**string, required**|
@@ -347,7 +352,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 <aside class="success">
 Response 201 (application/json)
 </aside>
-        
+
 ## Receipt
 
 ```shell
@@ -438,7 +443,7 @@ A single Receipt with all of its details
 |-------:|-----------|
 |**id:**|**string, required**|
 ||String based `id` of the receipt supplied in the response from the send of a receipt.|
-            
+
 <aside class="success">
 Response 200 (application/json)
 </aside>

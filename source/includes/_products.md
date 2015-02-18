@@ -9,7 +9,7 @@ These endpoints must be used to send updates about products for our reccommendat
 $ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -X PUT
+  -X PUT \
   -d '{
     "product_id": "ipa_12345",
     "type": "beer",

@@ -83,6 +83,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="s2">"c_1e23d"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"amountNotes"</span><span class="p">:</span><span class="s2">"Includes 19$ VAT"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="s2">"2015-01-07T10:02:13.915Z"</span><span class="p">,</span><span class="w">
@@ -245,11 +246,12 @@ Response 200 (application/json)
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -X POST
+  -X POST <span class="se">\</span>
   -d <span class="s1">'{
        "reference":"c_1e23d",
        "currency":"USD",
        "amount":"0.00",
+       "amountNotes":"Includes 19$ VAT",
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
@@ -313,6 +315,7 @@ Response 200 (application/json)
    </span><span class="s2">"reference"</span><span class="p">:</span><span class="s2">"c_1e23d"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"amountNotes"</span><span class="p">:</span><span class="s2">"Includes 19$ VAT"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"to"</span><span class="p">:</span><span class="s2">"customer@email.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"from"</span><span class="p">:</span><span class="s2">"me@mybusiness.com"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="s2">"2015-01-07T10:02:13.915Z"</span><span class="p">,</span><span class="w">
@@ -408,6 +411,14 @@ Response 200 (application/json)
 <td>Receipt total, including deductions</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>amountNotes:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Notes to add close to receipt amount (eg. &ldquo;Includes taxes&rdquo;)</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>to:</strong></td>
 <td><strong>string, required</strong></td>
 </tr>
@@ -494,7 +505,7 @@ Response 201 (application/json)
 </aside></p>
 <h2 id='receipt'>Receipt</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/a1b2c3d4"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -592,7 +603,7 @@ Response 200 (application/json)
 </aside></p>
 <h2 id='resend'>Resend</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X POST
 </code></pre>
 
@@ -898,11 +909,11 @@ Response 200 (application/json)
           <h1 id='products'>Products</h1>
 <p>Services related to sending product updates using the <strong>Receipts API</strong>.
 These endpoints must be used to send updates about products for our reccommendation engine.</p>
-<h2 id='when-a-new-product-is-created-or-updated'>When a new product is created or updated</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+<h2 id='create-product'>Create product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST (SINGLE PRODUCT)</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -X PUT
+  -X POST <span class="se">\</span>
   -d <span class="s1">'{
     "product_id": "ipa_12345",
     "type": "beer",
@@ -930,9 +941,70 @@ These endpoints must be used to send updates about products for our reccommendat
     ]
   }'</span>
 </code></pre>
-
-<p><code class="prettyprint">PUT https://app.receiptful.com/api/v1/products/{product_id}</code></p>
-<h3 id='arguments'>Arguments</h3><h4 id='main-object-product'>Main object (product)</h4>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST (MULTIPLE PRODUCTS)</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'[{
+    "product_id": "ipa_12345",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing IPA by StefanoS",
+    "description": "This IPA is awesome and brought to you by the legendary StefanoS",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/ipa_12345",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/ipa_12345_1.jpg" },
+      { "position": 2, "url": "https://stefanos.beer/img/ipa_hej.jpg" }
+    ],
+    "variants": [
+      { "price": 10.0 },
+      { "price": 15.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_1234",
+        "title": "IPA category",
+        "description": "A category of good IPAs",
+        "url": "https://stefanos.beer/categories/category_1234"
+      }
+    ]
+  },
+  {
+    "product_id": "wheat_54321",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing wheat beer by StefanoS",
+    "description": "This lovely golden wheat is perfect on a hot Summer day.",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/wheat_54321",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/wheat_54321.jpg" }
+    ],
+    "variants": [
+      { "price": 5.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_4321",
+        "title": "Wheat category",
+        "description": "A category of good wheat beers",
+        "url": "https://stefanos.beer/categories/category_4321"
+      }
+    ]
+  }]'</span>
+</code></pre>
+<h3 id='create-one-or-more-new-products-post'>Create one or more new products [POST]</h3>
+<p><code class="prettyprint">POST https://app.receiptful.com/api/v1/products</code></p>
+<h3 id='arguments'>Arguments</h3>
+<p><aside class="notice">
+The endpoint accepts a <em>single</em> product object or <em>multiple</em> products in an
+array. See examples on the right.
+</aside></p>
+<h4 id='main-object-product'>Main object (product)</h4>
 <table><thead>
 <tr>
 <th style="text-align: right">Argument</th>
@@ -1110,9 +1182,56 @@ These endpoints must be used to send updates about products for our reccommendat
 </tbody></table>
 
 <p><aside class="success">
-Response 204 (application/json)
+Response 200 (Success)
 </aside></p>
-<h2 id='when-a-product-is-deleted'>When a product is deleted</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<h2 id='update-product'>Update product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+    "product_id": "ipa_12345",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing IPA by StefanoS",
+    "description": "This IPA is awesome and brought to you by the legendary StefanoS",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/ipa_12345",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/ipa_12345_1.jpg" },
+      { "position": 2, "url": "https://stefanos.beer/img/ipa_hej.jpg" }
+    ],
+    "variants": [
+      { "price": 10.0 },
+      { "price": 15.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_1234",
+        "title": "IPA category",
+        "description": "A category of good IPAs",
+        "url": "https://stefanos.beer/categories/category_1234"
+      }
+    ]
+  }'</span>
+</code></pre>
+<h3 id='update-a-product-put'>Update a product [PUT]</h3>
+<p><code class="prettyprint">PUT https://app.receiptful.com/api/v1/products/{product_id}</code></p>
+<h3 id='arguments'>Arguments</h3>
+<p><aside class="notice">
+The product structure is the same as for <a href="#create-product">Create a product</a>
+except that you can only update a single product.
+</aside>
+<aside class="warning">
+Notice that the product should always be a <em>full</em> representation, <strong>not</strong> a
+partial. The API does not support partial updates.
+</aside></p>
+
+<p><aside class="success">
+Response 200 (application/json)
+</aside></p>
+<h2 id='delete-product'>Delete product</h2><h3 id='delete-a-product-delete'>Delete a product [DELETE]</h3><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1161,6 +1280,10 @@ Response 204 (application/json)
 <tr>
 <td>410</td>
 <td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entity Too Large &ndash; You sent too much data to us</td>
 </tr>
 <tr>
 <td>418</td>

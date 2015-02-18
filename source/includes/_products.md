@@ -5,7 +5,7 @@ These endpoints must be used to send updates about products for our reccommendat
 ## Create product
 
 ```shell
-# CREATE SINGLE PRODUCT
+# EXAMPLE REQUEST (SINGLE PRODUCT)
 $ curl "https://app.receiptful.com/api/v1/products" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -39,7 +39,7 @@ $ curl "https://app.receiptful.com/api/v1/products" \
 ```
 
 ```shell
-# CREATE MULTIPLE PRODUCTS
+# EXAMPLE REQUEST (MULTIPLE PRODUCTS)
 $ curl "https://app.receiptful.com/api/v1/products" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -170,7 +170,7 @@ Response 200 (Success)
 ## Update product
 
 ```shell
-# EXAMPLE UPDATE PRODUCT REQUEST
+# EXAMPLE REQUEST
 $ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \

@@ -2,14 +2,14 @@
 Services related to sending product updates using the **Receipts API**.
 These endpoints must be used to send updates about products for our reccommendation engine.
 
-## When a new product is created or updated
+## Create product
 
 ```shell
-# EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
+# EXAMPLE REQUEST (SINGLE PRODUCT)
+$ curl "https://app.receiptful.com/api/v1/products" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -X PUT
+  -X POST \
   -d '{
     "product_id": "ipa_12345",
     "type": "beer",
@@ -38,9 +38,74 @@ $ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
   }'
 ```
 
-`PUT https://app.receiptful.com/api/v1/products/{product_id}`
+```shell
+# EXAMPLE REQUEST (MULTIPLE PRODUCTS)
+$ curl "https://app.receiptful.com/api/v1/products" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '[{
+    "product_id": "ipa_12345",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing IPA by StefanoS",
+    "description": "This IPA is awesome and brought to you by the legendary StefanoS",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/ipa_12345",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/ipa_12345_1.jpg" },
+      { "position": 2, "url": "https://stefanos.beer/img/ipa_hej.jpg" }
+    ],
+    "variants": [
+      { "price": 10.0 },
+      { "price": 15.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_1234",
+        "title": "IPA category",
+        "description": "A category of good IPAs",
+        "url": "https://stefanos.beer/categories/category_1234"
+      }
+    ]
+  },
+  {
+    "product_id": "wheat_54321",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing wheat beer by StefanoS",
+    "description": "This lovely golden wheat is perfect on a hot Summer day.",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/wheat_54321",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/wheat_54321.jpg" }
+    ],
+    "variants": [
+      { "price": 5.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_4321",
+        "title": "Wheat category",
+        "description": "A category of good wheat beers",
+        "url": "https://stefanos.beer/categories/category_4321"
+      }
+    ]
+  }]'
+```
+
+### Create one or more new products [POST]
+
+`POST https://app.receiptful.com/api/v1/products`
 
 ### Arguments
+
+<aside class="notice">
+The endpoint accepts a *single* product object or *multiple* products in an
+array. See examples on the right.
+</aside>
 
 #### Main object (product)
 
@@ -99,10 +164,67 @@ $ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
 ||The price of the variant.|
 
 <aside class="success">
-Response 204 (application/json)
+Response 200 (Success)
 </aside>
 
-## When a product is deleted
+## Update product
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.receiptful.com/api/v1/products/{product_id}" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -X PUT \
+  -d '{
+    "product_id": "ipa_12345",
+    "type": "beer",
+    "brand": "StefanoS",
+    "title": "Refreshing IPA by StefanoS",
+    "description": "This IPA is awesome and brought to you by the legendary StefanoS",
+    "hidden": false,
+    "url": "https://stefanos.beer/products/ipa_12345",
+    "tags": [ "ipa", "beer", "refreshing" ],
+    "images": [
+      { "position": 1, "url": "https://stefanos.beer/img/ipa_12345_1.jpg" },
+      { "position": 2, "url": "https://stefanos.beer/img/ipa_hej.jpg" }
+    ],
+    "variants": [
+      { "price": 10.0 },
+      { "price": 15.0 }
+    ],
+    "categories": [
+      {
+        "category_id": "category_1234",
+        "title": "IPA category",
+        "description": "A category of good IPAs",
+        "url": "https://stefanos.beer/categories/category_1234"
+      }
+    ]
+  }'
+```
+
+### Update a product [PUT]
+
+`PUT https://app.receiptful.com/api/v1/products/{product_id}`
+
+### Arguments
+
+<aside class="notice">
+The product structure is the same as for [Create a product](#create-product)
+except that you can only update a single product.
+</aside>
+<aside class="warning">
+Notice that the product should always be a *full* representation, **not** a
+partial. The API does not support partial updates.
+</aside>
+
+<aside class="success">
+Response 200 (application/json)
+</aside>
+
+## Delete product
+
+### Delete a product [DELETE]
 
 ```shell
 # EXAMPLE REQUEST

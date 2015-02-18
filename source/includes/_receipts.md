@@ -180,7 +180,7 @@ Response 200 (application/json)
 $ curl "https://app.receiptful.com/api/v1/receipts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -X POST
+  -X POST \
   -d '{
        "reference":"c_1e23d",
        "currency":"USD",
@@ -358,7 +358,7 @@ Response 201 (application/json)
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
-  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -453,7 +453,7 @@ Response 200 (application/json)
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
-  -H "X-ApiKey: YOUR_API_KEY"
+  -H "X-ApiKey: YOUR_API_KEY" \
   -X POST
 ```
 

@@ -107,6 +107,10 @@ The endpoint accepts a *single* product object or *multiple* products in an
 array. See examples on the right.
 </aside>
 
+<aside class="notice">
+You can upload 250 products per request.
+</aside>
+
 #### Main object (product)
 
 |Argument|Details|

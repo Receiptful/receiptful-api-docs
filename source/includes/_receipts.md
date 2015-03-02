@@ -357,7 +357,7 @@ Response 201 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipt/a1b2c3d4" \
+$ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -452,7 +452,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
+$ curl "https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X POST
 ```
@@ -529,7 +529,7 @@ $ curl "https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send" \
 
 ### Resend a Receipt [POST]
 
-`https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}/send`
+`https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}/send`
 
 Resend a receipt using the id.
 
@@ -539,6 +539,153 @@ Resend a receipt using the id.
 |-------:|-----------|
 |**id:**|**string, required**|
 ||String based `id` of the receipt supplied in the response from the send of a receipt.| 
+
+<aside class="success">
+Response 200 (application/json)
+</aside>
+
+## Bulk upload
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '[{
+       "reference":"c_1e23d",
+       "currency":"USD",
+       "amount":"0.00",
+       "amountNotes":"Includes 19$ VAT",
+       "to":"customer@email.com",
+       "from":"me@mybusiness.com",
+       "date":1410715640,
+       "payment":{
+          "type":"VISA",
+          "last4":4242
+       },
+       "items":[
+          {
+             "reference":123,
+             "description":"Receiptful subscription",
+             "quantity":1,
+             "amount":"39.99",
+             "metas": [{
+               "key": "Color",
+               "value": "Red"
+             }]
+          }
+       ],
+       "subtotals":[
+          {
+             "description":"Delivery",
+             "amount":"9.00"
+          }
+       ],
+       "billing":{
+          "address":{
+             "firstName":"John",
+             "lastName":"Doe",
+             "company":"Acme Widgets",
+             "addressLine1":"111 Main",
+             "addressLine2":"Suite 101",
+             "city":"New York",
+             "state":"NY",
+             "postcode":"10012",
+             "country":"US"
+          },
+          "phone":"444-555-6464",
+          "email":"john@acmewidgets.com"
+       },
+       "shipping":{
+          "firstName":"John",
+          "lastName":"Doe",
+          "company":"Acme Widgets",
+          "addressLine1":"111 Main",
+          "addressLine2":"Suite 101",
+          "city":"New York",
+          "state":"NY",
+          "postcode":"10012",
+          "country":"US"
+       },
+       "customerIp":"145.145.145.145"
+    },{
+       "reference":"c_2e23d",
+       "currency":"USD",
+       "amount":"1.00",
+       "amountNotes":"Includes 19$ VAT",
+       "to":"customer@email.com",
+       "from":"me@mybusiness.com",
+       "date":1410715640,
+       "payment":{
+          "type":"VISA",
+          "last4":4242
+       },
+       "items":[
+          {
+             "reference":123,
+             "description":"Receiptful subscription",
+             "quantity":1,
+             "amount":"39.99",
+             "metas": [{
+               "key": "Color",
+               "value": "Red"
+             }]
+          }
+       ],
+       "subtotals":[
+          {
+             "description":"Delivery",
+             "amount":"9.00"
+          }
+       ],
+       "billing":{
+          "address":{
+             "firstName":"John",
+             "lastName":"Doe",
+             "company":"Acme Widgets",
+             "addressLine1":"111 Main",
+             "addressLine2":"Suite 101",
+             "city":"New York",
+             "state":"NY",
+             "postcode":"10012",
+             "country":"US"
+          },
+          "phone":"444-555-6464",
+          "email":"john@acmewidgets.com"
+       },
+       "shipping":{
+          "firstName":"John",
+          "lastName":"Doe",
+          "company":"Acme Widgets",
+          "addressLine1":"111 Main",
+          "addressLine2":"Suite 101",
+          "city":"New York",
+          "state":"NY",
+          "postcode":"10012",
+          "country":"US"
+       },
+       "customerIp":"145.145.145.145"
+    }]'
+```
+
+### Bulk upload [POST]
+
+`https://app.receiptful.com/api/v1/receipts/bulk`
+
+Upload many receipts at once *without sending the receipts*. This is useful for
+synchronizing the receipt history and is used for the recommendation engine.
+
+<aside class="notice">
+You can upload 250 receipts per request.
+</aside>
+
+### Arguments
+
+<aside class="notice">
+The receipt structure is the same as for [Send](#send) except that you should
+enclose the receipts in an array (see example request).
+</aside>
 
 <aside class="success">
 Response 200 (application/json)

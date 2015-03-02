@@ -688,5 +688,16 @@ enclose the receipts in an array (see example request).
 </aside>
 
 <aside class="success">
-Response 200 (application/json)
+Response 200 (success)
+
+All receipts are valid.
+</aside>
+
+<aside class="success">
+Response 202 (partial success)
+
+Some receipts are valid and some are invalid. The response specifies which
+receipts failed to validate.
+
+Valid receipts are accepted and processed and should *not* be re-uploaded.
 </aside>

@@ -168,7 +168,18 @@ You can upload 250 products per request.
 ||The price of the variant.|
 
 <aside class="success">
-Response 200 (Success)
+Response 200 (success)
+
+All products are valid.
+</aside>
+
+<aside class="success">
+Response 202 (partial success)
+
+Some products are valid and some are invalid. The response specifies which
+products failed to validate.
+
+Valid products are accepted and processed and should *not* be re-uploaded.
 </aside>
 
 ## Update product

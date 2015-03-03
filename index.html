@@ -504,7 +504,7 @@ Response 200 (application/json)
 Response 201 (application/json)
 </aside></p>
 <h2 id='receipt'>Receipt</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/a1b2c3d4"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/a1b2c3d4"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -602,7 +602,7 @@ Response 201 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='resend'>Resend</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipt/1a2b3c4d/send"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X POST
 </code></pre>
@@ -677,7 +677,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='resend-a-receipt-post'>Resend a Receipt [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}/send</code></p>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}/send</code></p>
 
 <p>Resend a receipt using the id.</p>
 <h3 id='arguments'>Arguments</h3>
@@ -699,6 +699,156 @@ Response 200 (application/json)
 
 <p><aside class="success">
 Response 200 (application/json)
+</aside></p>
+<h2 id='bulk-upload'>Bulk upload</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/bulk"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'[{
+       "reference":"c_1e23d",
+       "currency":"USD",
+       "amount":"0.00",
+       "amountNotes":"Includes 19$ VAT",
+       "to":"customer@email.com",
+       "from":"me@mybusiness.com",
+       "date":1410715640,
+       "payment":{
+          "type":"VISA",
+          "last4":4242
+       },
+       "items":[
+          {
+             "reference":123,
+             "description":"Receiptful subscription",
+             "quantity":1,
+             "amount":"39.99",
+             "metas": [{
+               "key": "Color",
+               "value": "Red"
+             }]
+          }
+       ],
+       "subtotals":[
+          {
+             "description":"Delivery",
+             "amount":"9.00"
+          }
+       ],
+       "billing":{
+          "address":{
+             "firstName":"John",
+             "lastName":"Doe",
+             "company":"Acme Widgets",
+             "addressLine1":"111 Main",
+             "addressLine2":"Suite 101",
+             "city":"New York",
+             "state":"NY",
+             "postcode":"10012",
+             "country":"US"
+          },
+          "phone":"444-555-6464",
+          "email":"john@acmewidgets.com"
+       },
+       "shipping":{
+          "firstName":"John",
+          "lastName":"Doe",
+          "company":"Acme Widgets",
+          "addressLine1":"111 Main",
+          "addressLine2":"Suite 101",
+          "city":"New York",
+          "state":"NY",
+          "postcode":"10012",
+          "country":"US"
+       },
+       "customerIp":"145.145.145.145"
+    },{
+       "reference":"c_2e23d",
+       "currency":"USD",
+       "amount":"1.00",
+       "amountNotes":"Includes 19$ VAT",
+       "to":"customer@email.com",
+       "from":"me@mybusiness.com",
+       "date":1410715640,
+       "payment":{
+          "type":"VISA",
+          "last4":4242
+       },
+       "items":[
+          {
+             "reference":123,
+             "description":"Receiptful subscription",
+             "quantity":1,
+             "amount":"39.99",
+             "metas": [{
+               "key": "Color",
+               "value": "Red"
+             }]
+          }
+       ],
+       "subtotals":[
+          {
+             "description":"Delivery",
+             "amount":"9.00"
+          }
+       ],
+       "billing":{
+          "address":{
+             "firstName":"John",
+             "lastName":"Doe",
+             "company":"Acme Widgets",
+             "addressLine1":"111 Main",
+             "addressLine2":"Suite 101",
+             "city":"New York",
+             "state":"NY",
+             "postcode":"10012",
+             "country":"US"
+          },
+          "phone":"444-555-6464",
+          "email":"john@acmewidgets.com"
+       },
+       "shipping":{
+          "firstName":"John",
+          "lastName":"Doe",
+          "company":"Acme Widgets",
+          "addressLine1":"111 Main",
+          "addressLine2":"Suite 101",
+          "city":"New York",
+          "state":"NY",
+          "postcode":"10012",
+          "country":"US"
+       },
+       "customerIp":"145.145.145.145"
+    }]'</span>
+</code></pre>
+<h3 id='bulk-upload-post'>Bulk upload [POST]</h3>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/bulk</code></p>
+
+<p>Upload many receipts at once <em>without sending the receipts</em>. This is useful for
+synchronizing the receipt history and is used for the recommendation engine.</p>
+
+<p><aside class="notice">
+You can upload 250 receipts per request.
+</aside></p>
+<h3 id='arguments'>Arguments</h3>
+<p><aside class="notice">
+The receipt structure is the same as for <a href="#send">Send</a> except that you should
+enclose the receipts in an array (see example request).
+</aside></p>
+
+<p><aside class="success">
+Response 200 (success)</p>
+
+<p>All receipts are valid.
+</aside></p>
+
+<p><aside class="success">
+Response 202 (partial success)</p>
+
+<p>Some receipts are valid and some are invalid. The response specifies which
+receipts failed to validate.</p>
+
+<p>Valid receipts are accepted and processed and should <em>not</em> be re-uploaded.
 </aside></p>
 
           <h1 id='coupons'>Coupons</h1>
@@ -1004,6 +1154,10 @@ These endpoints must be used to send updates about products for our reccommendat
 The endpoint accepts a <em>single</em> product object or <em>multiple</em> products in an
 array. See examples on the right.
 </aside></p>
+
+<p><aside class="notice">
+You can upload 250 products per request.
+</aside></p>
 <h4 id='main-object-product'>Main object (product)</h4>
 <table><thead>
 <tr>
@@ -1182,7 +1336,18 @@ array. See examples on the right.
 </tbody></table>
 
 <p><aside class="success">
-Response 200 (Success)
+Response 200 (success)</p>
+
+<p>All products are valid.
+</aside></p>
+
+<p><aside class="success">
+Response 202 (partial success)</p>
+
+<p>Some products are valid and some are invalid. The response specifies which
+products failed to validate.</p>
+
+<p>Valid products are accepted and processed and should <em>not</em> be re-uploaded.
 </aside></p>
 <h2 id='update-product'>Update product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>

@@ -107,6 +107,10 @@ The endpoint accepts a *single* product object or *multiple* products in an
 array. See examples on the right.
 </aside>
 
+<aside class="notice">
+You can upload 250 products per request.
+</aside>
+
 #### Main object (product)
 
 |Argument|Details|
@@ -164,7 +168,18 @@ array. See examples on the right.
 ||The price of the variant.|
 
 <aside class="success">
-Response 200 (Success)
+Response 200 (success)
+
+All products are valid.
+</aside>
+
+<aside class="success">
+Response 202 (partial success)
+
+Some products are valid and some are invalid. The response specifies which
+products failed to validate.
+
+Valid products are accepted and processed and should *not* be re-uploaded.
 </aside>
 
 ## Update product

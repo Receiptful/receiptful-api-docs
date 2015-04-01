@@ -13,6 +13,7 @@ includes:
   - receipts
   - coupons
   - products
+  - users
   - errors
 
 search: true

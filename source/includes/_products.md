@@ -1,5 +1,5 @@
 # Products
-Services related to sending product updates using the **Receipts API**.
+Services related to sending product updates using the **Products API**.
 These endpoints must be used to send updates about products for our reccommendation engine.
 
 ## Create product

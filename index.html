@@ -1057,7 +1057,7 @@ Response 200 (application/json)
 </aside></p>
 
           <h1 id='products'>Products</h1>
-<p>Services related to sending product updates using the <strong>Receipts API</strong>.
+<p>Services related to sending product updates using the <strong>Products API</strong>.
 These endpoints must be used to send updates about products for our reccommendation engine.</p>
 <h2 id='create-product'>Create product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST (SINGLE PRODUCT)</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products"</span> <span class="se">\</span>
@@ -1407,6 +1407,33 @@ Response 200 (application/json)
 
 <p><aside class="success">
 Response 204 (application/json)
+</aside></p>
+
+          <h1 id='users'>Users</h1>
+<p>Services related to users using the <strong>Users API</strong>.</p>
+<h2 id='current-user'>Current user</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/users/current"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"publicKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='retrieve-user-information-get'>Retrieve user information [GET]</h3>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/users/current</code></p>
+
+<p>The current API user.</p>
+
+<p><aside class="success">
+Response 200 (application/json)
 </aside></p>
 
           <h1 id='errors'>Errors</h1>

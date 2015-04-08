@@ -238,6 +238,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
           "country":"US"
        },
        "customerIp":"145.145.145.145"
+       "notes":"Products require individual packaging"
     }'
 ```
 
@@ -348,6 +349,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||details related to the upsell. Children:<ul><li>**products**<ul><li>array of<ul><li>**title**, Product 1</li><li>**description**, Lorem ipsum</li><li>**image**, http://foo/image.jpg</li><li>**actionUrl**, http://foo/product-1/</li></ul></li></ul>|
 |**customerIp:**|**string, optional**|
 ||the IP Address of the connection that completed the sale|
+|**notes:**|**string, optional**|
+||any notes to be added to the receipt|
 
 <aside class="success">
 Response 201 (application/json)

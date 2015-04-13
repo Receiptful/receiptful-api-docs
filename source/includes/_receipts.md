@@ -237,7 +237,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
           "postcode":"10012",
           "country":"US"
        },
-       "customerIp":"145.145.145.145"
+       "customerIp":"145.145.145.145",
        "notes":"Products require individual packaging"
     }'
 ```

@@ -303,8 +303,11 @@ Response 200 (application/json)
           "postcode":"10012",
           "country":"US"
        },
-       "customerIp":"145.145.145.145"
-       "notes":"Products require individual packaging"
+       "customerIp":"145.145.145.145",
+       "notes":"Products require individual packaging",
+       "coupons":[
+         "abcd-1234-5678"
+       ]
     }'</span>
 </code></pre>
 
@@ -506,6 +509,14 @@ Response 200 (application/json)
 <tr>
 <td style="text-align: right"></td>
 <td>any notes to be added to the receipt</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>coupons:</strong></td>
+<td><strong>array, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>an array of strings that represent all of the coupon codes used with the order</td>
 </tr>
 </tbody></table>
 

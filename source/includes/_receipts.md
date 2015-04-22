@@ -237,8 +237,11 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
           "postcode":"10012",
           "country":"US"
        },
-       "customerIp":"145.145.145.145"
-       "notes":"Products require individual packaging"
+       "customerIp":"145.145.145.145",
+       "notes":"Products require individual packaging",
+       "coupons":[
+         "abcd-1234-5678"
+       ]
     }'
 ```
 
@@ -351,6 +354,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 ||the IP Address of the connection that completed the sale|
 |**notes:**|**string, optional**|
 ||any notes to be added to the receipt|
+|**coupons:**|**array, optional**|
+||an array of strings that represent all of the coupon codes used with the order|
 
 <aside class="success">
 Response 201 (application/json)

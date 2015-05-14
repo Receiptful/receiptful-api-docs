@@ -441,7 +441,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
 
 ### Retrieve a receipt [GET]
 
-`https://app.receiptful.com/api/v1/receipt/{RECEIPT_ID}`
+`https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}`
 
 A single Receipt with all of its details
 

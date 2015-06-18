@@ -97,7 +97,8 @@ Your API Key can be found on the profile page in your Receiptful control panel
                </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
                </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="w">
+               </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
             </span><span class="p">}</span><span class="w">
          </span><span class="p">],</span><span class="w">
          </span><span class="s2">"subtotals"</span><span class="p">:[</span><span class="w">
@@ -162,7 +163,8 @@ Your API Key can be found on the profile page in your Receiptful control panel
                </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
                </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="w">
+               </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
             </span><span class="p">}</span><span class="w">
          </span><span class="p">],</span><span class="w">
          </span><span class="s2">"subtotals"</span><span class="p">:[</span><span class="w">
@@ -265,6 +267,7 @@ Response 200 (application/json)
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"
@@ -333,7 +336,8 @@ Response 200 (application/json)
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="w">
+         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"subtotals"</span><span class="p">:[</span><span class="w">
@@ -460,7 +464,7 @@ Response 200 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Receiptful Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://receiptful.com/download/123</em></li><li><strong>metas</strong>, <em>optional, [{ &ldquo;key&rdquo;: &ldquo;Color&rdquo;, &ldquo;value&rdquo;: &ldquo;Red&rdquo; }]</em></li></ul></td>
+<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Receiptful Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://receiptful.com/download/123</em></li><li><strong>metas</strong>, <em>optional, [{ &ldquo;key&rdquo;: &ldquo;Color&rdquo;, &ldquo;value&rdquo;: &ldquo;Red&rdquo; }]</em></li><li><strong>image</strong>, <em>optional, http://foo/image.jpg</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>subtotals:</strong></td>
@@ -549,7 +553,8 @@ Response 201 (application/json)
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="w">
+         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"subtotals"</span><span class="p">:[</span><span class="w">
@@ -648,7 +653,8 @@ Response 200 (application/json)
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="w">
+         </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">],</span><span class="w">
    </span><span class="s2">"subtotals"</span><span class="p">:[</span><span class="w">
@@ -743,6 +749,7 @@ Response 200 (application/json)
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"
@@ -800,6 +807,7 @@ Response 200 (application/json)
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"

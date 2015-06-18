@@ -40,7 +40,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
                "reference":123,
                "description":"Receiptful subscription",
                "quantity":1,
-               "amount":"39.99"
+               "amount":"39.99",
+               "image":"http://foo/image.jpg"
             }
          ],
          "subtotals":[
@@ -105,7 +106,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
                "reference":123,
                "description":"Receiptful subscription",
                "quantity":1,
-               "amount":"39.99"
+               "amount":"39.99",
+               "image":"http://foo/image.jpg"
             }
          ],
          "subtotals":[
@@ -199,6 +201,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"
@@ -267,7 +270,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
          "reference":123,
          "description":"Receiptful subscription",
          "quantity":1,
-         "amount":"39.99"
+         "amount":"39.99",
+         "image":"http://foo/image.jpg"
       }
    ],
    "subtotals":[
@@ -341,7 +345,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 |**payment:**|**object, optional**, *default is null*|
 ||The display details of the payment that completed the sale. Children:<ul><li>**Type**, *VISA*</li><li>**Last4**, *4242*</li></ul>|
 |**items:**|**array, required**|
-||The items sold. Children:<ul><li>**reference**, *optional, c_123*</li><li>**description**, *Receiptful Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li><li>**url**, *http://receiptful.com/download/123*</li><li>**metas**, *optional, [{ "key": "Color", "value": "Red" }]*</li></ul>|
+||The items sold. Children:<ul><li>**reference**, *optional, c_123*</li><li>**description**, *Receiptful Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li><li>**url**, *http://receiptful.com/download/123*</li><li>**metas**, *optional, [{ "key": "Color", "value": "Red" }]*</li><li>**image**, *optional, http://foo/image.jpg*</li></ul>|
 |**subtotals:**|**array, optional**|
 ||any extra fields that are required before the total is displayed, e.g. discounts, delivery. Children:<ul><li>**description**, *Delivery*</li><li>**amount**, *9.99*</li></ul>|
 |**billing:**|**object, optional**|
@@ -390,7 +394,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
          "reference":123,
          "description":"Receiptful subscription",
          "quantity":1,
-         "amount":"39.99"
+         "amount":"39.99",
+         "image":"http://foo/image.jpg"
       }
    ],
    "subtotals":[
@@ -486,7 +491,8 @@ $ curl "https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send" \
          "reference":123,
          "description":"Receiptful subscription",
          "quantity":1,
-         "amount":"39.99"
+         "amount":"39.99",
+         "image":"http://foo/image.jpg"
       }
    ],
    "subtotals":[
@@ -578,6 +584,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"
@@ -635,6 +642,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
              "description":"Receiptful subscription",
              "quantity":1,
              "amount":"39.99",
+             "image":"http://foo/image.jpg",
              "metas": [{
                "key": "Color",
                "value": "Red"

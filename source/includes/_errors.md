@@ -2,6 +2,16 @@
 
 The Receiptful API uses the following error codes:
 
+```javascript
+// On status 422
+{
+  "errors": [
+    "Path `currency` is required.",
+    "Path `amount` is required.",
+    "Path `token` is required."
+  ]
+}
+```
 
 Error Code | Meaning
 ---------- | -------
@@ -14,6 +24,7 @@ Error Code | Meaning
 410 | Gone -- The kitten requested has been removed from our servers
 413 | Request Entity Too Large -- You sent too much data to us
 418 | I'm a teapot
+422 | Unprocessable Entity
 429 | Too Many Requests
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.

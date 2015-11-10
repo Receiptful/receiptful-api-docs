@@ -2,7 +2,6 @@
 
 The Receiptful API uses the following error codes:
 
-
 Error Code | Meaning
 ---------- | -------
 400 | Bad Request -- Something required is missing of the request is malformed

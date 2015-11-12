@@ -20,7 +20,8 @@ $ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
              "variant":"rct2",
              "description":"Receiptful subscription",
              "quantity":1,
-             "amount":"39.99"
+             "amount":"39.99",
+             "attributes":[{ "key": "foo", "value": "bar" }]
           }
        ]
     }'
@@ -38,18 +39,40 @@ $ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
 
 ### Arguments
 
-|Argument|Details|
-|-------:|-----------|
-|**token:**    | **string, required**|
-||Cart token or unique identifier|
-|**customer:** | **string, required**|
-||Email address of the user to whom the cart belongs|
-|**amount:**   | **string, required**|
-||Cart total, including deductions|
-|**currency:** | **string, required**|
-||ISO 4217 currency code|
-|**items:**    | **array, required**|
-||The items inside the cart. Children:<ul><li>**reference**, *optional, c_123*</li><li>**variant**, *optional, c_123_2*</li><li>**description**, *Receiptful Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li></ul>|
+|Argument      |Details                                               |
+|-------------:|------------------------------------------------------|
+|**token:**    | **string, required**                                 |
+|              |Cart token or unique identifier                       |
+|**customer:** | **string, required**                                 |
+|              |Email address of the customer to whom the cart belongs|
+|**currency:** | **string, required**                                 |
+|              |ISO 4217 currency code                                |
+|**items:**    | **[object], required, _see below_**                  |
+|              |The items inside the cart.                            |
+
+#### Items
+
+The items inside the cart. Object contents:
+
+|Key              |Details                    |Example                         |
+|----------------:|---------------------------|--------------------------------|
+|**reference:**   |**string, optional**       |*c_123*                         |
+|**variant:**     |**string, optional**       |*c_123_2*                       |
+|**description:** |**string, required**       |*Receiptful Hobby Plan*         |
+|**quantity:**    |**number, optional**       |*1*                             |
+|**amount:**      |**number, optional**       |*29.00*                         |
+|                 |A single item's price.     |                                |
+|**attributes:**  |**[object], optional**     |*[{ key: "foo", value: "bar" }]*|
+|                 |Item attributes. See below.|                                |
+
+##### Attributes
+
+Item attributes:
+
+|Key        |Details              |
+|----------:|---------------------|
+|**key:**   |**string, required** |
+|**value:** |**string, required** |
 
 <aside class="success">
 Response 200 (application/json)

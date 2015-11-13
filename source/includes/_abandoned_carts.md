@@ -12,7 +12,6 @@ $ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
   -d '{
        "token":"sometoken",
        "customer":"some@customer.com",
-       "amount":"125.0",
        "currency":"USD",
        "items":[
           {

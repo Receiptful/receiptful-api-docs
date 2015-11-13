@@ -1437,6 +1437,151 @@ Response 200 (application/json)
 Response 204 (application/json)
 </aside></p>
 
+          <h1 id='abandoned-carts'>Abandoned Carts</h1>
+<p>Services related to managing <strong>Abandoned Carts</strong>.</p>
+<h2 id='create'>Create</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+       "token":"sometoken",
+       "customer":"some@customer.com",
+       "currency":"USD",
+       "items":[
+          {
+             "reference":"rct",
+             "variant":"rct2",
+             "description":"Receiptful subscription",
+             "quantity":1,
+             "amount":"39.99",
+             "attributes":[{ "key": "foo", "value": "bar" }]
+          }
+       ]
+    }'</span>
+</code></pre>
+
+<blockquote>
+<p>RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{}</span><span class="w">
+</span></code></pre>
+<h3 id='create-or-update-a-cart-post'>Create or Update a Cart [POST]</h3>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/abandoned-carts</code></p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>token:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Cart token or unique identifier</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customer:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Email address of the customer to whom the cart belongs</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>currency:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>ISO 4217 currency code</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>items:</strong></td>
+<td><strong>[object], required, <em>see below</em></strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The items inside the cart.</td>
+</tr>
+</tbody></table>
+<h4 id='items'>Items</h4>
+<p>The items inside the cart. Object contents:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>reference:</strong></td>
+<td><strong>string, optional</strong></td>
+<td><em>c_123</em></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>variant:</strong></td>
+<td><strong>string, optional</strong></td>
+<td><em>c_123_2</em></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>description:</strong></td>
+<td><strong>string, required</strong></td>
+<td><em>Receiptful Hobby Plan</em></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>quantity:</strong></td>
+<td><strong>number, optional</strong></td>
+<td><em>1</em></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>amount:</strong></td>
+<td><strong>number, optional</strong></td>
+<td><em>29.00</em></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A single item&rsquo;s price.</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>attributes:</strong></td>
+<td><strong>[object], optional</strong></td>
+<td><em>[{ key: &ldquo;foo&rdquo;, value: &ldquo;bar&rdquo; }]</em></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Item attributes. See below.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id='attributes'>Attributes</h5>
+<p>Item attributes:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>key:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>value:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+Response 200 (application/json)
+</aside></p>
+
           <h1 id='users'>Users</h1>
 <p>Services related to users using the <strong>Users API</strong>.</p>
 <h2 id='current-user'>Current user</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>

@@ -76,3 +76,28 @@ Item attributes:
 <aside class="success">
 Response 200 (application/json)
 </aside>
+
+## Delete an abandoned cart
+
+```shell
+# DEFINITION
+DELETE https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d
+
+# EXAMPLE REQUEST
+$ curl "https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -X DELETE
+```
+
+`https://app.receiptful.com/api/v1/abandoned-carts/{TOKEN}`
+
+### Arguments
+
+|Argument|Details|
+|-------:|-----------|
+|**token:**|**string, required**|
+||Cart token or unique identifier.|
+
+<aside class="success">
+Response 204 (application/json)
+</aside>

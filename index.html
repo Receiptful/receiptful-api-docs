@@ -739,6 +739,7 @@ Response 200 (application/json)
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
+       "status": "completed",
        "payment":{
           "type":"VISA",
           "last4":4242
@@ -797,6 +798,7 @@ Response 200 (application/json)
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
+       "status": "cancelled",
        "payment":{
           "type":"VISA",
           "last4":4242
@@ -861,8 +863,26 @@ You can upload 250 receipts per request.
 <h3 id='arguments'>Arguments</h3>
 <p><aside class="notice">
 The receipt structure is the same as for <a href="#send">Send</a> except that you should
-enclose the receipts in an array (see example request).
+enclose the receipts in an array (see example request) and you can include a
+<code class="prettyprint">status</code> field to indicate if the historic order was actually completed or not.
+See below.
 </aside></p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Status of the receipt, valid values are &ldquo;pending&rdquo;, &ldquo;completed&rdquo;, &ldquo;cancelled&rdquo; and &ldquo;refunded&rdquo;</td>
+</tr>
+</tbody></table>
 
 <p><aside class="success">
 Response 200 (success)</p>
@@ -1580,6 +1600,36 @@ Response 204 (application/json)
 
 <p><aside class="success">
 Response 200 (application/json)
+</aside></p>
+<h2 id='delete-an-abandoned-cart'>Delete an abandoned cart</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
+DELETE https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d
+
+<span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/abandoned-carts/{TOKEN}</code></p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>token:</strong></td>
+<td><strong>string, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Cart token or unique identifier.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+Response 204 (application/json)
 </aside></p>
 
           <h1 id='users'>Users</h1>

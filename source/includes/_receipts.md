@@ -574,6 +574,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
+       "status": "completed",
        "payment":{
           "type":"VISA",
           "last4":4242
@@ -632,6 +633,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
        "to":"customer@email.com",
        "from":"me@mybusiness.com",
        "date":1410715640,
+       "status": "cancelled",
        "payment":{
           "type":"VISA",
           "last4":4242
@@ -700,8 +702,15 @@ You can upload 250 receipts per request.
 
 <aside class="notice">
 The receipt structure is the same as for [Send](#send) except that you should
-enclose the receipts in an array (see example request).
+enclose the receipts in an array (see example request) and you can include a
+`status` field to indicate if the historic order was actually completed or not.
+See below.
 </aside>
+
+|Argument|Details|
+|-------:|-----------|
+|**status:**|**string, optional**|
+||Status of the receipt, valid values are "pending", "completed", "cancelled" and "refunded"|
 
 <aside class="success">
 Response 200 (success)

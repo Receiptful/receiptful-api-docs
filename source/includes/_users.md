@@ -30,3 +30,23 @@ The current API user.
 <aside class="success">
 Response 200 (application/json)
 </aside>
+
+## Uninstall
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.receiptful.com/api/v1/users/uninstall" \
+  -X POST \
+  -H "X-ApiKey: YOUR_API_KEY"
+```
+
+### Uninstall the user/app [POST]
+
+`https://app.receiptful.com/api/v1/users/uninstall`
+
+Tells Receiptful to uninstall the user associated with the given API key. Among
+other things, this automatically unsubscribes the user from a premium plan.
+
+<aside class="success">
+Response 204
+</aside>

@@ -726,7 +726,7 @@ Response 200 (application/json)
 <p><aside class="success">
 Response 200 (application/json)
 </aside></p>
-<h2 id='bulk-upload'>Bulk upload</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<h2 id='bulk-sync'>Bulk Sync</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/bulk"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -851,11 +851,10 @@ Response 200 (application/json)
        "customerIp":"145.145.145.145"
     }]'</span>
 </code></pre>
-<h3 id='bulk-upload-post'>Bulk upload [POST]</h3>
+<h3 id='bulk-sync-post'>Bulk Sync [POST]</h3>
 <p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/bulk</code></p>
 
-<p>Upload many receipts at once <em>without sending the receipts</em>. This is useful for
-synchronizing the receipt history and is used for the recommendation engine.</p>
+<p>Synchronize many receipts at once <em>without sending the receipts</em>. This is used to create a Receipt history for the recommendation engine. It <strong>will not create</strong> the receipts in Receiptful.</p>
 
 <p><aside class="notice">
 You can upload 250 receipts per request.

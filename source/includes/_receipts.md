@@ -558,7 +558,7 @@ Resend a receipt using the id.
 Response 200 (application/json)
 </aside>
 
-## Bulk upload
+## Bulk Sync
 
 ```shell
 # EXAMPLE REQUEST
@@ -687,12 +687,11 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
     }]'
 ```
 
-### Bulk upload [POST]
+### Bulk Sync [POST]
 
 `https://app.receiptful.com/api/v1/receipts/bulk`
 
-Upload many receipts at once *without sending the receipts*. This is useful for
-synchronizing the receipt history and is used for the recommendation engine.
+Synchronize many receipts at once *without sending the receipts*. This is used to create a Receipt history for the recommendation engine. It **will not create** the receipts in Receiptful.
 
 <aside class="notice">
 You can upload 250 receipts per request.

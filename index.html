@@ -1672,6 +1672,117 @@ other things, this automatically unsubscribes the user from a premium plan.</p>
 Response 204
 </aside></p>
 
+          <h1 id='customer-lists'>Customer Lists</h1>
+<p>Services related to managing <strong>Customer Lists</strong> (for newsletters) and subscriptions.</p>
+<h2 id='get-customer-lists'>Get Customer Lists</h2>
+<p>Get all available customer lists.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/customer-lists"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weekly Newsletter Subscribers"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Products Announcements"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-customer-lists-get'>List all Customer Lists [GET]</h3>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/customer-lists</code></p>
+
+<p><aside class="success">
+  Response 200 (application/json)
+</aside></p>
+<h3 id='return'>Return</h3>
+<p>The endpoint returns an array with all the Customer Lists in the account. Object keys are:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Customer List ID. This is used whenever referencing this Customer List in other endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The title picked by the user for this List. Used in user-facing interfaces.</td>
+</tr>
+</tbody></table>
+<h2 id='subscribe-to-list'>Subscribe to List</h2>
+<p>Subscribe an email address and optional user details to a specific customer list.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+    "email": "an@email.com",
+    "name": "John Snow",
+    "source": "landing-page"
+  }'</span>
+</code></pre>
+<h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
+<p><code class="prettyprint">https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions</code></p>
+
+<p><code class="prettyprint">LIST_ID</code> should be the <code class="prettyprint">id</code> returned in the <a href="#get-customer-lists">list</a> response.</p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>email:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to subscribe to this Customer List. Must be a valid email address.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>name:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address owner&rsquo;s name. Expects first or first and last name.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>source:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where this subscription came from. Use it to keep track of where customer emails are captured.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 204
+</aside></p>
+
           <h1 id='errors'>Errors</h1>
 <p>The Receiptful API uses the following error codes:</p>
 

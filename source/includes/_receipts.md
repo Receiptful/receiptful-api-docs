@@ -5,7 +5,7 @@ Services related to sending using the **Receipts API**
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
+$ curl "https://app.conversio.com/api/v1/receipts?page=1&limit=10" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 > Example Response
@@ -14,10 +14,10 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
 {
    "meta":{
       "_links":{
-         "first":"https://app.receiptful.com/api/v1/receipts?page=1",
-         "next":"https://app.receiptful.com/api/v1/receipts?page=3",
-         "prev":"https://app.receiptful.com/api/v1/receipts?page=1",
-         "last":"https://app.receiptful.com/api/v1/receipts?page=5"
+         "first":"https://app.conversio.com/api/v1/receipts?page=1",
+         "next":"https://app.conversio.com/api/v1/receipts?page=3",
+         "prev":"https://app.conversio.com/api/v1/receipts?page=1",
+         "last":"https://app.conversio.com/api/v1/receipts?page=5"
       }
    },
    "data":[
@@ -38,7 +38,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "items":[
             {
                "reference":123,
-               "description":"Receiptful subscription",
+               "description":"Conversio subscription",
                "quantity":1,
                "amount":"39.99",
                "image":"http://foo/image.jpg"
@@ -104,7 +104,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
          "items":[
             {
                "reference":123,
-               "description":"Receiptful subscription",
+               "description":"Conversio subscription",
                "quantity":1,
                "amount":"39.99",
                "image":"http://foo/image.jpg"
@@ -160,7 +160,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts?page=1&limit=10" \
 
 ### List all Receipts [GET]
 
-`https://app.receiptful.com/api/v1/receipts`
+`https://app.conversio.com/api/v1/receipts`
 
 ### Arguments
 
@@ -179,7 +179,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipts" \
+$ curl "https://app.conversio.com/api/v1/receipts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -198,7 +198,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -268,7 +268,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
    "items":[
       {
          "reference":123,
-         "description":"Receiptful subscription",
+         "description":"Conversio subscription",
          "quantity":1,
          "amount":"39.99",
          "image":"http://foo/image.jpg"
@@ -322,7 +322,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 
 ### Create a new receipt [POST]
 
-`https://app.receiptful.com/api/v1/receipts`
+`https://app.conversio.com/api/v1/receipts`
 
 ### Arguments
 
@@ -345,13 +345,13 @@ $ curl "https://app.receiptful.com/api/v1/receipts" \
 |**payment:**|**object, optional**, *default is null*|
 ||The display details of the payment that completed the sale. Children:<ul><li>**Type**, *VISA*</li><li>**Last4**, *4242*</li></ul>|
 |**items:**|**array, required**|
-||The items sold. Children:<ul><li>**reference**, *optional, c_123*</li><li>**description**, *Receiptful Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li><li>**url**, *http://receiptful.com/download/123*</li><li>**metas**, *optional, [{ "key": "Color", "value": "Red" }]*</li><li>**image**, *optional, http://foo/image.jpg*</li></ul>|
+||The items sold. Children:<ul><li>**reference**, *optional, c_123*</li><li>**description**, *Conversio Hobby Plan*</li><li>**quantity**, *optional, 1*</li><li>**amount**, *29.00*</li><li>**url**, *http://conversio.com/download/123*</li><li>**metas**, *optional, [{ "key": "Color", "value": "Red" }]*</li><li>**image**, *optional, http://foo/image.jpg*</li></ul>|
 |**subtotals:**|**array, optional**|
 ||any extra fields that are required before the total is displayed, e.g. discounts, delivery. Children:<ul><li>**description**, *Delivery*</li><li>**amount**, *9.99*</li></ul>|
 |**billing:**|**object, optional**|
-||the customer's billing details. Children:<ul><li>**address**<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Receiptful*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul></li><li>**phone**, *518-111-1111*</li><li>**email**, *help@receiptful.com*</li></ul>|
+||the customer's billing details. Children:<ul><li>**address**<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Conversio*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul></li><li>**phone**, *518-111-1111*</li><li>**email**, *help@conversio.com*</li></ul>|
 |**shipping:**|**object, optional**|
-||the customer's shipping details. Children:<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Receiptful*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul>|
+||the customer's shipping details. Children:<ul><li>**firstName**, *Joe*</li><li>**lastName**, *Smith*</li><li>**company**, *Conversio*</li><li>**addressLine1**, *30 Broadway*</li><li>**AddressLine2**, *Manhattan*</li><li>**city**, *New York*</li><li>**state**, *New York*</li><li>**postcode**, *10001*</li><li>**country**, *USA*</li></ul>|
 |**upsell:**|**object, optional**|
 ||details related to the upsell. Children:<ul><li>**products**<ul><li>array of<ul><li>**title**, Product 1</li><li>**description**, Lorem ipsum</li><li>**image**, http://foo/image.jpg</li><li>**actionUrl**, http://foo/product-1/</li></ul></li></ul>|
 |**customerIp:**|**string, optional**|
@@ -369,7 +369,7 @@ Response 201 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
+$ curl "https://app.conversio.com/api/v1/receipts/a1b2c3d4" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -392,7 +392,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
    "items":[
       {
          "reference":123,
-         "description":"Receiptful subscription",
+         "description":"Conversio subscription",
          "quantity":1,
          "amount":"39.99",
          "image":"http://foo/image.jpg"
@@ -446,7 +446,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/a1b2c3d4" \
 
 ### Retrieve a receipt [GET]
 
-`https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}`
+`https://app.conversio.com/api/v1/receipts/{RECEIPT_ID}`
 
 A single Receipt with all of its details
 
@@ -465,7 +465,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send" \
+$ curl "https://app.conversio.com/api/v1/receipts/1a2b3c4d/send" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X POST
 ```
@@ -489,7 +489,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send" \
    "items":[
       {
          "reference":123,
-         "description":"Receiptful subscription",
+         "description":"Conversio subscription",
          "quantity":1,
          "amount":"39.99",
          "image":"http://foo/image.jpg"
@@ -543,7 +543,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send" \
 
 ### Resend a Receipt [POST]
 
-`https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}/send`
+`https://app.conversio.com/api/v1/receipts/{RECEIPT_ID}/send`
 
 Resend a receipt using the id.
 
@@ -562,7 +562,7 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
+$ curl "https://app.conversio.com/api/v1/receipts/bulk" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -582,7 +582,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -641,7 +641,7 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -689,9 +689,9 @@ $ curl "https://app.receiptful.com/api/v1/receipts/bulk" \
 
 ### Bulk Sync [POST]
 
-`https://app.receiptful.com/api/v1/receipts/bulk`
+`https://app.conversio.com/api/v1/receipts/bulk`
 
-Synchronize many receipts at once *without sending the receipts*. This is used to create a Receipt history for the recommendation engine. It **will not create** the receipts in Receiptful.
+Synchronize many receipts at once *without sending the receipts*. This is used to create a Receipt history for the recommendation engine. It **will not create** the receipts in Conversio.
 
 <aside class="notice">
 You can upload 250 receipts per request.

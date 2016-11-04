@@ -1,12 +1,12 @@
 # Errors
 
-The Receiptful API uses the following error codes:
+The Conversio API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
 400 | Bad Request -- Something required is missing of the request is malformed
 401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The receiptful requested is hidden for administrators only
+403 | Forbidden -- The requested resource is hidden for administrators only
 404 | Not Found -- The specified endpoint, receipt or coupon could not be found
 405 | Method Not Allowed -- You tried to access a receipt or coupon with an invalid method
 406 | Not Acceptable -- You requested a format that isn't json

@@ -96,10 +96,11 @@ html, body {
 
   &>.search {
     position: relative;
+    padding-bottom: 10px;
 
     input {
       background: $navy;
-      border-width: 0 0 1px 0;
+      border-width: 0;
       border-color: $search-box-border-color;
       padding: 6px 0 6px 25px;
       @include box-sizing(border-box);
@@ -182,7 +183,6 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    @include box-shadow(0px 1px 0px $nav-active-shadow);
     background-color: $green;
     color: $navy;
   }
@@ -198,8 +198,6 @@ html, body {
       font-size: 12px;
     }
 
-    // for embossed look:
-    @include embossed-bg;
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
@@ -208,10 +206,10 @@ html, body {
   .toc-footer {
     padding: 1em 0;
     margin-top: 1em;
-    border-top: 1px dashed $nav-footer-border-color;
 
     li,a {
       color: $nav-text;
+      opacity: 0.75;
       text-decoration: none;
     }
 
@@ -347,7 +345,6 @@ html, body {
     padding: 0 $main-padding;
     @include box-sizing(border-box);
     display: block;
-    @include text-shadow($main-embossed-text-shadow);
 
     @extend %left-col;
   }
@@ -483,20 +480,23 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
-    text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: #6bc0d2;
+    background: #44a7d4;
     line-height: 1.6;
+    color: #FFF;
+    font-weight: bold;
+
+    a {
+      color: inherit;
+    }
 
     &.warning {
       background-color: $aside-warning-bg;
-      text-shadow: 0 1px 0 lighten($aside-warning-bg, 15%);
     }
 
     &.success {
       background-color: $green;
-      text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
     }
   }
 
@@ -523,7 +523,6 @@ html, body {
     margin: -2px;
     border-radius: 4px;
     border: 1px solid #F7E633;
-    text-shadow: 1px 1px 0 #666;
     @include background(linear-gradient(bottom right, #F7E633 0%, #F1D32F 100%));
   }
 }
@@ -537,6 +536,7 @@ html, body {
   pre, blockquote {
     background-color: $darknavy;
     color: #fff;
+    font-weight: bold;
 
     padding: 2em $main-padding;
     margin: 0;
@@ -546,7 +546,6 @@ html, body {
     clear:right;
 
     @include box-sizing(border-box);
-    @include text-shadow(0px 1px 2px rgba(0,0,0,0.4));
 
     @extend %right-col;
 

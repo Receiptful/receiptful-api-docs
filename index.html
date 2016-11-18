@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Receiptful V1 API</title>
+    <title>Conversio V1 API</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -37,7 +37,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://app.receiptful.com'>Sign Up for an API Key</a></li>
+            <li><a href='https://app.conversio.com'>Sign Up for an API Key</a></li>
             <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -50,18 +50,18 @@
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
-<p>All paths should prefixed with https://app.receiptful.com/api/v1 and will need the following HTTP header:</p>
+<p>All paths should prefixed with https://app.conversio.com/api/v1 and will need the following HTTP header:</p>
 
 <p><code class="prettyprint">X-ApiKey: YOUR_API_KEY</code></p>
 
 <p><aside class="notice">
-Your API Key can be found on the profile page in your Receiptful control panel
+Your API Key can be found on the profile page in your Conversio control panel
 </aside></p>
 
           <h1 id='receipts'>Receipts</h1>
 <p>Services related to sending using the <strong>Receipts API</strong></p>
 <h2 id='all-receipts'>All Receipts</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1&amp;limit=10"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/receipts?page=1&amp;limit=10"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -71,10 +71,10 @@ Your API Key can be found on the profile page in your Receiptful control panel
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
    </span><span class="s2">"meta"</span><span class="p">:{</span><span class="w">
       </span><span class="s2">"_links"</span><span class="p">:{</span><span class="w">
-         </span><span class="s2">"first"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=3"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"prev"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"last"</span><span class="p">:</span><span class="s2">"https://app.receiptful.com/api/v1/receipts?page=5"</span><span class="w">
+         </span><span class="s2">"first"</span><span class="p">:</span><span class="s2">"https://app.conversio.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https://app.conversio.com/api/v1/receipts?page=3"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"prev"</span><span class="p">:</span><span class="s2">"https://app.conversio.com/api/v1/receipts?page=1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"last"</span><span class="p">:</span><span class="s2">"https://app.conversio.com/api/v1/receipts?page=5"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
@@ -95,7 +95,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
          </span><span class="s2">"items"</span><span class="p">:[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Conversio subscription"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
                </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
@@ -161,7 +161,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
          </span><span class="s2">"items"</span><span class="p">:[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Conversio subscription"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
                </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
                </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
@@ -215,7 +215,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-receipts-get'>List all Receipts [GET]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/receipts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -245,7 +245,7 @@ Your API Key can be found on the profile page in your Receiptful control panel
 Response 200 (application/json)
 </aside></p>
 <h2 id='send'>Send</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/receipts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -264,7 +264,7 @@ Response 200 (application/json)
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -334,7 +334,7 @@ Response 200 (application/json)
    </span><span class="s2">"items"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Conversio subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
@@ -386,7 +386,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-a-new-receipt-post'>Create a new receipt [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/receipts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -464,7 +464,7 @@ Response 200 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Receiptful Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://receiptful.com/download/123</em></li><li><strong>metas</strong>, <em>optional, [{ &ldquo;key&rdquo;: &ldquo;Color&rdquo;, &ldquo;value&rdquo;: &ldquo;Red&rdquo; }]</em></li><li><strong>image</strong>, <em>optional, http://foo/image.jpg</em></li></ul></td>
+<td>The items sold. Children:<ul><li><strong>reference</strong>, <em>optional, c_123</em></li><li><strong>description</strong>, <em>Conversio Hobby Plan</em></li><li><strong>quantity</strong>, <em>optional, 1</em></li><li><strong>amount</strong>, <em>29.00</em></li><li><strong>url</strong>, <em>http://conversio.com/download/123</em></li><li><strong>metas</strong>, <em>optional, [{ &ldquo;key&rdquo;: &ldquo;Color&rdquo;, &ldquo;value&rdquo;: &ldquo;Red&rdquo; }]</em></li><li><strong>image</strong>, <em>optional, http://foo/image.jpg</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>subtotals:</strong></td>
@@ -480,7 +480,7 @@ Response 200 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>the customer&rsquo;s billing details. Children:<ul><li><strong>address</strong><ul><li><strong>firstName</strong>, <em>Joe</em></li><li><strong>lastName</strong>, <em>Smith</em></li><li><strong>company</strong>, <em>Receiptful</em></li><li><strong>addressLine1</strong>, <em>30 Broadway</em></li><li><strong>AddressLine2</strong>, <em>Manhattan</em></li><li><strong>city</strong>, <em>New York</em></li><li><strong>state</strong>, <em>New York</em></li><li><strong>postcode</strong>, <em>10001</em></li><li><strong>country</strong>, <em>USA</em></li></ul></li><li><strong>phone</strong>, <em>518-111-1111</em></li><li><strong>email</strong>, <em>help@receiptful.com</em></li></ul></td>
+<td>the customer&rsquo;s billing details. Children:<ul><li><strong>address</strong><ul><li><strong>firstName</strong>, <em>Joe</em></li><li><strong>lastName</strong>, <em>Smith</em></li><li><strong>company</strong>, <em>Conversio</em></li><li><strong>addressLine1</strong>, <em>30 Broadway</em></li><li><strong>AddressLine2</strong>, <em>Manhattan</em></li><li><strong>city</strong>, <em>New York</em></li><li><strong>state</strong>, <em>New York</em></li><li><strong>postcode</strong>, <em>10001</em></li><li><strong>country</strong>, <em>USA</em></li></ul></li><li><strong>phone</strong>, <em>518-111-1111</em></li><li><strong>email</strong>, <em>help@conversio.com</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>shipping:</strong></td>
@@ -488,7 +488,7 @@ Response 200 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>the customer&rsquo;s shipping details. Children:<ul><li><strong>firstName</strong>, <em>Joe</em></li><li><strong>lastName</strong>, <em>Smith</em></li><li><strong>company</strong>, <em>Receiptful</em></li><li><strong>addressLine1</strong>, <em>30 Broadway</em></li><li><strong>AddressLine2</strong>, <em>Manhattan</em></li><li><strong>city</strong>, <em>New York</em></li><li><strong>state</strong>, <em>New York</em></li><li><strong>postcode</strong>, <em>10001</em></li><li><strong>country</strong>, <em>USA</em></li></ul></td>
+<td>the customer&rsquo;s shipping details. Children:<ul><li><strong>firstName</strong>, <em>Joe</em></li><li><strong>lastName</strong>, <em>Smith</em></li><li><strong>company</strong>, <em>Conversio</em></li><li><strong>addressLine1</strong>, <em>30 Broadway</em></li><li><strong>AddressLine2</strong>, <em>Manhattan</em></li><li><strong>city</strong>, <em>New York</em></li><li><strong>state</strong>, <em>New York</em></li><li><strong>postcode</strong>, <em>10001</em></li><li><strong>country</strong>, <em>USA</em></li></ul></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>upsell:</strong></td>
@@ -528,7 +528,7 @@ Response 200 (application/json)
 Response 201 (application/json)
 </aside></p>
 <h2 id='receipt'>Receipt</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/a1b2c3d4"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/receipts/a1b2c3d4"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -551,7 +551,7 @@ Response 201 (application/json)
    </span><span class="s2">"items"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Conversio subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
@@ -603,7 +603,7 @@ Response 201 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='retrieve-a-receipt-get'>Retrieve a receipt [GET]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/receipts/{RECEIPT_ID}</code></p>
 
 <p>A single Receipt with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -627,7 +627,7 @@ Response 201 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='resend'>Resend</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/1a2b3c4d/send"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/receipts/1a2b3c4d/send"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X POST
 </code></pre>
@@ -651,7 +651,7 @@ Response 200 (application/json)
    </span><span class="s2">"items"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
          </span><span class="s2">"reference"</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Receiptful subscription"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Conversio subscription"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
          </span><span class="s2">"amount"</span><span class="p">:</span><span class="s2">"39.99"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"image"</span><span class="p">:</span><span class="s2">"http://foo/image.jpg"</span><span class="w">
@@ -703,7 +703,7 @@ Response 200 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='resend-a-receipt-post'>Resend a Receipt [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/{RECEIPT_ID}/send</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/receipts/{RECEIPT_ID}/send</code></p>
 
 <p>Resend a receipt using the id.</p>
 <h3 id='arguments'>Arguments</h3>
@@ -727,7 +727,7 @@ Response 200 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='bulk-sync'>Bulk Sync</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/receipts/bulk"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/receipts/bulk"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -747,7 +747,7 @@ Response 200 (application/json)
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -806,7 +806,7 @@ Response 200 (application/json)
        "items":[
           {
              "reference":123,
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "image":"http://foo/image.jpg",
@@ -852,9 +852,9 @@ Response 200 (application/json)
     }]'</span>
 </code></pre>
 <h3 id='bulk-sync-post'>Bulk Sync [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/receipts/bulk</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/receipts/bulk</code></p>
 
-<p>Synchronize many receipts at once <em>without sending the receipts</em>. This is used to create a Receipt history for the recommendation engine. It <strong>will not create</strong> the receipts in Receiptful.</p>
+<p>Synchronize many receipts at once <em>without sending the receipts</em>. This is used to create a Receipt history for the recommendation engine. It <strong>will not create</strong> the receipts in Conversio.</p>
 
 <p><aside class="notice">
 You can upload 250 receipts per request.
@@ -901,10 +901,10 @@ receipts failed to validate.</p>
           <h1 id='coupons'>Coupons</h1>
 <p>Services related to retreiving coupons using the <strong>Coupons API</strong></p>
 <h2 id='all-coupons'>All Coupons</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
-GET https://app.receiptful.com/api/v1/coupons
+GET https://app.conversio.com/api/v1/coupons
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -941,7 +941,7 @@ GET https://app.receiptful.com/api/v1/coupons
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons</code></p>
 
 <p>Get a list of all coupons</p>
 
@@ -949,10 +949,10 @@ GET https://app.receiptful.com/api/v1/coupons
 Response 200 (application/json)
 </aside></p>
 <h2 id='get-a-coupon'>Get a coupon</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
-GET https://app.receiptful.com/api/v1/coupons/1a2b3c4d
+GET https://app.conversio.com/api/v1/coupons/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -969,7 +969,7 @@ GET https://app.receiptful.com/api/v1/coupons/1a2b3c4d
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}</code></p>
 
 <p>A single coupon with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -993,15 +993,15 @@ GET https://app.receiptful.com/api/v1/coupons/1a2b3c4d
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-a-coupon'>Delete a coupon</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
-DELETE https://app.receiptful.com/api/v1/coupons/1a2b3c4d
+DELETE https://app.conversio.com/api/v1/coupons/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1023,10 +1023,10 @@ DELETE https://app.receiptful.com/api/v1/coupons/1a2b3c4d
 Response 204 (application/json)
 </aside></p>
 <h2 id='mark-coupon-as-used'>Mark coupon as used</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
-PUT https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use
+PUT https://app.conversio.com/api/v1/coupons/1a2b3c4d/use
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d/use"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X PUT
   -d <span class="s1">'{
@@ -1057,7 +1057,7 @@ PUT https://app.receiptful.com/api/v1/coupons/1a2b3c4d/use
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/coupons/{COUPON_ID}/use</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}/use</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1107,7 +1107,7 @@ Response 200 (application/json)
 <p>Services related to sending product updates using the <strong>Products API</strong>.
 These endpoints must be used to send updates about products for our reccommendation engine.</p>
 <h2 id='create-product'>Create product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST (SINGLE PRODUCT)</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -1139,7 +1139,7 @@ These endpoints must be used to send updates about products for our reccommendat
   }'</span>
 </code></pre>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST (MULTIPLE PRODUCTS)</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -1195,7 +1195,7 @@ These endpoints must be used to send updates about products for our reccommendat
   }]'</span>
 </code></pre>
 <h3 id='create-one-or-more-new-products-post'>Create one or more new products [POST]</h3>
-<p><code class="prettyprint">POST https://app.receiptful.com/api/v1/products</code></p>
+<p><code class="prettyprint">POST https://app.conversio.com/api/v1/products</code></p>
 <h3 id='arguments'>Arguments</h3>
 <p><aside class="notice">
 The endpoint accepts a <em>single</em> product object or <em>multiple</em> products in an
@@ -1397,7 +1397,7 @@ products failed to validate.</p>
 <p>Valid products are accepted and processed and should <em>not</em> be re-uploaded.
 </aside></p>
 <h2 id='update-product'>Update product</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
@@ -1429,7 +1429,7 @@ products failed to validate.</p>
   }'</span>
 </code></pre>
 <h3 id='update-a-product-put'>Update a product [PUT]</h3>
-<p><code class="prettyprint">PUT https://app.receiptful.com/api/v1/products/{product_id}</code></p>
+<p><code class="prettyprint">PUT https://app.conversio.com/api/v1/products/{product_id}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <p><aside class="notice">
 The product structure is the same as for <a href="#create-product">Create a product</a>
@@ -1444,13 +1444,13 @@ partial. The API does not support partial updates.
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-product'>Delete product</h2><h3 id='delete-a-product-delete'>Delete a product [DELETE]</h3><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X DELETE<span class="s1">'
 </span></code></pre>
 
-<p><code class="prettyprint">DELETE https://app.receiptful.com/api/v1/products/{product_id}</code></p>
+<p><code class="prettyprint">DELETE https://app.conversio.com/api/v1/products/{product_id}</code></p>
 
 <p><aside class="success">
 Response 204 (application/json)
@@ -1459,7 +1459,7 @@ Response 204 (application/json)
           <h1 id='abandoned-carts'>Abandoned Carts</h1>
 <p>Services related to managing <strong>Abandoned Carts</strong>.</p>
 <h2 id='create'>Create</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -1471,7 +1471,7 @@ Response 204 (application/json)
           {
              "reference":"rct",
              "variant":"rct2",
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "attributes":[{ "key": "foo", "value": "bar" }]
@@ -1486,7 +1486,7 @@ Response 204 (application/json)
 <pre><code class="highlight json"><span class="p">{}</span><span class="w">
 </span></code></pre>
 <h3 id='create-or-update-a-cart-post'>Create or Update a Cart [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/abandoned-carts</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1550,7 +1550,7 @@ Response 204 (application/json)
 <tr>
 <td style="text-align: right"><strong>description:</strong></td>
 <td><strong>string, required</strong></td>
-<td><em>Receiptful Hobby Plan</em></td>
+<td><em>Conversio Hobby Plan</em></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>quantity:</strong></td>
@@ -1601,15 +1601,15 @@ Response 204 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-an-abandoned-cart'>Delete an abandoned cart</h2><pre><code class="highlight shell"><span class="c"># DEFINITION</span>
-DELETE https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d
+DELETE https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/abandoned-carts/{TOKEN}</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/{TOKEN}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1634,7 +1634,7 @@ Response 204 (application/json)
           <h1 id='users'>Users</h1>
 <p>Services related to users using the <strong>Users API</strong>.</p>
 <h2 id='current-user'>Current user</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/users/current"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/users/current"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -1650,7 +1650,7 @@ Response 204 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='retrieve-user-information-get'>Retrieve user information [GET]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/users/current</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/users/current</code></p>
 
 <p>The current API user.</p>
 
@@ -1658,14 +1658,14 @@ Response 204 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='uninstall'>Uninstall</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/users/uninstall"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/users/uninstall"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 <h3 id='uninstall-the-userapp-post'>Uninstall the user/app [POST]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/users/uninstall</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/users/uninstall</code></p>
 
-<p>Tells Receiptful to uninstall the user associated with the given API key. Among
+<p>Tells Conversio to uninstall the user associated with the given API key. Among
 other things, this automatically unsubscribes the user from a premium plan.</p>
 
 <p><aside class="success">
@@ -1677,7 +1677,7 @@ Response 204
 <h2 id='get-customer-lists'>Get Customer Lists</h2>
 <p>Get all available customer lists.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/customer-lists"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X GET
@@ -1698,7 +1698,7 @@ Response 204
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-customer-lists-get'>List all Customer Lists [GET]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/customer-lists</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists</code></p>
 
 <p><aside class="success">
   Response 200 (application/json)
@@ -1732,7 +1732,7 @@ Response 204
 <h2 id='subscribe-to-list'>Subscribe to List</h2>
 <p>Subscribe an email address and optional user details to a specific customer list.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
@@ -1743,7 +1743,7 @@ Response 204
   }'</span>
 </code></pre>
 <h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
-<p><code class="prettyprint">https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions</code></p>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions</code></p>
 
 <p><code class="prettyprint">LIST_ID</code> should be the <code class="prettyprint">id</code> returned in the <a href="#get-customer-lists">list</a> response.</p>
 <h3 id='arguments'>Arguments</h3>
@@ -1784,7 +1784,7 @@ Response 204
 </aside></p>
 
           <h1 id='errors'>Errors</h1>
-<p>The Receiptful API uses the following error codes:</p>
+<p>The Conversio API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -1802,7 +1802,7 @@ Response 204
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The receiptful requested is hidden for administrators only</td>
+<td>Forbidden &ndash; The requested resource is hidden for administrators only</td>
 </tr>
 <tr>
 <td>404</td>

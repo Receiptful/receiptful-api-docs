@@ -5,7 +5,7 @@ Services related to managing **Abandoned Carts**.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
+$ curl "https://app.conversio.com/api/v1/abandoned-carts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -17,7 +17,7 @@ $ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
           {
              "reference":"rct",
              "variant":"rct2",
-             "description":"Receiptful subscription",
+             "description":"Conversio subscription",
              "quantity":1,
              "amount":"39.99",
              "attributes":[{ "key": "foo", "value": "bar" }]
@@ -34,7 +34,7 @@ $ curl "https://app.receiptful.com/api/v1/abandoned-carts" \
 
 ### Create or Update a Cart [POST]
 
-`https://app.receiptful.com/api/v1/abandoned-carts`
+`https://app.conversio.com/api/v1/abandoned-carts`
 
 ### Arguments
 
@@ -57,7 +57,7 @@ The items inside the cart. Object contents:
 |----------------:|---------------------------|--------------------------------|
 |**reference:**   |**string, optional**       |*c_123*                         |
 |**variant:**     |**string, optional**       |*c_123_2*                       |
-|**description:** |**string, required**       |*Receiptful Hobby Plan*         |
+|**description:** |**string, required**       |*Conversio Hobby Plan*         |
 |**quantity:**    |**number, optional**       |*1*                             |
 |**amount:**      |**number, optional**       |*29.00*                         |
 |                 |A single item's price.     |                                |
@@ -81,15 +81,15 @@ Response 200 (application/json)
 
 ```shell
 # DEFINITION
-DELETE https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d
+DELETE https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d
 
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/abandoned-carts/1a2b3c4d" \
+$ curl "https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X DELETE
 ```
 
-`https://app.receiptful.com/api/v1/abandoned-carts/{TOKEN}`
+`https://app.conversio.com/api/v1/abandoned-carts/{TOKEN}`
 
 ### Arguments
 

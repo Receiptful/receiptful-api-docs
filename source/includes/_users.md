@@ -5,7 +5,7 @@ Services related to users using the **Users API**.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/users/current" \
+$ curl "https://app.conversio.com/api/v1/users/current" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -23,7 +23,7 @@ $ curl "https://app.receiptful.com/api/v1/users/current" \
 
 ### Retrieve user information [GET]
 
-`https://app.receiptful.com/api/v1/users/current`
+`https://app.conversio.com/api/v1/users/current`
 
 The current API user.
 
@@ -35,16 +35,16 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/users/uninstall" \
+$ curl "https://app.conversio.com/api/v1/users/uninstall" \
   -X POST \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 ### Uninstall the user/app [POST]
 
-`https://app.receiptful.com/api/v1/users/uninstall`
+`https://app.conversio.com/api/v1/users/uninstall`
 
-Tells Receiptful to uninstall the user associated with the given API key. Among
+Tells Conversio to uninstall the user associated with the given API key. Among
 other things, this automatically unsubscribes the user from a premium plan.
 
 <aside class="success">

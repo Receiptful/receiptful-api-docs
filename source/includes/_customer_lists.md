@@ -7,7 +7,7 @@ Get all available customer lists.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/customer-lists" \
+$ curl "https://app.conversio.com/api/v1/customer-lists" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json" \
   -X GET
@@ -30,7 +30,7 @@ $ curl "https://app.receiptful.com/api/v1/customer-lists" \
 
 ### List all Customer Lists [GET]
 
-`https://app.receiptful.com/api/v1/customer-lists`
+`https://app.conversio.com/api/v1/customer-lists`
 
 <aside class="success">
   Response 200 (application/json)
@@ -53,7 +53,7 @@ Subscribe an email address and optional user details to a specific customer list
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json" \
   -X PUT \
@@ -66,7 +66,7 @@ $ curl "https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions" 
 
 ### Subscribe an Email to a Customer List [PUT]
 
-`https://app.receiptful.com/api/v1/customer-lists/LIST_ID/subscriptions`
+`https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions`
 
 `LIST_ID` should be the `id` returned in the [list](#get-customer-lists) response.
 

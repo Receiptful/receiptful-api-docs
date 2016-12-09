@@ -60,7 +60,9 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -d '{
     "email": "an@email.com",
     "name": "John Snow",
-    "source": "landing-page"
+    "source": "Conversio",
+    "sourceType": "SubscriptionForm",
+    "sourceId": "some-form-slug"
   }'
 ```
 
@@ -79,7 +81,11 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 |**name:**|**string, optional**|
 ||The email address owner's name. Expects first or first and last name.|
 |**source:**|**string, optional**|
-||Where this subscription came from. Use it to keep track of where customer emails are captured.|
+||Where this subscription came from. Should be an App or company name.|
+|**sourceType:**|**string, optional**|
+||What type of control did the user interact for subscribing. Could be a form type, page, etc.|
+|**sourceId:**|**string, optional**|
+||A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.|
 
 <aside class="success">
   Response 204

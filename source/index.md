@@ -16,6 +16,7 @@ includes:
   - abandoned_carts
   - users
   - customer_lists
+  - webhooks
   - errors
 
 search: true

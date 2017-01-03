@@ -17,6 +17,7 @@ includes:
   - users
   - customer_lists
   - webhooks
+  - async_jobs
   - errors
 
 search: true

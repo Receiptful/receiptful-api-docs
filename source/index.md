@@ -15,6 +15,7 @@ includes:
   - products
   - abandoned_carts
   - users
+  - newsletters
   - customer_lists
   - webhooks
   - errors

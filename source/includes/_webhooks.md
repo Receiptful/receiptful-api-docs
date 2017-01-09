@@ -4,7 +4,81 @@ Endpoints for subscribing and configuring Webhooks triggered by events on your a
 
 You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will `POST` some data related to that event to the endpoints registered in webhooks that subscribed to that event's topic.
 
-Currently, only the ´newsletter-email/sent' topic is supported.
+When Webhook delivery fails (your endpoint can't be reached or returns an error status code), we'll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponetial back-off fashion. Details are described below.
+
+### Subscribable Topics
+
+* `newsletter-email/sent`: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;
+* `async-job/completed`: Triggered when an Async Job has been completed (failed or succeeded).
+
+### Payload
+
+All request bodies contain two keys, `meta` and `data`. The `meta` key contains information about the webhook itself:
+
+|Key       |Details|
+|---------:|-----------|
+|**topic:**|**string**|
+|          |The Webhook's topic. Useful if you wish to direct all webhooks to the same endpoint.|
+|**ts:**   |**number**|
+|          |The timestamp for when the webhook was **first sent**. This will stay equal for subsequent retries.|
+
+The `data` key's content depends on the Webhook's topic. The following apply:
+
+#### `newsletter-email/sent`
+
+|Key            |Details|
+|--------------:|-----------|
+|**emailId:**   |**string** |
+|               |The Newsletter Email's ID. Can be used to reference the email using the API.|
+|**templateId:**|**string** |
+|               |The Newsletter Template's ID. The template that the email belongs to.|
+|**userId:**    |**string** |
+|               |The User / Store that this email belongs to.|
+|**recipient:** |**string** |
+|               |The email address to whom this email was sent.|
+|**subject:**   |**string** |
+|               |The subject of the email|
+|**title:**     |**string** |
+|               |The Newsletter's title (store-facing, not necessarily in email content).|
+|**sentAt:**    |**string** |
+|               |When the email was sent. This is an **ISO 8601** formatted date.|
+
+#### `async-job/completed`
+
+Data is the JSON representation of the completed Async Job:
+
+|Key               |Details    |
+|-----------------:|-----------|
+|**id:**           |**string**|
+|                  |The Async Job's ID.|
+|**kind:**         |**string**|
+|                  |What kind of job it is.|
+|**status:**       |**string**|
+|                  |The job's status. Is either "done" or "failed".|
+|**startedAt:**    |**string, optional**|
+|                  |When this job started processing. Is an **ISO 8601** encoded date. Can be null if it hasn't started yet.|
+|**completedAt:**  |**string**|
+|                  |When this job completed. Is an **ISO 8601** encoded date.|
+|**error:**        |**string, optional**|
+|                  |An error message that indicates a problem when processing the job. There is no `result` if this is present.|
+|**result:**       |**string, optional**|
+|                  |The final result from processing this job. What it is depends on job `kind`.|
+
+### Retry Mechanism
+
+Webhooks retry up to 6 times, for a total of 7 attempts. Multiple failures are grouped by endpoint and retried in batches. If 5% or more of a batch of retries fails consecutively, all webhooks in that batch are skipped and an attempt is counted for each.
+
+The retry progression is (in time elapsed from first attempt):
+
+1. 10min
+2. 35min
+3. 1h 30min
+4. 4h 20min
+5. 10h 30min
+6. 1d 3h
+7. 3d
+
+After all attempts are through, the webhooks are discarded.
 
 ## View Webhooks
 

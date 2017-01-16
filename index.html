@@ -1672,6 +1672,659 @@ other things, this automatically unsubscribes the user from a premium plan.</p>
 Response 204
 </aside></p>
 
+          <h1 id='newsletters'>Newsletters</h1>
+<p>Endpoints for getting data on existing Newsletters for a shop, and their emails.</p>
+<h2 id='list-newsletters'>List Newsletters</h2>
+<p>Returns all the Newsletters created in a shop.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Friday Announcement"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sent"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:10:15.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4th of July Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-03:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"57b5aa3b046abfb053d80b57"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"57b5aa3b046abfb053d80b56"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-newsletters-get'>List all Newsletters [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_templates, write_newsletter_templates</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with all the newsletters in the shop.</p>
+
+<p>Each newsletter object includes the following info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s ID. Use it when calling single-newsletter endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s title.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>liveAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an <strong>ISO 8601</strong> encoded date. Is omitted if the Newsletter is a draft.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerLists:</strong></td>
+<td><strong>array[string]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegments:</strong></td>
+<td><strong>array[string]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s current status. Must be one of &ldquo;draft&rdquo;, &ldquo;scheduled&rdquo;, &ldquo;live&rdquo;, or &ldquo;sent&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the Newsletter was fully sent, if such is the case. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+</tbody></table>
+<h2 id='newsletter-report'>Newsletter Report</h2>
+<p>Returns the selected Newsletter and some stats regarding its sending status.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Friday Announcement"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:10:15.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"sends"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"opens"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"uniqueOpens"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"clicks"</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recipientCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">515</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='single-newsletter-report-get'>Single Newsletter Report [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_templates, write_newsletter_templates</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Newsletter not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing newsletter</li>
+    <li>The ID belongs to another shop&rsquo;s newsletter</li>
+    <li>The newsletter has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that the Newsletter object. The included info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s ID. Use it when calling single-newsletter endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s title.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>liveAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an <strong>ISO 8601</strong> encoded date. Is omitted if the Newsletter is a draft.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerLists:</strong></td>
+<td><strong>array[string]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegments:</strong></td>
+<td><strong>array[string]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s current status. Must be one of &ldquo;draft&rdquo;, &ldquo;scheduled&rdquo;, &ldquo;live&rdquo;, or &ldquo;sent&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the Newsletter was fully sent, if such is the case. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>stats</strong></td>
+<td><strong>object</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An object with this Newsletter&rsquo;s stats. Included keys are described below.</td>
+</tr>
+</tbody></table>
+<h4 id='stats'>Stats</h4>
+<p>The <code class="prettyprint">stats</code> key has the following format:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>sends:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The total number of emails that were sent for this Newsletter.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>opens:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The total number of times this Newsletter&rsquo;s emails have been opened.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>uniqueOpens:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The number of unique users that have opened this Newsletter&rsquo;s emails.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>clicks:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The total number of clicks on this Newsletter&rsquo;s links.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>recipientCount:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many recipients was this Newsletter sent to. May differ from <code class="prettyprint">sends</code> if there are sending errors.</td>
+</tr>
+</tbody></table>
+<h2 id='list-newsletter-emails'>List Newsletter Emails</h2>
+<p>A paginated list of all the emails sent for a Newsletter. Will be empty if Newsletter has not been sent yet. Emails are returned sorted by email address, and pagination is done by providing the email address from which to return results.</p>
+
+<p>Note that if the Newsletter is currently live and sending, paginating results will not guarantee that all emails are returned. Wait for the &ldquo;sent&rdquo; status if an exhaustive list is required.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b60"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a@customer.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deliveredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:15.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"openedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"clickedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:01:10.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b60"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"another@customer.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:01.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"deliveredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:17.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"openedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-21T10:02:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/?from=another%40email.com&amp;limit=2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='newsletter-email-list-get'>Newsletter Email List [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_emails, write_newsletter_emails</p>
+<h3 id='request-query-params'>Request Query Params</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>from:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address from which to start paginating records. Must be URI encoded if present.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>limit:</strong></td>
+<td><strong>number, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The maximum number of records to return at once. Very high numbers are discouraged and might result in connection timeouts.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Newsletter not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing newsletter</li>
+    <li>The ID belongs to another shop&rsquo;s newsletter</li>
+    <li>The newsletter has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which contains an array of newsletter emails. The emails&#39; format:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>to:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to which this email was sent.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was sent. <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>deliveredAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was delivered. <strong>ISO 8601</strong> encoded date. Can be missing if not delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>openedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last opened. <strong>ISO 8601</strong> encoded date. Can be missing if never delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>clickedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last clicked. <strong>ISO 8601</strong> encoded date. Can be missing if no link was ever clicked.</td>
+</tr>
+</tbody></table>
+
+<p>The response body also includes a <code class="prettyprint">meta</code> key with further pagination information. The keys included are:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>total:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The total number of emails for this Newsletter.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>limit:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The maximum number of records returned in this request.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>pages:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many pages need to be requested to go through all emails. Varies with <code class="prettyprint">total</code> and <code class="prettyprint">limit</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>nextPage:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The URL form where the next page of emails can be fetched. Use it to cycle pages. May be omitted if there are no more emails to fetch.</td>
+</tr>
+</tbody></table>
+<h2 id='view-newsletter-email'>View Newsletter Email</h2>
+<p>Returns a Newsletter&rsquo;s email, along with its text &amp; HTML contents.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b68"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a@customer.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deliveredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:15.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"openedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"clickedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:01:10.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rendered"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an email's text version..."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;html&gt;&lt;body&gt;This is an email's HTML content...&lt;/body&gt;&lt;/html&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"subject:"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the Newsletter's subject."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-newsletter-email-get'>Show Newsletter Email [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_emails, write_newsletter_emails</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Email not found. One of the following happened:
+  <ul>
+    <li>The given NEWSLETTER_ID does not belong to an existing newsletter</li>
+    <li>The given EMAIL_ID does not belong to an existing email</li>
+    <li>The NEWSLETTER_ID belongs to another shop&rsquo;s newsletter</li>
+    <li>The EMAIL_ID belongs to another newsletter than indicated</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which contains an object representation of the requested newsletter emails. The <code class="prettyprint">rendered</code> key is included with the email&rsquo;s contents:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>to:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to which this email was sent.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was sent. <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>deliveredAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was delivered. <strong>ISO 8601</strong> encoded date. Can be missing if not delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>openedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last opened. <strong>ISO 8601</strong> encoded date. Can be missing if never delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>clickedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last clicked. <strong>ISO 8601</strong> encoded date. Can be missing if no link was ever clicked.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>rendered:</strong></td>
+<td><strong>object</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The rendered content for this email. Contains keys: <code class="prettyprint">text</code>, <code class="prettyprint">html</code> and <code class="prettyprint">subject</code></td>
+</tr>
+</tbody></table>
+<h2 id='export-newsletter-recipients'>Export Newsletter Recipients</h2>
+<p>Starts an Async Job to export a Newsletter&rsquo;s recipients. Once completed, the job&rsquo;s result will point to a CSV file with email addresses.</p>
+
+<p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ecipients/async-export"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b68"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-recipients"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='create-export-job-post'>Create Export Job [POST]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_emails, write_newsletter_emails</p>
+
+<p><aside class="success">
+  Response 201 - Job Created
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Newsletter not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing newsletter</li>
+    <li>The ID belongs to another shop&rsquo;s newsletter</li>
+    <li>The newsletter has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which reflects the created Async Job&rsquo;s info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for the created AsyncJob. Use this to identify this export.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The kind of job created. Is always <code class="prettyprint">newsletter-recipients</code> on this endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. Always <code class="prettyprint">pending</code>.</td>
+</tr>
+</tbody></table>
+
           <h1 id='customer-lists'>Customer Lists</h1>
 <p>Services related to managing <strong>Customer Lists</strong> (for newsletters) and subscriptions.</p>
 <h2 id='get-customer-lists'>Get Customer Lists</h2>
@@ -1739,7 +2392,9 @@ Response 204
   -d <span class="s1">'{
     "email": "an@email.com",
     "name": "John Snow",
-    "source": "landing-page"
+    "source": "Conversio",
+    "sourceType": "SubscriptionForm",
+    "sourceId": "some-form-slug"
   }'</span>
 </code></pre>
 <h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
@@ -1775,13 +2430,648 @@ Response 204
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>Where this subscription came from. Use it to keep track of where customer emails are captured.</td>
+<td>Where this subscription came from. Should be an App or company name.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sourceType:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What type of control did the user interact for subscribing. Could be a form type, page, etc.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sourceId:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.</td>
 </tr>
 </tbody></table>
 
 <p><aside class="success">
   Response 204
 </aside></p>
+
+          <h1 id='webhooks'>Webhooks</h1>
+<p>Endpoints for subscribing and configuring Webhooks triggered by events on your account.</p>
+
+<p>You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will <code class="prettyprint">POST</code> some data related to that event to the endpoints registered in webhooks that subscribed to that event&rsquo;s topic.</p>
+
+<p>When Webhook delivery fails (your endpoint can&rsquo;t be reached or returns an error status code), we&rsquo;ll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponetial back-off fashion. Details are described below.</p>
+<h3 id='subscribable-topics'>Subscribable Topics</h3>
+<ul>
+<li><code class="prettyprint">newsletter-email/sent</code>: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;</li>
+<li><code class="prettyprint">async-job/completed</code>: Triggered when an Async Job has been completed (failed or succeeded).</li>
+</ul>
+<h3 id='payload'>Payload</h3>
+<p>All request bodies contain two keys, <code class="prettyprint">meta</code> and <code class="prettyprint">data</code>. The <code class="prettyprint">meta</code> key contains information about the webhook itself:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Webhook&rsquo;s topic. Useful if you wish to direct all webhooks to the same endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>ts:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The timestamp for when the webhook was <strong>first sent</strong>. This will stay equal for subsequent retries.</td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">data</code> key&rsquo;s content depends on the Webhook&rsquo;s topic. The following apply:</p>
+<h4 id='code-classprettyprintnewsletter-emailsentcode'><code class="prettyprint">newsletter-email/sent</code></h4>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>emailId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter Email&rsquo;s ID. Can be used to reference the email using the API.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>templateId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter Template&rsquo;s ID. The template that the email belongs to.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>userId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The User / Store that this email belongs to.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>recipient:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to whom this email was sent.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subject:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The subject of the email</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s title (store-facing, not necessarily in email content).</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the email was sent. This is an <strong>ISO 8601</strong> formatted date.</td>
+</tr>
+</tbody></table>
+<h4 id='code-classprettyprintasync-jobcompletedcode'><code class="prettyprint">async-job/completed</code></h4>
+<p>Data is the JSON representation of the completed Async Job:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Async Job&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What kind of job it is.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. Is either &ldquo;done&rdquo; or &ldquo;failed&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>startedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job started processing. Is an <strong>ISO 8601</strong> encoded date. Can be null if it hasn&rsquo;t started yet.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>completedAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job completed. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>error:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An error message that indicates a problem when processing the job. There is no <code class="prettyprint">result</code> if this is present.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>result:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The final result from processing this job. What it is depends on job <code class="prettyprint">kind</code>.</td>
+</tr>
+</tbody></table>
+<h3 id='retry-mechanism'>Retry Mechanism</h3>
+<p>Webhooks retry up to 6 times, for a total of 7 attempts. Multiple failures are grouped by endpoint and retried in batches. If 5% or more of a batch of retries fails consecutively, all webhooks in that batch are skipped and an attempt is counted for each.</p>
+
+<p>The retry progression is (in time elapsed from first attempt):</p>
+
+<ol>
+<li>10min</li>
+<li>35min</li>
+<li>1h 30min</li>
+<li>4h 20min</li>
+<li>10h 30min</li>
+<li>1d 3h</li>
+<li>3d</li>
+</ol>
+
+<p>After all attempts are through, the webhooks are discarded.</p>
+<h2 id='view-webhooks'>View Webhooks</h2>
+<p>Returns all Webhooks registered for the current shop. If authorized through OAuth, only those webhooks created by the authorized PartnerApp will be listed.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-email/sent"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.endpoint.com/conversio-webhook"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-webhooks-get'>List all Webhooks [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks</code></p>
+
+<p><em>OAuth Scopes</em>: read_webhook, write_webhook</p>
+
+<p><aside class="success">
+  Response 200 (application/json)
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with all the webhooks in the shop. It will limit output to the currently authenticated Partner App webhooks if authorized through OAuth.</p>
+
+<p>Each webhook includes the following info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Webhook ID. Use it when calling single-webhook endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The event that triggers this webhook.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where the webhook&rsquo;s payload is sent, when triggered. Must be a URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this webhook. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-email/sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.endpoint.com/conversio-webhook"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-single-webhook-get'>Show Single Webhook [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_webhook, write_webhook</p>
+
+<p><aside class="success">
+  Response 200 - All good
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Webhook not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing webhook</li>
+    <li>The ID belongs to another shop&rsquo;s webhook</li>
+    <li>The ID belongs to another Partner App&rsquo;s webhook</li>
+    <li>The webhook has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is itself an object with the Webhook&rsquo;s properties. It will include the Partner App if authorized with an API key. The following keys are returned:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Webhook ID. You used it to call this endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The event that triggers this webhook.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where the webhook&rsquo;s payload is sent, when triggered. Must be a URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this webhook. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+<h2 id='create-webhooks'>Create Webhooks</h2>
+<p>Create a new Webhook for the currently authenticated shop. If authorized through OAuth, the Webhook will be assigned to the authorized Partner App.</p>
+
+<p>Only one Webhook for a unique topic &amp; endpoint combination can exist for each Shop. Thus, trying to create multiple webhooks for the same topic and endpoint will result in errors.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+        "endpoint": "https://www.your-endpoint.com/webhooks",
+        "topic": "newsletter-email/sent",
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-email/sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.your-endpoint.com/webhooks"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE ERROR RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"The chosen topic is invalid"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='create-webhook-post'>Create Webhook [POST]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks</code></p>
+
+<p><em>OAuth Scopes</em>: write_webhook</p>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The topic to subscribe with this Webhook.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>URL where to publish this Webhook&rsquo;s payload, when triggered.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 201 - Webhook Created
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - The Webhook data provided is invalid. The particular error will be returned in the response body, but these could be the most common:
+  <ul>
+    <li>A Webhook for that particular endpoint and topic combination already exists.</li>
+    <li>The selected topic isn&rsquo;t supported.</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>When successful, the endpoint returns the newly created webhook. The returned data mimics that of the <code class="prettyprint">show</code> endpoint:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The new Webhook&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The event that triggers this webhook.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where the webhook&rsquo;s payload is sent, when triggered. Must be a URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this webhook. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+
+<p>Any errors during creation will be identified by a 400 status code and a JSON object with an <code class="prettyprint">errors</code> Array with string explanations of what went wrong.</p>
+<h2 id='update-webhooks'>Update Webhooks</h2>
+<p>Update an existing webhook with new data. Can change either the topic or endpoint of an existing webhook.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X PATCH <span class="se">\</span>
+  -d <span class="s1">'{
+        "endpoint": "https://www.your-other-endpoint.com/webhooks"
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-email/sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.your-endpoint.com/webhooks"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE ERROR RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"The chosen topic is invalid"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='update-webhook-patchput'>Update Webhook [PATCH/PUT]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: write_webhook</p>
+
+<p>If your client doesn&rsquo;t support the <code class="prettyprint">PATCH</code> method, <code class="prettyprint">PUT</code> can be used to the same effect.</p>
+
+<p><aside class="notice">
+  This endpoint performs a partial update. This means omitting a key from the request body will rresult in that value not being changed. Values can be unset with <code class="prettyprint">null</code>.
+</aside></p>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The topic to subscribe with this Webhook. Can&rsquo;t be <code class="prettyprint">null</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>URL where to publish this Webhook&rsquo;s payload, when triggered. Can&rsquo;t be <code class="prettyprint">null</code>.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200 - Webhook Updated
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - The Webhook data provided is invalid. The particular error will be returned in the response body, but these could be the most common:
+  <ul>
+    <li>A Webhook (other than this one) for that particular endpoint and topic combination already exists.</li>
+    <li>The selected topic isn&rsquo;t supported.</li>
+  </ul>
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Webhook not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing webhook</li>
+    <li>The ID belongs to another shop&rsquo;s webhook</li>
+    <li>The ID belongs to another Partner App&rsquo;s webhook</li>
+    <li>The webhook has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>When successful, the endpoint returns the newly created webhook. The returned data mimics that of the <code class="prettyprint">show</code> endpoint:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The updated Webhook&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The event that triggers this webhook.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>endpoint:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where the webhook&rsquo;s payload is sent, when triggered. Must be a URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this webhook. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+
+<p>Any errors during creation will be identified by a 400 status code and a JSON object with an <code class="prettyprint">errors</code> Array with string explanations of what went wrong.</p>
+<h2 id='delete-webhook'>Delete Webhook</h2>
+<p>Delete an existing Webhook to stop receiving data at the endpoint.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -X DELETE
+</code></pre>
+<h3 id='delete-webhook-delete'>Delete Webhook [DELETE]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: write_webhook</p>
+
+<p><aside class="success">
+  Response 204 - Webhook destroyed
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Webhook not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing webhook</li>
+    <li>The ID belongs to another shop&rsquo;s webhook</li>
+    <li>The ID belongs to another Partner App&rsquo;s webhook</li>
+    <li>The webhook has been deleted</li>
+  </ul>
+</aside></p>
+
+<p>Successful requests return nothing.</p>
 
           <h1 id='errors'>Errors</h1>
 <p>The Conversio API uses the following error codes:</p>
@@ -1810,27 +3100,19 @@ Response 204
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a receipt or coupon with an invalid method</td>
+<td>Method Not Allowed &ndash; You tried to access a resource with an invalid method</td>
 </tr>
 <tr>
 <td>406</td>
 <td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
 <td>413</td>
 <td>Request Entity Too Large &ndash; You sent too much data to us</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
 <td>429</td>
-<td>Too Many Requests</td>
+<td>Too Many Requests &ndash; You&rsquo;re exceeding the API rate limit</td>
 </tr>
 <tr>
 <td>500</td>
@@ -1838,7 +3120,7 @@ Response 204
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 

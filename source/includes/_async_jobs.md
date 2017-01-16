@@ -10,7 +10,7 @@ Due to the presumably large size of an Async Job's results and how they'll be le
 
 ## List Async Jobs
 
-Returns all the async jobs created for the authenticated shop. When using OAuth, only jobs started by the authenticated app are returned.
+Returns all the Async Jobs created for the authenticated shop. When using OAuth, only jobs started by the authenticated app are returned.
 
 ```shell
 # EXAMPLE REQUEST
@@ -44,7 +44,7 @@ $ curl "https://app.conversio.com/api/v1/async-jobs" \
       "status": "failed",
       "startedAt": "2017-01-02T05:33:22.123Z",
       "completedAt": "2017-01-02T05:33:45.412Z",
-      "error": "Something terrible as happened. Get in touch with support tout de suite!"
+      "error": "Something terrible has happened. Get in touch with support tout de suite!"
     }
   ]
 }
@@ -62,7 +62,7 @@ _OAuth Scopes_: read_async_jobs
 
 ### Response Body
 
-Then endpoint returns an object with a `data` key that is an Array with all the async jobs in the shop. It will limit output to the currently authenticated Partner App webhooks if authorized through OAuth.
+The endpoint returns an object with a `data` key that is an Array with all the Async Jobs in the shop. It will limit output to the currently authenticated Partner App webhooks if authorized through OAuth.
 
 Each Async Job includes the following info:
 
@@ -75,19 +75,19 @@ Each Async Job includes the following info:
 |**status:**       |**string**|
 |                  |The job's status. One of "pending", "done" or "failed".|
 |**startedAt:**    |**string, optional**|
-|                  |When this job started processing. Is an **ISO 8601** encoded date. Can be null if it hasn't started yet.|
+|                  |When this job started processing. Is an **ISO 8601** encoded date. Is `null` if it hasn't started yet.|
 |**completedAt:**  |**string, optional**|
-|                  |When this job completed. There's a `result` or `error` if this is present. Is an **ISO 8601** encoded date. Can be null if it hasn't finished yet.|
+|                  |When this job completed. Is `null` if it hasn't finished yet. There's a `result` or `error` if set. Is an **ISO 8601** encoded date.|
 |**error:**        |**string, optional**|
 |                  |An error message that indicates a problem when processing the job. There is no `result` if this is present.|
 |**result:**       |**string, optional**|
-|                  |The final result from processing this job. What it is depends on job `kind`.|
+|                  |The final result from processing this job. Contents depend on job `kind`.|
 |**partnerApp:**   |**string, optional**|
 |                  |The ID of the Partner App that created this Async Job. Included only when authorization is made with the API key.|
 
 ## Get Async Job
 
-Returns the requested async job. When using OAuth, only jobs started by the authenticated app can be accessed.
+Returns the requested Async Job. When using OAuth, only jobs started by the authenticated app can be accessed.
 
 ```shell
 # EXAMPLE REQUEST
@@ -134,23 +134,23 @@ _OAuth Scopes_: read_async_jobs
 
 ### Response Body
 
-Then endpoint returns an object with a `data` key that is itself an object with the Async Job's properties. It will include the Partner App if authorized with an API key. The following keys are returned:
+The endpoint returns an object with a `data` key. The `data` key is an object with the Async Job's properties. It will include the Partner App if authorized with an API key. The following keys are returned:
 
 |Key               |Details    |
 |-----------------:|-----------|
 |**id:**           |**string**|
-|                  |The Async Job's ID. You used it to call this endpoint.|
+|                  |The Async Job's ID. The ID used to call this endpoint.|
 |**kind:**         |**string**|
 |                  |What kind of job this is. Currently only supports "newsletters-recipients".|
 |**status:**       |**string**|
 |                  |The job's status. One of "pending", "done" or "failed".|
 |**startedAt:**    |**string, optional**|
-|                  |When this job started processing. Is an **ISO 8601** encoded date. Can be null if it hasn't started yet.|
+|                  |When this job started processing. Is an **ISO 8601** encoded date. Is `null` if it hasn't started yet.|
 |**completedAt:**  |**string, optional**|
-|                  |When this job completed. There's a `result` or `error` if this is present. Is an **ISO 8601** encoded date. Can be null if it hasn't finished yet.|
+|                  |When this job completed. Is `null` if it hasn't finished yet. There's a `result` or `error` if set. Is an **ISO 8601** encoded date.|
 |**error:**        |**string, optional**|
 |                  |An error message that indicates a problem when processing the job. There is no `result` if this is present.|
 |**result:**       |**string, optional**|
-|                  |The final result from processing this job. What it is depends on job `kind`.|
+|                  |The final result from processing this job. Contents depend on job `kind`.|
 |**partnerApp:**   |**string, optional**|
 |                  |The ID of the Partner App that created this Async Job. Included only when authorization is made with the API key.|

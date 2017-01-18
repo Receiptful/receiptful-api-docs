@@ -2459,7 +2459,186 @@ Response 204
 
 <p>You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will <code class="prettyprint">POST</code> some data related to that event to the endpoints registered in webhooks that subscribed to that event&rsquo;s topic.</p>
 
-<p>Currently, only the ´newsletter-email/sent&#39; topic is supported.</p>
+<p>When Webhook delivery fails (your endpoint can&rsquo;t be reached or returns an error status code), we&rsquo;ll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponetial back-off fashion. Details are described below.</p>
+<h3 id='subscribable-topics'>Subscribable Topics</h3>
+<ul>
+<li><code class="prettyprint">newsletter-email/sent</code>: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;</li>
+<li><code class="prettyprint">async-job/completed</code>: Triggered when an Async Job has been completed (failed or succeeded).</li>
+</ul>
+<h3 id='payload'>Payload</h3>
+<p>All request bodies contain two keys, <code class="prettyprint">meta</code> and <code class="prettyprint">data</code>. The <code class="prettyprint">meta</code> key contains information about the webhook itself:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>topic:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Webhook&rsquo;s topic. Useful if you wish to direct all webhooks to the same endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>ts:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The timestamp for when the webhook was <strong>first sent</strong>. This will stay equal for subsequent retries.</td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">data</code> key&rsquo;s content depends on the Webhook&rsquo;s topic. The following apply:</p>
+<h4 id='code-classprettyprintnewsletter-emailsentcode'><code class="prettyprint">newsletter-email/sent</code></h4>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>emailId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter Email&rsquo;s ID. Can be used to reference the email using the API.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>templateId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter Template&rsquo;s ID. The template that the email belongs to.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>userId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The User / Store that this email belongs to.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>recipient:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to whom this email was sent.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subject:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The subject of the email</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s title (store-facing, not necessarily in email content).</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the email was sent. This is an <strong>ISO 8601</strong> formatted date.</td>
+</tr>
+</tbody></table>
+<h4 id='code-classprettyprintasync-jobcompletedcode'><code class="prettyprint">async-job/completed</code></h4>
+<p>Data is the JSON representation of the completed Async Job:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Async Job&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What kind of job it is.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. Is either &ldquo;done&rdquo; or &ldquo;failed&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>startedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job started processing. Is an <strong>ISO 8601</strong> encoded date. Can be null if it hasn&rsquo;t started yet.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>completedAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job completed. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>error:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An error message that indicates a problem when processing the job. There is no <code class="prettyprint">result</code> if this is present.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>result:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The final result from processing this job. What it is depends on job <code class="prettyprint">kind</code>.</td>
+</tr>
+</tbody></table>
+<h3 id='retry-mechanism'>Retry Mechanism</h3>
+<p>Webhooks retry up to 6 times, for a total of 7 attempts. Multiple failures are grouped by endpoint and retried in batches. If 5% or more of a batch of retries fails consecutively, all webhooks in that batch are skipped and an attempt is counted for each.</p>
+
+<p>The retry progression is (in time elapsed from first attempt):</p>
+
+<ol>
+<li>10min</li>
+<li>35min</li>
+<li>1h 30min</li>
+<li>4h 20min</li>
+<li>10h 30min</li>
+<li>1d 3h</li>
+<li>3d</li>
+</ol>
+
+<p>After all attempts are through, the webhooks are discarded.</p>
 <h2 id='view-webhooks'>View Webhooks</h2>
 <p>Returns all Webhooks registered for the current shop. If authorized through OAuth, only those webhooks created by the authorized PartnerApp will be listed.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
@@ -2893,6 +3072,254 @@ Response 204
 </aside></p>
 
 <p>Successful requests return nothing.</p>
+
+          <h1 id='async-jobs'>Async Jobs</h1>
+<p>An Async Job is created on certain API endpoints and user actions that we expect will take a long time to complete. Generally, when a job is created, you&rsquo;ll receive a Job ID that you can poll using this API to:</p>
+
+<ol>
+<li>Check if the job&rsquo;s completed;</li>
+<li>Get the job&rsquo;s result; and</li>
+<li>Check the job for errors.</li>
+</ol>
+
+<p>Due to the presumably large size of an Async Job&rsquo;s results and how they&rsquo;ll be less relevant as time advances, Async jobs expire 1 week after they&rsquo;ve finished processing, being automatically removed.</p>
+<h2 id='list-async-jobs'>List Async Jobs</h2>
+<p>Returns all the Async Jobs created for the authenticated shop. When using OAuth, only jobs started by the authenticated app are returned.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-recipients"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"startedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:32:27.741Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"completedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:37:20.417Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b54"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-recipients"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b57"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-recipients"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"startedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-02T05:33:22.123Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"completedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-02T05:33:45.412Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Something terrible has happened. Get in touch with support tout de suite!"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-jobs-get'>List all Jobs [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/async-jobs</code></p>
+
+<p><em>OAuth Scopes</em>: read_async_jobs</p>
+
+<p><aside class="success">
+  Response 200 (application/json)
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with all the Async Jobs in the shop. It will limit output to the currently authenticated Partner App webhooks if authorized through OAuth.</p>
+
+<p>Each Async Job includes the following info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Async Job ID. Use it when calling single-job endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What kind of job this is. Currently only supports &ldquo;newsletters-recipients&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. One of &ldquo;pending&rdquo;, &ldquo;done&rdquo; or &ldquo;failed&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>startedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job started processing. Is an <strong>ISO 8601</strong> encoded date. Is <code class="prettyprint">null</code> if it hasn&rsquo;t started yet.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>completedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job completed. Is <code class="prettyprint">null</code> if it hasn&rsquo;t finished yet. There&rsquo;s a <code class="prettyprint">result</code> or <code class="prettyprint">error</code> if set. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>error:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An error message that indicates a problem when processing the job. There is no <code class="prettyprint">result</code> if this is present.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>result:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The final result from processing this job. Contents depend on job <code class="prettyprint">kind</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this Async Job. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+<h2 id='get-async-job'>Get Async Job</h2>
+<p>Returns the requested Async Job. When using OAuth, only jobs started by the authenticated app can be accessed.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X GET
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-recipients"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"startedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:32:27.741Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"completedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:37:20.417Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='get-an-async-job-get'>Get an Async Job [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/async-jobs/{ASYNC_JOB_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_async_jobs</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Async Job not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing job</li>
+    <li>The ID belongs to another shop&rsquo;s job</li>
+    <li>The ID belongs to another Partner App&rsquo;s job</li>
+    <li>The job has expired</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key. The <code class="prettyprint">data</code> key is an object with the Async Job&rsquo;s properties. It will include the Partner App if authorized with an API key. The following keys are returned:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Async Job&rsquo;s ID. The ID used to call this endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What kind of job this is. Currently only supports &ldquo;newsletters-recipients&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. One of &ldquo;pending&rdquo;, &ldquo;done&rdquo; or &ldquo;failed&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>startedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job started processing. Is an <strong>ISO 8601</strong> encoded date. Is <code class="prettyprint">null</code> if it hasn&rsquo;t started yet.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>completedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this job completed. Is <code class="prettyprint">null</code> if it hasn&rsquo;t finished yet. There&rsquo;s a <code class="prettyprint">result</code> or <code class="prettyprint">error</code> if set. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>error:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An error message that indicates a problem when processing the job. There is no <code class="prettyprint">result</code> if this is present.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>result:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The final result from processing this job. Contents depend on job <code class="prettyprint">kind</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>partnerApp:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Partner App that created this Async Job. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
 
           <h1 id='errors'>Errors</h1>
 <p>The Conversio API uses the following error codes:</p>

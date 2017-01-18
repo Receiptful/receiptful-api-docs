@@ -18,6 +18,7 @@ includes:
   - newsletters
   - customer_lists
   - webhooks
+  - async_jobs
   - errors
 
 search: true

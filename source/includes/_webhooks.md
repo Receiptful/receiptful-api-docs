@@ -87,9 +87,7 @@ Returns all Webhooks registered for the current shop. If authorized through OAut
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/webhooks" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -136,9 +134,7 @@ Each webhook includes the following info:
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE

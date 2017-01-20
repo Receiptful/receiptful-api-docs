@@ -9,9 +9,7 @@ Returns all the Newsletters created in a shop.
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/newsletters" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -83,9 +81,7 @@ Returns the selected Newsletter and some stats regarding its sending status.
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -179,9 +175,7 @@ Note that if the Newsletter is currently live and sending, paginating results wi
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -280,9 +274,7 @@ Returns a Newsletter's email, along with its text & HTML contents.
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -356,7 +348,7 @@ Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's 
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ecipients/async-export" \
   -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -X POST
 ```
 

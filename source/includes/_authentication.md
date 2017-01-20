@@ -17,7 +17,7 @@ All paths should prefixed with https://app.conversio.com/api/v1 and will need th
 `X-ApiKey: YOUR_API_KEY`
 
 <aside class="notice">
-Your API Key can be found in your store's <a target="_blank" href="https://app.conversio.com/profile">profile page</a>.
+Your API Key can be found in your store's [profile page](https://app.conversio.com/profile).
 </aside>
 
 ## OAuth
@@ -58,7 +58,7 @@ This section has the following structure:
 
 Conversio uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:
 
-1. Redirecting the User's to Conversio, where they can authorize the Partner App
+1. Redirecting the User to Conversio, where they can authorize the Partner App
 2. Conversio redirects the User back to the Partner App, including a `code`
 3. The Partner App exchanges the `code` for an `access_token`
 

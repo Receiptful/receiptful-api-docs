@@ -50,13 +50,328 @@
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
+<p>Authentication with Conversio can be done through API key or OAuth. If you&rsquo;re a store owner or affiliated with a store who uses Conversio, your best (and fastest) bet is to use API Key authentication.</p>
+
+<p>OAuth is more complex and should be used by Partner Apps that want to authenticate with their user&rsquo;s accounts in Conversio. Use of API Key Authentication by other Apps on behalf of Conversio&rsquo;s users is discouraged.</p>
+<h2 id='api-key-authentication'>API Key Authentication</h2>
 <p>All paths should prefixed with https://app.conversio.com/api/v1 and will need the following HTTP header:</p>
 
 <p><code class="prettyprint">X-ApiKey: YOUR_API_KEY</code></p>
 
 <p><aside class="notice">
-Your API Key can be found on the profile page in your Conversio control panel
+Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.com/profile">profile page</a>.
 </aside></p>
+<h2 id='oauth'>OAuth</h2>
+<p>Conversio implements the Authorization Code Grant of the <a href="https://tools.ietf.org/html/rfc6749">OAuth v2.0</a> standard, with <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Tokens</a> (Proof of Possession).</p>
+
+<p>The standard is followed to spec, except for these cases:</p>
+
+<ul>
+<li>Access Tokens do not expire.</li>
+<li><code class="prettyprint">responseType</code> is not a required query parameter.</li>
+<li><code class="prettyprint">accessType</code> is not a required query parameter.</li>
+<li><code class="prettyprint">state</code> is required and must have a minimum length.</li>
+</ul>
+
+<p>In general terms, the OAuth process involves a Partner App getting authorization from the User to access their account. When authorized, an Access Token must be requested from Conversio. This token can then be included in requests to Conversio to Authenticate &amp; Authorize the App to access a User&rsquo;s account.</p>
+
+<p>This section has the following structure:</p>
+
+<ul>
+<li><a href="#terminology">Terminology</a></li>
+<li><a href="#issuing-access-token">Issuing Access Token</a>:
+
+<ol>
+<li><a href="#step-1-get-user-authorization">Get User Authorization</a></li>
+<li><a href="#step-2-receive-authorization-code">Receive Authorization Code</a></li>
+<li><a href="#step-3-exchange-code-for-access-token">Exchange Code for Access Token</a></li>
+</ol></li>
+<li><a href="#authorizing-requests">Autorizing Requests</a></li>
+<li><a href="#scopes">Scopes</a></li>
+</ul>
+<h3 id='terminology'>Terminology</h3>
+<ul>
+<li>User: Someone who owns an account in Conversio, and on whose behalf the API is used;</li>
+<li>Partner App: An app, authorized by Conversio, that can access a User&rsquo;s API when authorized by that User;</li>
+<li>Access Token: A 30 character string that, when included in an API request, Authenticates its associated User and Authorizes access according to it associated scopes.</li>
+<li>Scope: A string that represents permission to access a resource. Listed <a href="#scopes">here</a>.</li>
+<li>PoP Token: Proof of Possession Token. The only type of Access Token issued by Conversio.</li>
+<li>Code: A short-lived 60 character string that can be exchanged for an Access Token.</li>
+<li>Client Secret: A 60 character string that acts as password when Authenticating a Partner App and as symmetric key when signing a PoP Token.</li>
+<li>JWS: <a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature</a></li>
+</ul>
+<h3 id='issuing-access-token'>Issuing Access Token</h3>
+<p>Conversio uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:</p>
+
+<ol>
+<li>Redirecting the User to Conversio, where they can authorize the Partner App</li>
+<li>Conversio redirects the User back to the Partner App, including a <code class="prettyprint">code</code></li>
+<li>The Partner App exchanges the <code class="prettyprint">code</code> for an <code class="prettyprint">access_token</code></li>
+</ol>
+
+<p>These three steps are described in detail below.</p>
+<h4 id='step-1-get-user-authorization'>Step 1: Get User Authorization</h4><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/oauth/authorize"</span> <span class="se">\</span>
+  -G <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -d <span class="nv">client_id</span><span class="o">=</span>57b5aa3b046abfb053d80b52 <span class="se">\</span>
+  -d <span class="nv">redirect_uri</span><span class="o">=</span>https%3A%2F%2Fwww.partner-app.com%2Fcallback <span class="se">\</span>
+  -d <span class="nv">scope</span><span class="o">=</span>read_webhook%20write_newsletter_email <span class="se">\</span>
+  -d <span class="nv">state</span><span class="o">=</span>2034590283
+</code></pre>
+
+<p>To begin the OAuth flow, the User is redirected to Conversio&rsquo;s authorize endpoint:</p>
+
+<p><code class="prettyprint">https://app.conversio.com/oauth/authorize</code></p>
+
+<p>Including the following parameters in the URL query string:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parameter</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>client_id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s ID. Should be provided by Conversio.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>redirect_uri:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where the User will be redirected. Must match the value saved for the Partner App.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>scope:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The scopes that the App wishes to access on behalf of the User. Space separated values.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>state:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A random string, at least 10 characters long, that is unique. This will be passed on to <code class="prettyprint">redirect_uri</code> when the User accepts or rejects the authorization, and should be validated to be the same.</td>
+</tr>
+</tbody></table>
+
+<p>The User will be required to log-in to Conversio as needed.</p>
+
+<p>If all required parameters are present and valid, the User can then review what permissions (scopes) are requested by which App. Conversely, any missing or invalid parameters will instead show an error page with a description of each problem.</p>
+
+<p>At this point the User can Authorize or Reject the Authorization Request. When rejecting, the User will be redirected to <code class="prettyprint">redirect_uri</code> with the following parameters in the URL query string:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parameter</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>error:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>As per spec, will have the value &ldquo;access_denied&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>error_description:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Will be &ldquo;The user refused to authorize your App.&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>state:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Will be the same <code class="prettyprint">state</code> value sent on the first request.</td>
+</tr>
+</tbody></table>
+
+<p>This ends the OAuth flow prematurely.</p>
+
+<p>Conversely, when the User authorizes the App, an authorization <code class="prettyprint">code</code> is generated that is bound to that User, the requested scopes and <code class="prettyprint">redirect_uri</code>. The User is then redirected to <code class="prettyprint">redirect_uri</code> with the <code class="prettyprint">code</code> in the query params, and the same <code class="prettyprint">state</code> that was received in the request, starting step 2.</p>
+<h4 id='step-2-receive-authorization-code'>Step 2: Receive Authorization Code</h4><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://www.partner-app.com/callback"</span> <span class="se">\</span>
+  -G <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -d <span class="nv">code</span><span class="o">=</span>f85b6db85f79310aee955bf104caa2dfcb50e6a565f8f8837f44c6ded306 <span class="se">\</span>
+  -d <span class="nv">state</span><span class="o">=</span>2034590283
+</code></pre>
+
+<p>At this point the User has authorized the Partner App to access their account on their behalf. They will be redirected to <code class="prettyprint">redirect_uri</code> and the URL query will include the following parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parameter</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>code:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A 60 character hex string. This code represents the user&rsquo;s authorization and must be used to get an Access Token in step 3. It is single-use and short-lived, expiring in 3 minutes.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>state:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Must be the same value sent in the first request.</td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">state</code> param&rsquo;s value should be validated. It is exactly the same value as was sent in the first step. This ensures that the User is coming from the original request, and that the <code class="prettyprint">code</code> isn&rsquo;t from an earlier request intercepted by an attacker.</p>
+
+<p>The <code class="prettyprint">code</code> can now be used to request an Access Token from Conversio.</p>
+<h4 id='step-3-exchange-code-for-access-token'>Step 3: Exchange Code for Access Token</h4><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/oauth/access-token"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Basic NTdiNWFhM2IwNDZhYmZiMDUzZDgwYjUyOndhdGNodS1sb29raW4tYXQ="</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="nv">code</span><span class="o">=</span>f85b6db85f79310aee955bf104caa2dfcb50e6a565f8f8837f44c6ded306 <span class="se">\</span>
+  -d <span class="nv">redirect_uri</span><span class="o">=</span>https%3A%2F%2Fwww.partner-app.com%2Fcallback
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0aee955bf104caa2dfcb50e6a565f8"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To issue an <code class="prettyprint">access_token</code>, the received <code class="prettyprint">code</code> must be <code class="prettyprint">POST</code>ed to Conversio.</p>
+
+<p>This request must use HTTPS and be Authenticated using <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic Access Authentication</a> using the App&rsquo;s ID as the username and the App&rsquo;s Client Secret as password. Both are provided by Conversio.</p>
+
+<p>The POST body must have the <code class="prettyprint">application/x-www-form-urlencoded</code> MIME type and the following parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parameter</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>code:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The 60 character code received in Step 2 of the flow.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>redirect_uri:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s redirect URI.</td>
+</tr>
+</tbody></table>
+
+<p>If the App is successfully authenticated, the <code class="prettyprint">redirect_uri</code> matches the App and the <code class="prettyprint">code</code> is valid, Conversio will return a new <code class="prettyprint">access_token</code> in JSON:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parameter</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>access_token:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A 30 character token bound to the User and requested Scopes. Must be kept secret.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>token_type:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Indicate&rsquo;s the token&rsquo;s type. Is &ldquo;pop&rdquo;.</td>
+</tr>
+</tbody></table>
+
+<p>This <code class="prettyprint">access_token</code> can then be used to <a href="#authorizing-requests">authorize</a> any client when accessing the User&rsquo;s data.</p>
+<h3 id='autorizing-requests'>Autorizing Requests</h3>
+<p>As mentioned above, Conversio issues <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Access Tokens</a>. These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.</p>
+
+<p>Reading the Tokens draft &amp; JWS RFC will provide deeper understanding of what&rsquo;s going on, but to get started quickly we&rsquo;d recommend using a lib for the language being used. Some examples:</p>
+
+<ol>
+<li>Javascript -&gt; <a href="https://github.com/brianloveswords/node-jws"><code class="prettyprint">npm install jws</code></a></li>
+<li>Ruby -&gt; <a href="https://github.com/jwt/ruby-jwt"><code class="prettyprint">gem install jwt</code></a></li>
+</ol>
+
+<p>If the language used isn&rsquo;t listed, get in touch with us and we&rsquo;ll help out finding an appropriate alternative.</p>
+<h4 id='generating-the-pop-token'>Generating the PoP Token</h4><pre><code class="highlight ruby"><span class="c1"># Ruby</span>
+<span class="nb">require</span> <span class="s1">'jwt'</span>
+
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s1">'partner-app-client-secret'</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">at: </span><span class="s1">'pop-access-token'</span><span class="p">,</span> <span class="ss">ts: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">to_i</span> <span class="p">}</span>
+
+<span class="n">pop_token</span> <span class="o">=</span> <span class="no">JWT</span><span class="p">.</span><span class="nf">encode</span> <span class="n">payload</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="s1">'HS256'</span>
+<span class="c1"># &gt; "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.J6DUAy9TopLOfIJHFbY2BNDankWID9ZvJ-ylHoV_a6k"</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="c1">// Javascript</span>
+<span class="kr">const</span> <span class="nx">jws</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jws'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">clientSecret</span> <span class="o">=</span> <span class="s1">'partner-app-client-secret'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="p">{</span> <span class="na">typ</span><span class="p">:</span> <span class="s1">'JWT'</span><span class="p">,</span> <span class="na">alg</span><span class="p">:</span> <span class="s1">'HS256'</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="na">at</span><span class="p">:</span> <span class="s1">'pop-access-token'</span><span class="p">,</span> <span class="na">ts</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">popToken</span> <span class="o">=</span> <span class="nx">jws</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="na">secret</span><span class="p">:</span> <span class="nx">clientSecret</span> <span class="p">});</span>
+<span class="c1">// &gt; 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo'</span>
+</code></pre>
+
+<p>As a first step, the Access Token received from Conversio must be included in an Object (Hash for Ruby) at the key <code class="prettyprint">at</code>. In that object, the current Unix time must be defined at the key <code class="prettyprint">ts</code>. This timestamp is validated by Conversio to be within 3 minutes of current time, in an effort to prevent header reuse by attackers.</p>
+
+<p>This object is then signed with HMAC, generating 3 Base64 encoded strings, separated by a period. This is the PoP Token.</p>
+
+<p>We support three HMAC algorithms, <code class="prettyprint">HS256</code>, <code class="prettyprint">HS384</code> and <code class="prettyprint">HS512</code>.</p>
+<pre><code class="highlight shell"><span class="c"># Example authorized request</span>
+<span class="gp">$ </span>curl https://app.conversio.com/api/v1 <span class="se">\</span>
+  -H <span class="s2">"Authorization: PoP eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo
+</span></code></pre>
+
+<p>The PoP Token can then be included in a request&rsquo;s Authorization header, prefixed with the string &ldquo;PoP&rdquo;.</p>
+
+<p>The server then decodes the PoP Token and validates the signature to both Authenticate the Partner App and Authorize its access to a User&rsquo;s account through the included Access Token.</p>
+<h3 id='scopes'>Scopes</h3>
+<p>Below is a table of the recognized scopes. Scopes that are prefixed with <code class="prettyprint">write_</code> provide read &amp; write access, while those with the <code class="prettyprint">read_</code> prefix provide access to read-only endpoints.</p>
+
+<ul>
+<li><code class="prettyprint">read_webhook</code>/<code class="prettyprint">write_webhook</code>: These allow accessing the registered webhooks for a User&rsquo;s account. With <code class="prettyprint">write_</code> one can also register new webhooks &amp; endpoints.</li>
+<li><code class="prettyprint">read_newsletter_template</code>: Provides access to a User&rsquo;s Newsletter Templates. This includes contents and sending stats.</li>
+<li><code class="prettyprint">read_newsletter_email</code>: Provides access to the list of emails associated with a sent Newsletter Template. Includes action timestamps (sentAt, openedAt, etc.) and email address info.</li>
+<li><code class="prettyprint">read_async_job</code>: Provides access to Async Jobs, their statuses and results.</li>
+</ul>
 
           <h1 id='receipts'>Receipts</h1>
 <p>Services related to sending using the <strong>Receipts API</strong></p>

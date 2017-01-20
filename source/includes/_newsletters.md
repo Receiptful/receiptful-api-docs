@@ -47,7 +47,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters" \
 
 `https://app.conversio.com/api/v1/newsletters`
 
-_OAuth Scopes_: read_newsletter_templates, write_newsletter_templates
+_OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
 <aside class="success">
   Response 200
@@ -115,7 +115,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
 
 `https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}`
 
-_OAuth Scopes_: read_newsletter_templates, write_newsletter_templates
+_OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
 <aside class="success">
   Response 200
@@ -217,7 +217,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
 
 `https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails`
 
-_OAuth Scopes_: read_newsletter_emails, write_newsletter_emails
+_OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
 ### Request Query Params
 
@@ -309,7 +309,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
 
 `https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}`
 
-_OAuth Scopes_: read_newsletter_emails, write_newsletter_emails
+_OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
 <aside class="success">
   Response 200
@@ -376,7 +376,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ec
 
 `https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export`
 
-_OAuth Scopes_: read_newsletter_emails, write_newsletter_emails
+_OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
 <aside class="success">
   Response 201 - Job Created

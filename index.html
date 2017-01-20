@@ -1678,9 +1678,7 @@ Response 204
 <p>Returns all the Newsletters created in a shop.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -1791,9 +1789,7 @@ Response 204
 <p>Returns the selected Newsletter and some stats regarding its sending status.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -1965,9 +1961,7 @@ Response 204
 <p>Note that if the Newsletter is currently live and sending, paginating results will not guarantee that all emails are returned. Wait for the &ldquo;sent&rdquo; status if an exhaustive list is required.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -2143,9 +2137,7 @@ Response 204
 <p>Returns a Newsletter&rsquo;s email, along with its text &amp; HTML contents.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -2258,7 +2250,7 @@ Response 204
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ecipients/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST
 </code></pre>
 
@@ -2331,9 +2323,7 @@ Response 204
 <p>Get all available customer lists.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -2387,7 +2377,7 @@ Response 204
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s1">'{
     "email": "an@email.com",
@@ -2643,9 +2633,7 @@ Response 204
 <p>Returns all Webhooks registered for the current shop. If authorized through OAuth, only those webhooks created by the authorized PartnerApp will be listed.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -2715,9 +2703,7 @@ Response 204
 </tbody></table>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -3087,9 +3073,7 @@ Response 204
 <p>Returns all the Async Jobs created for the authenticated shop. When using OAuth, only jobs started by the authenticated app are returned.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>
@@ -3209,9 +3193,7 @@ Response 204
 <p>Returns the requested Async Job. When using OAuth, only jobs started by the authenticated app can be accessed.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
-  -X GET
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
 <blockquote>

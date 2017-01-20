@@ -8,9 +8,7 @@ Get all available customer lists.
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/customer-lists" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -55,7 +53,7 @@ Subscribe an email address and optional user details to a specific customer list
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -X PUT \
   -d '{
     "email": "an@email.com",

@@ -15,9 +15,7 @@ Returns all the Async Jobs created for the authenticated shop. When using OAuth,
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/async-jobs" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE
@@ -92,9 +90,7 @@ Returns the requested Async Job. When using OAuth, only jobs started by the auth
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52" \
-  -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
-  -X GET
+  -H "X-ApiKey: YOUR_API_KEY"
 ```
 
 > EXAMPLE RESPONSE

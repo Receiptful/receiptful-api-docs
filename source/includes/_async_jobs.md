@@ -54,7 +54,7 @@ $ curl "https://app.conversio.com/api/v1/async-jobs" \
 
 `https://app.conversio.com/api/v1/async-jobs`
 
-_OAuth Scopes_: read_async_jobs
+_OAuth Scopes_: read_async_job
 
 <aside class="success">
   Response 200 (application/json)
@@ -116,7 +116,7 @@ $ curl "https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52" \
 
 `https://app.conversio.com/api/v1/async-jobs/{ASYNC_JOB_ID}`
 
-_OAuth Scopes_: read_async_jobs
+_OAuth Scopes_: read_async_job
 
 <aside class="success">
   Response 200

@@ -6,9 +6,11 @@ $ curl "api_endpoint_here" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
-Authentication with Conversio can be done through API key or OAuth. If you're a store owner or affiliated with a store who uses Conversio, your best (and fastest) bet is to use API Key authentication.
+Conversio provides three types of Authentication, each with its own use case. These are:
 
-OAuth is more complex and should be used by Partner Apps that want to authenticate with their user's accounts in Conversio. Use of API Key Authentication by other Apps on behalf of Conversio's users is discouraged.
+1. **API Key**: For store owners or someone affiliated with a store owner (typically a developer). This is the fastest way to get access to a store's data and actions;
+2. **OAuth**: For Partner Apps that wish to authenticate with their users' accounts in Conversio. This gives access to Conversio on behalf of one or more users.
+3. **HMAC**: For Partner Apps only. Used for accessing the Parter App API.
 
 ## API Key Authentication
 
@@ -17,7 +19,7 @@ All paths should prefixed with https://app.conversio.com/api/v1 and will need th
 `X-ApiKey: YOUR_API_KEY`
 
 <aside class="notice">
-Your API Key can be found in your store's [profile page](https://app.conversio.com/profile).
+Your API Key can be found in the store's [profile page](https://app.conversio.com/profile).
 </aside>
 
 ## OAuth
@@ -242,3 +244,40 @@ Below is a table of the recognized scopes. Scopes that are prefixed with `write_
 * `read_newsletter_template`: Provides access to a User's Newsletter Templates. This includes contents and sending stats.
 * `read_newsletter_email`: Provides access to the list of emails associated with a sent Newsletter Template. Includes action timestamps (sentAt, openedAt, etc.) and email address info.
 * `read_async_job`: Provides access to Async Jobs, their statuses and results.
+
+## HMAC
+
+```ruby
+# Ruby
+require 'jwt'
+
+client_secret = 'partner-app-client-secret'
+payload = { iss: '57b5aa3b046abfb053d80b52' }
+
+pop_token = JWT.encode payload, client_secret, 'HS256'
+# > "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ"
+```
+
+```javascript
+// Javascript
+const jws = require('jws');
+
+const clientSecret = 'partner-app-client-secret';
+const header = { typ: 'JWT', alg: 'HS256' };
+const payload = { iss: '57b5aa3b046abfb053d80b52' };
+
+const popToken = jws.sign({ header, payload, secret: clientSecret });
+// > 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ'
+```
+
+```shell
+# Example authorized request
+$ curl https://app.conversio.com/api/v1/partners/ \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
+```
+
+This authentication type is used exclusively when accessing the [Partner Apps API](#partner-apps-api) because it authenticates a Partner only, not a User. It is used on signed JSON Web Tokens with a JSON Web Signature.
+
+The token must have an `iss` entry set to the Partner App's ID. Then, it must be signed with the Client Secret and added to the Authorization header of each request, using the `Bearer` schema.
+
+All requests to the Partner Apps API must be authorized this way.

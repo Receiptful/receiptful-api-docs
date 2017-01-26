@@ -346,7 +346,7 @@ Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ecipients/async-export" \
+$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST

@@ -40,7 +40,7 @@ This section has the following structure:
   1. [Get User Authorization](#step-1-get-user-authorization)
   2. [Receive Authorization Code](#step-2-receive-authorization-code)
   3. [Exchange Code for Access Token](#step-3-exchange-code-for-access-token)
-* [Autorizing Requests](#authorizing-requests)
+* [Authorizing Requests](#authorizing-requests)
 * [Scopes](#scopes)
 
 ### Terminology
@@ -182,13 +182,13 @@ If the App is successfully authenticated, the `redirect_uri` matches the App and
 
 This `access_token` can then be used to [authorize](#authorizing-requests) any client when accessing the User's data.
 
-### Autorizing Requests
+### Authorizing Requests
 
 As mentioned above, Conversio issues [PoP Access Tokens](https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03). These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.
 
 Reading the Tokens draft & JWS RFC will provide deeper understanding of what's going on, but to get started quickly we'd recommend using a lib for the language being used. Some examples:
 
-1. Javascript -> [`npm install jws`](https://github.com/brianloveswords/node-jws)
+1. JavaScript -> [`npm install jws`](https://github.com/brianloveswords/node-jws)
 2. Ruby -> [`gem install jwt`](https://github.com/jwt/ruby-jwt)
 
 If the language used isn't listed, get in touch with us and we'll help out finding an appropriate alternative.
@@ -207,7 +207,7 @@ pop_token = JWT.encode payload, client_secret, 'HS256'
 ```
 
 ```javascript
-// Javascript
+// JavaScript
 const jws = require('jws');
 
 const clientSecret = 'partner-app-client-secret';

@@ -86,7 +86,7 @@ Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.c
 <li><a href="#step-2-receive-authorization-code">Receive Authorization Code</a></li>
 <li><a href="#step-3-exchange-code-for-access-token">Exchange Code for Access Token</a></li>
 </ol></li>
-<li><a href="#authorizing-requests">Autorizing Requests</a></li>
+<li><a href="#authorizing-requests">Authorizing Requests</a></li>
 <li><a href="#scopes">Scopes</a></li>
 </ul>
 <h3 id='terminology'>Terminology</h3>
@@ -319,13 +319,13 @@ Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.c
 </tbody></table>
 
 <p>This <code class="prettyprint">access_token</code> can then be used to <a href="#authorizing-requests">authorize</a> any client when accessing the User&rsquo;s data.</p>
-<h3 id='autorizing-requests'>Autorizing Requests</h3>
+<h3 id='authorizing-requests'>Authorizing Requests</h3>
 <p>As mentioned above, Conversio issues <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Access Tokens</a>. These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.</p>
 
 <p>Reading the Tokens draft &amp; JWS RFC will provide deeper understanding of what&rsquo;s going on, but to get started quickly we&rsquo;d recommend using a lib for the language being used. Some examples:</p>
 
 <ol>
-<li>Javascript -&gt; <a href="https://github.com/brianloveswords/node-jws"><code class="prettyprint">npm install jws</code></a></li>
+<li>JavaScript -&gt; <a href="https://github.com/brianloveswords/node-jws"><code class="prettyprint">npm install jws</code></a></li>
 <li>Ruby -&gt; <a href="https://github.com/jwt/ruby-jwt"><code class="prettyprint">gem install jwt</code></a></li>
 </ol>
 
@@ -339,7 +339,7 @@ Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.c
 <span class="n">pop_token</span> <span class="o">=</span> <span class="no">JWT</span><span class="p">.</span><span class="nf">encode</span> <span class="n">payload</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="s1">'HS256'</span>
 <span class="c1"># &gt; "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.J6DUAy9TopLOfIJHFbY2BNDankWID9ZvJ-ylHoV_a6k"</span>
 </code></pre>
-<pre><code class="highlight javascript"><span class="c1">// Javascript</span>
+<pre><code class="highlight javascript"><span class="c1">// JavaScript</span>
 <span class="kr">const</span> <span class="nx">jws</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jws'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">clientSecret</span> <span class="o">=</span> <span class="s1">'partner-app-client-secret'</span><span class="p">;</span>
@@ -2563,7 +2563,7 @@ Response 204
 
 <p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/ecipients/async-export"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST
@@ -2764,7 +2764,9 @@ Response 204
 
 <p>You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will <code class="prettyprint">POST</code> some data related to that event to the endpoints registered in webhooks that subscribed to that event&rsquo;s topic.</p>
 
-<p>When Webhook delivery fails (your endpoint can&rsquo;t be reached or returns an error status code), we&rsquo;ll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponetial back-off fashion. Details are described below.</p>
+<p>When Webhook delivery fails (your endpoint can&rsquo;t be reached or returns an error status code), we&rsquo;ll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponential back-off fashion. Details are described <a href="#retry-mechanism">below</a>.</p>
+
+<p>For security purposes, all our webhooks use JSON Web Signatures (<a href="https://tools.ietf.org/html/rfc7515">JWS</a>). These allow recipients to validate that each webhook originates from Conversio. More details on the validation are <a href="#security-signature">below</a>.</p>
 <h3 id='subscribable-topics'>Subscribable Topics</h3>
 <ul>
 <li><code class="prettyprint">newsletter-email/sent</code>: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;</li>
@@ -2798,7 +2800,29 @@ Response 204
 </tbody></table>
 
 <p>The <code class="prettyprint">data</code> key&rsquo;s content depends on the Webhook&rsquo;s topic. The following apply:</p>
-<h4 id='code-classprettyprintnewsletter-emailsentcode'><code class="prettyprint">newsletter-email/sent</code></h4>
+<h4 id='code-classprettyprintnewsletter-emailsentcode'><code class="prettyprint">newsletter-email/sent</code></h4><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
+<span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+    "meta": {
+      "topic": "newsletter-email/sent",
+      "ts": 1485431966802
+    },
+    "data": {
+      "emailId": "57b5aa3b046abfb053d80b52",
+      "templateId": "57b5aa3b640abfb053d80a63",
+      "userId": "67b5aa3c640abfb053d80a63",
+      "recipient": "an@email.com",
+      "subject": "Black Friday Sale",
+      "title": "Black Friday opening announcement",
+      "sentAt": "2017-01-26T11:57:26.675Z"
+    }
+  }'</span>
+</code></pre>
+
 <table><thead>
 <tr>
 <th style="text-align: right">Key</th>
@@ -2862,7 +2886,28 @@ Response 204
 <td>When the email was sent. This is an <strong>ISO 8601</strong> formatted date.</td>
 </tr>
 </tbody></table>
-<h4 id='code-classprettyprintasync-jobcompletedcode'><code class="prettyprint">async-job/completed</code></h4>
+<h4 id='code-classprettyprintasync-jobcompletedcode'><code class="prettyprint">async-job/completed</code></h4><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
+<span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+    "meta": {
+      "topic": "async-job/completed",
+      "ts": 1485431966803
+    },
+    "data": {
+      "id": "57b5aa3b046abfb053d80b52",
+      "kind": "newsletter-recipients",
+      "status": "done",
+      "startedAt": "2017-01-26T11:57:26.675Z",
+      "completedAt": "2017-01-26T12:02:06.665Z",
+      "result": "https://receiptful.s3.amazonaws.com/async-jobs/1234567890987654321.csv"
+    }
+  }'</span>
+</code></pre>
+
 <p>Data is the JSON representation of the completed Async Job:</p>
 
 <table><thead>
@@ -2944,6 +2989,120 @@ Response 204
 </ol>
 
 <p>After all attempts are through, the webhooks are discarded.</p>
+<h3 id='security-signature'>Security Signature</h3><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
+<span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{ ... }'</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="cm">/* JavaScript */</span>
+<span class="kr">const</span> <span class="nx">jws</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jws'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">authorization</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">);</span>
+<span class="c1">// &gt; 'Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'</span>
+
+<span class="kr">const</span> <span class="p">[,</span> <span class="nx">encodedToken</span><span class="p">]</span> <span class="o">=</span> <span class="nx">authorization</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jws</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">encodedToken</span><span class="p">);</span>
+<span class="c1">// &gt; {</span>
+<span class="c1">// &gt;   header: { alg: 'HS256', kid: 'Client Secret', typ: 'JWT' },</span>
+<span class="c1">// &gt;   payload: {</span>
+<span class="c1">// &gt;     jit: '3985cbe0-e3be-11e6-a8f3-85339628c34a',</span>
+<span class="c1">// &gt;     iat: 1485431682,</span>
+<span class="c1">// &gt;     iss: 'Conversio'</span>
+<span class="c1">// &gt;   },</span>
+<span class="c1">// &gt;   signature: 'WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'</span>
+<span class="c1">// &gt; }</span>
+
+<span class="nx">jws</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">encodedToken</span><span class="p">,</span> <span class="nx">token</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">alg</span><span class="p">,</span> <span class="s1">'a-secret'</span><span class="p">);</span>
+<span class="c1">// &gt; true</span>
+</code></pre>
+<pre><code class="highlight ruby"><span class="c1">## Ruby</span>
+<span class="nb">require</span> <span class="s1">'JWT'</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">encoded_token</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">].</span><span class="nf">split</span>
+<span class="n">payload</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="no">JWT</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">encoded_token</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+<span class="c1"># &gt; payload = {"jit"=&gt;"3985cbe0-e3be-11e6-a8f3-85339628c34a", "iat"=&gt;1485431682, "iss"=&gt;"Conversio"}</span>
+<span class="c1"># &gt; header = {"alg"=&gt;"HS256", "kid"=&gt;"Client Secret", "typ"=&gt;"JWT"}</span>
+
+<span class="no">JWT</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">encoded_token</span><span class="p">,</span> <span class="s1">'a-secret'</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">algorithm: </span><span class="n">header</span><span class="p">[</span><span class="s1">'alg'</span><span class="p">],</span> <span class="ss">iss: </span><span class="s1">'Conversio'</span><span class="p">,</span> <span class="ss">verify_iss: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">verify_iat: </span><span class="kp">true</span><span class="p">)</span>
+<span class="c1"># &gt; [{"jit"=&gt;"3985cbe0-e3be-11e6-a8f3-85339628c34a", "iat"=&gt;1485431682, "iss"=&gt;"Conversio"}, {"alg"=&gt;"HS256", "kid"=&gt;"Client Secret", "typ"=&gt;"JWT"}]</span>
+</code></pre>
+
+<p>A JSON Web Token (<a href="https://tools.ietf.org/html/rfc7519">JWT</a>) is signed and encoded into the Authorization header of the Webhook&rsquo;s request using the Bearer schema. The token&rsquo;s header includes the following keys:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>alg:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Has the value &ldquo;HS245&rdquo;. It&rsquo;s the algorightm used for the HMAC signature.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>typ:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Has the value &ldquo;JWT&rdquo;. Indicates this is a JSON Web Token.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kid:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Hints at what secret was used for signing the Token. Is &ldquo;Client Secret&rdquo; when the webhook is registered for a Partner App, or &ldquo;API Key&rdquo; when the webhook was registered through an API.</td>
+</tr>
+</tbody></table>
+
+<p>The token&rsquo;s body itself includes the following keys:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>jti:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Has a random, unique value. Two tokens with the same <code class="prettyprint">jti</code> could mean an attacker is re-using tokens to fabricate authorized webhooks.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>iss:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Has the value &ldquo;Conversio&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>iat:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>UNIX time of when the token was generated (when webhook request is sent).</td>
+</tr>
+</tbody></table>
+
+<p>This token is then serialized using <a href="https://tools.ietf.org/html/rfc7515#page-19">JWS Compact Serialization</a> and included in the Authorization header using the Bearer schema.</p>
+
+<p>Webhooks recipients should validate that every request is properly signed. This acts as guarantee that the webhook is valid and was sent by Conversio.</p>
+
+<p>Validating the signatures is a process made simple by programming libraries. The same library used during <a href="#authorizing-requests">OAuth</a> can be used here, just follow the examples on the right.</p>
 <h2 id='view-webhooks'>View Webhooks</h2>
 <p>Returns all Webhooks registered for the current shop. If authorized through OAuth, only those webhooks created by the authorized PartnerApp will be listed.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>

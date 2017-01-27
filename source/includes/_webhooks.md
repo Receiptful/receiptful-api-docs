@@ -182,7 +182,7 @@ A JSON Web Token ([JWT](https://tools.ietf.org/html/rfc7519)) is signed and enco
 |Key               |Details    |
 |-----------------:|-----------|
 |**alg:**          |**string**|
-|                  |Has the value "HS245". It's the algorightm used for the HMAC signature.|
+|                  |Has the value "HS256". It's the algorightm used for the HMAC signature.|
 |**typ:**          |**string**|
 |                  |Has the value "JWT". Indicates this is a JSON Web Token.|
 |**kid:**          |**string**|

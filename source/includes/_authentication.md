@@ -169,7 +169,7 @@ The POST body must have the `application/x-www-form-urlencoded` MIME type and th
 |**code:**             |**string** |
 |                      |The 60 character code received in Step 2 of the flow.|
 |**redirect_uri:**     |**string** |
-|                      |The Partner App's redirect URI.|
+|                      |The Partner App's redirect URI. It must be the exact same value as used to generate the `code`.|
 
 If the App is successfully authenticated, the `redirect_uri` matches the App and the `code` is valid, Conversio will return a new `access_token` in JSON:
 
@@ -212,7 +212,7 @@ const jws = require('jws');
 
 const clientSecret = 'partner-app-client-secret';
 const header = { typ: 'JWT', alg: 'HS256' };
-const payload = { at: 'pop-access-token', ts: Date.now() };
+const payload = { at: 'pop-access-token', ts: Math.floor(Date.now() / 1000) };
 
 const popToken = jws.sign({ header, payload, secret: clientSecret });
 // > 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo'

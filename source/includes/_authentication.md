@@ -10,7 +10,7 @@ Conversio provides three types of Authentication, each with its own use case. Th
 
 1. **API Key**: For store owners or someone affiliated with a store owner (typically a developer). This is the fastest way to get access to a store's data and actions;
 2. **OAuth**: For Partner Apps that wish to authenticate with their users' accounts in Conversio. This gives access to Conversio on behalf of one or more users.
-3. **HMAC**: For Partner Apps only. Used for accessing the Parter App API.
+3. **HMAC**: For Partner Apps only. Used for accessing the Partner App API.
 
 ## API Key Authentication
 

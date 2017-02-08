@@ -19,6 +19,7 @@ includes:
   - customer_lists
   - webhooks
   - async_jobs
+  - partner_apps
   - errors
 
 search: true

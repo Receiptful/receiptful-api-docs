@@ -377,9 +377,9 @@ _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 <aside class="warning">
   Response 404 - Newsletter not found. One of the following happened:
   <ul>
-    <li>The given ID does not belong to an existing newsletter</li>
-    <li>The ID belongs to another shop's newsletter</li>
-    <li>The newsletter has been deleted</li>
+    <li>The given ID does not belong to an existing Newsletter</li>
+    <li>The ID belongs to another shop's Newsletter</li>
+    <li>The Newsletter has been deleted</li>
   </ul>
 </aside>
 
@@ -393,5 +393,63 @@ The response body includes a `data` key which reflects the created Async Job's i
 |                   |The ID for the created AsyncJob. Use this to identify this export.|
 |**kind:**          |**string**|
 |                   |The kind of job created. Is always `newsletter-recipients` on this endpoint.|
+|**status:**        |**string**|
+|                   |The job's status. Always `pending`.|
+
+## Export Newsletter Emails
+
+Starts an Async Job to export a Newsletter's emails. Once completed, the job's result will point to a CSV file with email addresses and activity timestamps.
+
+Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's result.
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export" \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -X POST
+```
+
+> EXAMPLE RESPONSE
+
+```json
+{
+  "data": {
+    "id": "57b5aa3b046abfb053d80b68",
+    "kind": "newsletter-emails",
+    "status": "pending"
+  }
+}
+```
+
+### Create Export Job [POST]
+
+`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/async-export`
+
+_OAuth Scopes_: read_newsletter_email, write_newsletter_email
+
+<aside class="success">
+  Response 201 - Job Created
+</aside>
+
+<aside class="warning">
+  Response 404 - Newsletter not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing Newsletter</li>
+    <li>The ID belongs to another shop's newsletter</li>
+    <li>The Newsletter has been deleted</li>
+  </ul>
+</aside>
+
+### Response Body
+
+The response body includes a `data` key which reflects the created Async Job's info:
+
+|Key                |Details|
+|------------------:|-----------|
+|**id:**            |**string**|
+|                   |The ID for the created AsyncJob. Use this to identify this export.|
+|**kind:**          |**string**|
+|                   |The kind of job created. Is always `newsletter-emails` on this endpoint.|
 |**status:**        |**string**|
 |                   |The job's status. Always `pending`.|

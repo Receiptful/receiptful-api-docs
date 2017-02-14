@@ -2844,6 +2844,7 @@ Response 204
 <ul>
 <li><code class="prettyprint">newsletter-email/sent</code>: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;</li>
 <li><code class="prettyprint">async-job/completed</code>: Triggered when an Async Job has been completed (failed or succeeded).</li>
+<li><code class="prettyprint">abandoned-cart-email/sent</code>: Triggered when an email was sent for an Abandoned Cart.</li>
 </ul>
 <h3 id='payload'>Payload</h3>
 <p>All request bodies contain two keys, <code class="prettyprint">meta</code> and <code class="prettyprint">data</code>. The <code class="prettyprint">meta</code> key contains information about the webhook itself:</p>
@@ -3044,6 +3045,112 @@ Response 204
 <tr>
 <td style="text-align: right"></td>
 <td>The final result from processing this job. What it is depends on job <code class="prettyprint">kind</code>.</td>
+</tr>
+</tbody></table>
+<h4 id='code-classprettyprintabandoned-cart-emailsentcode'><code class="prettyprint">abandoned-cart-email/sent</code></h4><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
+<span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+    "meta": {
+      "topic": "abandoned-cart-email/sent",
+      "ts": 1485431966893
+    },
+    "data": {
+      "userId": "57b5aa3b0461234053d80b52"
+      "emailId": "57b5aa3b046abfb053d80b52",
+      "templateId": "57b5aa3b046abfb053d80b53",
+      "campaignId": "57b5aa3b046abfb053d80b56",
+      "abandonedCartId": "57b5aa3b046abfb053d80b59",
+      "to": "some@customer.com",
+      "status": "sent"
+      "sentAt": "2017-01-26T11:57:26.675Z",
+      "subject": "You forgot your goodies!"
+    }
+  }'</span>
+</code></pre>
+
+<p>Data is the JSON representation of the sent Abandoned Cart email:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>emailId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>templateId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email template&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>campaignId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Abandoned Cart Campaign&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>abandonedCartId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Abandoned Cart that triggered this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>userId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The User&rsquo;s ID.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>to:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address of the customer that received this email (also the owner of the Abandoned Cart).</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email&rsquo;s status. Is &ldquo;sent&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>stringl</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the email was sent. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subject:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email subject.</td>
 </tr>
 </tbody></table>
 <h3 id='retry-mechanism'>Retry Mechanism</h3>

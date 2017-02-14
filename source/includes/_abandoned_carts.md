@@ -1,5 +1,6 @@
 # Abandoned Carts
-Services related to managing **Abandoned Carts**.
+
+Services related to managing **Abandoned Carts**. For the Email Campaigns triggered by Abandoned Carts, go to [the next section](#abandoned-cart-emails).
 
 ## Create
 

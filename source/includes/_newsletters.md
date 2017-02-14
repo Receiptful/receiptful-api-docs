@@ -319,7 +319,7 @@ _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
 ### Response Body
 
-The response body includes a `data` key which contains an object representation of the requested newsletter emails. The `rendered` key is included with the email's contents:
+The response body includes a `data` key which contains an object representation of the requested newsletter email. The `rendered` key is included with the email's contents:
 
 |Key                |Details|
 |------------------:|-----------|

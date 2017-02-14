@@ -2842,6 +2842,7 @@ Response 204
 <p>For security purposes, all our webhooks use JSON Web Signatures (<a href="https://tools.ietf.org/html/rfc7515">JWS</a>). These allow recipients to validate that each webhook originates from Conversio. More details on the validation are <a href="#security-signature">below</a>.</p>
 <h3 id='subscribable-topics'>Subscribable Topics</h3>
 <ul>
+<li><code class="prettyprint">newsletter-template/sent</code>: Triggered when all emails for a Newsletter have been sent.</li>
 <li><code class="prettyprint">newsletter-email/sent</code>: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;</li>
 <li><code class="prettyprint">async-job/completed</code>: Triggered when an Async Job has been completed (failed or succeeded).</li>
 <li><code class="prettyprint">abandoned-cart-email/sent</code>: Triggered when an email was sent for an Abandoned Cart.</li>
@@ -2874,6 +2875,83 @@ Response 204
 </tbody></table>
 
 <p>The <code class="prettyprint">data</code> key&rsquo;s content depends on the Webhook&rsquo;s topic. The following apply:</p>
+<h4 id='code-classprettyprintnewsletter-templatesentcode'><code class="prettyprint">newsletter-template/sent</code></h4><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
+<span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+    "meta": {
+      "topic": "newsletter-template/sent",
+      "ts": 1485431966802
+    },
+    "data": {
+      "templateId": "57b5aa3b640abfb053d80a63",
+      "userId": "67b5aa3c640abfb053d80a63",
+      "status": "sent",
+      "title": "Black Friday opening announcement",
+      "sentAt": "2017-01-26T11:57:26.675Z",
+      "liveAt": "2017-01-26T11:45:28.888Z"
+    }
+  }'</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>templateId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter Template&rsquo;s ID. Can be used to reference the template using the API.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>userId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The User / Store that this template belongs to.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Template status, is &ldquo;sent&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s title (store-facing, not necessarily in email content).</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>liveAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the template started sending. This is an <strong>ISO 8601</strong> formatted date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When the template finished sending. This is an <strong>ISO 8601</strong> formatted date.</td>
+</tr>
+</tbody></table>
 <h4 id='code-classprettyprintnewsletter-emailsentcode'><code class="prettyprint">newsletter-email/sent</code></h4><pre><code class="highlight shell"><span class="c"># EXAMPLE WEBHOOK</span>
 <span class="gp">$ </span>curl <span class="s2">"https://partner-app.com/registered/endpoint"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'"</span> <span class="se">\</span>

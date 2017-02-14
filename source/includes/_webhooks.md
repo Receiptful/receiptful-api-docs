@@ -12,6 +12,7 @@ For security purposes, all our webhooks use JSON Web Signatures ([JWS](https://t
 
 * `newsletter-email/sent`: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;
 * `async-job/completed`: Triggered when an Async Job has been completed (failed or succeeded).
+* `abandoned-cart-email/sent`: Triggered when an email was sent for an Abandoned Cart.
 
 ### Payload
 
@@ -112,6 +113,57 @@ Data is the JSON representation of the completed Async Job:
 |                  |An error message that indicates a problem when processing the job. There is no `result` if this is present.|
 |**result:**       |**string, optional**|
 |                  |The final result from processing this job. What it is depends on job `kind`.|
+
+#### `abandoned-cart-email/sent`
+
+```shell
+# EXAMPLE WEBHOOK
+$ curl "https://partner-app.com/registered/endpoint" \
+  -H "Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -X POST \
+  -d '{
+    "meta": {
+      "topic": "abandoned-cart-email/sent",
+      "ts": 1485431966893
+    },
+    "data": {
+      "userId": "57b5aa3b0461234053d80b52"
+      "emailId": "57b5aa3b046abfb053d80b52",
+      "templateId": "57b5aa3b046abfb053d80b53",
+      "campaignId": "57b5aa3b046abfb053d80b56",
+      "abandonedCartId": "57b5aa3b046abfb053d80b59",
+      "to": "some@customer.com",
+      "status": "sent"
+      "sentAt": "2017-01-26T11:57:26.675Z",
+      "subject": "You forgot your goodies!"
+    }
+  }'
+```
+
+Data is the JSON representation of the sent Abandoned Cart email:
+
+|Key                  |Details    |
+|--------------------:|-----------|
+|**emailId:**         |**string** |
+|                     |The email's ID.|
+|**templateId:**      |**string** |
+|                     |The email template's ID.|
+|**campaignId:**      |**string** |
+|                     |The Abandoned Cart Campaign's ID.|
+|**abandonedCartId:** |**string** |
+|                     |The ID of the Abandoned Cart that triggered this email.|
+|**userId:**          |**string** |
+|                     |The User's ID.|
+|**to:**              |**string** |
+|                     |The email address of the customer that received this email (also the owner of the Abandoned Cart).|
+|**status:**          |**string** |
+|                     |The email's status. Is "sent".|
+|**sentAt:**          |**stringl**|
+|                     |When the email was sent. Is an **ISO 8601** encoded date.|
+|**subject:**         |**string** |
+|                     |The email subject.|
 
 ### Retry Mechanism
 

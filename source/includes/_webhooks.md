@@ -10,6 +10,7 @@ For security purposes, all our webhooks use JSON Web Signatures ([JWS](https://t
 
 ### Subscribable Topics
 
+* `newsletter-template/sent`: Triggered when all emails for a Newsletter have been sent.
 * `newsletter-email/sent`: Triggered when a Newsletter is sent to a customer. These typically arrive in bursts as the Newsletter Template is sending;
 * `async-job/completed`: Triggered when an Async Job has been completed (failed or succeeded).
 * `abandoned-cart-email/sent`: Triggered when an email was sent for an Abandoned Cart.
@@ -26,6 +27,46 @@ All request bodies contain two keys, `meta` and `data`. The `meta` key contains 
 |          |The timestamp for when the webhook was **first sent**. This will stay equal for subsequent retries.|
 
 The `data` key's content depends on the Webhook's topic. The following apply:
+
+#### `newsletter-template/sent`
+
+```shell
+# EXAMPLE WEBHOOK
+$ curl "https://partner-app.com/registered/endpoint" \
+  -H "Authorization: Bearer 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNsaWVudCBTZWNyZXQiLCJ0eXAiOiJKV1QifQ.eyJqaXQiOiIzOTg1Y2JlMC1lM2JlLTExZTYtYThmMy04NTMzOTYyOGMzNGEiLCJpYXQiOjE0ODU0MzE2ODIsImlzcyI6IkNvbnZlcnNpbyJ9.WZYh7Wylj5vnGRWqrgeMXdeRjIqJc9V30nyEG7QHpvk'" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -X POST \
+  -d '{
+    "meta": {
+      "topic": "newsletter-template/sent",
+      "ts": 1485431966802
+    },
+    "data": {
+      "templateId": "57b5aa3b640abfb053d80a63",
+      "userId": "67b5aa3c640abfb053d80a63",
+      "status": "sent",
+      "title": "Black Friday opening announcement",
+      "sentAt": "2017-01-26T11:57:26.675Z",
+      "liveAt": "2017-01-26T11:45:28.888Z"
+    }
+  }'
+```
+
+|Key            |Details    |
+|--------------:|-----------|
+|**templateId:**|**string** |
+|               |The Newsletter Template's ID. Can be used to reference the template using the API.|
+|**userId:**    |**string** |
+|               |The User / Store that this template belongs to.|
+|**status:**    |**string** |
+|               |Template status, is "sent".|
+|**title:**     |**string** |
+|               |The Newsletter's title (store-facing, not necessarily in email content).|
+|**liveAt:**    |**string** |
+|               |When the template started sending. This is an **ISO 8601** formatted date.|
+|**sentAt:**    |**string** |
+|               |When the template finished sending. This is an **ISO 8601** formatted date.|
 
 #### `newsletter-email/sent`
 

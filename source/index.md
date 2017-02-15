@@ -14,6 +14,7 @@ includes:
   - coupons
   - products
   - abandoned_carts
+  - abandoned_cart_emails
   - users
   - newsletters
   - customer_lists

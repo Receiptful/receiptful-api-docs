@@ -86,7 +86,7 @@ $ curl "https://partner-app.com/registered/endpoint" \
       "emailId": "57b5aa3b046abfb053d80b52",
       "templateId": "57b5aa3b640abfb053d80a63",
       "userId": "67b5aa3c640abfb053d80a63",
-      "recipient": "an@email.com",
+      "to": "an@email.com",
       "subject": "Black Friday Sale",
       "title": "Black Friday opening announcement",
       "sentAt": "2017-01-26T11:57:26.675Z"
@@ -102,7 +102,7 @@ $ curl "https://partner-app.com/registered/endpoint" \
 |               |The Newsletter Template's ID. The template that the email belongs to.|
 |**userId:**    |**string** |
 |               |The User / Store that this email belongs to.|
-|**recipient:** |**string** |
+|**to:**        |**string** |
 |               |The email address to whom this email was sent.|
 |**subject:**   |**string** |
 |               |The subject of the email|
@@ -126,7 +126,8 @@ $ curl "https://partner-app.com/registered/endpoint" \
       "ts": 1485431966803
     },
     "data": {
-      "id": "57b5aa3b046abfb053d80b52",
+      "asyncJobId": "57b5aa3b046abfb053d80b52",
+      "userId": "57b5aa3b046abbf053d80b64"
       "kind": "newsletter-recipients",
       "status": "done",
       "startedAt": "2017-01-26T11:57:26.675Z",
@@ -140,8 +141,10 @@ Data is the JSON representation of the completed Async Job:
 
 |Key               |Details    |
 |-----------------:|-----------|
-|**id:**           |**string**|
+|**asyncJobId:**   |**string** |
 |                  |The Async Job's ID.|
+|**userId:**       |**string** |
+|                  |The user on whose behalf this job is running.|
 |**kind:**         |**string**|
 |                  |What kind of job it is.|
 |**status:**       |**string**|

@@ -102,7 +102,8 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
       "uniqueOpens": 300,
       "clicks": 99,
       "recipientCount": 515
-    }
+    },
+    "contentModules": []
   }
 }
 ```
@@ -142,12 +143,14 @@ Then endpoint returns an object with a `data` key that the Newsletter object. Th
 |                     |An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.|
 |**customerSegments:**|**array[string]**|
 |                     |An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.|
-|**status**           |**string**|
+|**status:**          |**string**|
 |                     |The Newsletter's current status. Must be one of "draft", "scheduled", "live", or "sent".|
-|**sentAt**           |**string, optional**|
+|**sentAt:**          |**string, optional**|
 |                     |When the Newsletter was fully sent, if such is the case. Is an **ISO 8601** encoded date.|
-|**stats**            |**object**|
+|**stats:**           |**object**|
 |                     |An object with this Newsletter's stats. Included keys are described below.|
+|**contentModules:**  |**array**|
+|                     |An array of the Content Modules in a Newsletter. These represent the content (copy, images, discounts, etc.) in a Newsletter. More details below.|
 
 #### Stats
 
@@ -165,6 +168,53 @@ The `stats` key has the following format:
 |                     |The total number of clicks on this Newsletter's links.|
 |**recipientCount:**  |**number**|
 |                     |How many recipients was this Newsletter sent to. May differ from `sends` if there are sending errors.|
+
+#### Content Modules
+
+```json
+{
+  "contentModules": [
+    {
+      "position": 0,
+      "type": "text",
+      "context": {
+        "body": "Black Friday Sale!"
+      }
+    },
+    {
+      "position": 1,
+      "type": "image",
+      "context": {
+        "value": "https://www.epic-store.com/black-friday-img.png",
+        "url": "https://www.epic-store.com/sale",
+        "alignment": "center"
+      }
+    },
+    {
+      "position": 2,
+      "type": "discountCoupon",
+      "context": {
+        "title": "Extra Black Friday Discount",
+        "description": "{{firstName}}, these are the last few hours of our Black Friday sale! As an extra incentive, this is a coupon for extra {{discount}} off your next purchase :)",
+        "actionTitle": "Start Shopping",
+        "expiresOn": "Expires On",
+        "primaryColor": "#1990FF",
+        "amount": 10,
+        "expiryPeriod": 1,
+        "emailLimit": false,
+        "couponType": 2,
+        "backgroundColor": "#f8f8f8",
+        "onePerUser": true,
+        "usageLimit": 1
+      }
+    }
+  ]
+}
+```
+
+Each module has a `position` and a `type`. The 0-based position indicates where in the Newsletter the module appears (starting from top) and the type defines the kind of content.
+
+The module's content is in the `context` key. This object and its keys depend on the module's type. These map directly to the content & settings in the Newsletter editor, so we recommend referencing that in case any values are unclear.
 
 ## List Newsletter Emails
 

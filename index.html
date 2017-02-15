@@ -50,16 +50,20 @@
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
-<p>Authentication with Conversio can be done through API key or OAuth. If you&rsquo;re a store owner or affiliated with a store who uses Conversio, your best (and fastest) bet is to use API Key authentication.</p>
+<p>Conversio provides three types of Authentication, each with its own use case. These are:</p>
 
-<p>OAuth is more complex and should be used by Partner Apps that want to authenticate with their user&rsquo;s accounts in Conversio. Use of API Key Authentication by other Apps on behalf of Conversio&rsquo;s users is discouraged.</p>
+<ol>
+<li><strong>API Key</strong>: For store owners or someone affiliated with a store owner (typically a developer). This is the fastest way to get access to a store&rsquo;s data and actions;</li>
+<li><strong>OAuth</strong>: For Partner Apps that wish to authenticate with their users&#39; accounts in Conversio. This gives access to Conversio on behalf of one or more users.</li>
+<li><strong>HMAC</strong>: For Partner Apps only. Used for accessing the Partner App API.</li>
+</ol>
 <h2 id='api-key-authentication'>API Key Authentication</h2>
 <p>All paths should prefixed with https://app.conversio.com/api/v1 and will need the following HTTP header:</p>
 
 <p><code class="prettyprint">X-ApiKey: YOUR_API_KEY</code></p>
 
 <p><aside class="notice">
-Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.com/profile">profile page</a>.
+Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.com/profile">profile page</a>.
 </aside></p>
 <h2 id='oauth'>OAuth</h2>
 <p>Conversio implements the Authorization Code Grant of the <a href="https://tools.ietf.org/html/rfc6749">OAuth v2.0</a> standard, with <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Tokens</a> (Proof of Possession).</p>
@@ -372,6 +376,35 @@ Your API Key can be found in your store&rsquo;s <a href="https://app.conversio.c
 <li><code class="prettyprint">read_newsletter_email</code>: Provides access to the list of emails associated with a sent Newsletter Template. Includes action timestamps (sentAt, openedAt, etc.) and email address info.</li>
 <li><code class="prettyprint">read_async_job</code>: Provides access to Async Jobs, their statuses and results.</li>
 </ul>
+<h2 id='hmac'>HMAC</h2><pre><code class="highlight ruby"><span class="c1"># Ruby</span>
+<span class="nb">require</span> <span class="s1">'jwt'</span>
+
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s1">'partner-app-client-secret'</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">iss: </span><span class="s1">'57b5aa3b046abfb053d80b52'</span> <span class="p">}</span>
+
+<span class="n">pop_token</span> <span class="o">=</span> <span class="no">JWT</span><span class="p">.</span><span class="nf">encode</span> <span class="n">payload</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="s1">'HS256'</span>
+<span class="c1"># &gt; "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ"</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="c1">// Javascript</span>
+<span class="kr">const</span> <span class="nx">jws</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jws'</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">clientSecret</span> <span class="o">=</span> <span class="s1">'partner-app-client-secret'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">header</span> <span class="o">=</span> <span class="p">{</span> <span class="na">typ</span><span class="p">:</span> <span class="s1">'JWT'</span><span class="p">,</span> <span class="na">alg</span><span class="p">:</span> <span class="s1">'HS256'</span> <span class="p">};</span>
+<span class="kr">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="na">iss</span><span class="p">:</span> <span class="s1">'57b5aa3b046abfb053d80b52'</span> <span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">popToken</span> <span class="o">=</span> <span class="nx">jws</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="na">secret</span><span class="p">:</span> <span class="nx">clientSecret</span> <span class="p">});</span>
+<span class="c1">// &gt; 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ'</span>
+</code></pre>
+<pre><code class="highlight shell"><span class="c"># Example authorized request</span>
+<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
+</span></code></pre>
+
+<p>This authentication type is used exclusively when accessing the <a href="#partner-apps-api">Partner Apps API</a> because it authenticates a Partner only, not a User. It is used on signed JSON Web Tokens with a JSON Web Signature.</p>
+
+<p>The token must have an <code class="prettyprint">iss</code> entry set to the Partner App&rsquo;s ID. Then, it must be signed with the Client Secret and added to the Authorization header of each request, using the <code class="prettyprint">Bearer</code> schema.</p>
+
+<p>All requests to the Partner Apps API must be authorized this way.</p>
 
           <h1 id='receipts'>Receipts</h1>
 <p>Services related to sending using the <strong>Receipts API</strong></p>
@@ -4338,6 +4371,74 @@ Response 204
 <tr>
 <td style="text-align: right"></td>
 <td>The ID of the Partner App that created this Async Job. Included only when authorization is made with the API key.</td>
+</tr>
+</tbody></table>
+
+          <h1 id='partner-apps-api'>Partner Apps API</h1>
+<p>This API comprises of management endpoints for Partner Apps. Because they&rsquo;re unrelated to any Store, authentication is done through <a href="#hmac">HMAC</a>.</p>
+<h2 id='get-partner-app'>Get Partner App</h2>
+<p>Returns the saved info for the authenticated Partner App</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Epic Forms"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello@epicforms.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://epicforms.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-current-partner-app-get'>Show Current Partner App [GET]</h3>
+<p><aside class="success">
+  Response 200
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Returns JSON with a <code class="prettyprint">data</code> key which contains the info for the authenticated Partner App:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s ID. This is also the <code class="prettyprint">client_id</code> used in OAuth.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>name:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The name of this Partner App.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>email:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The contact email for this Partner App.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>website:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s homepage.</td>
 </tr>
 </tbody></table>
 

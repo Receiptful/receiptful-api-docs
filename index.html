@@ -2464,7 +2464,8 @@ Response 204
       </span><span class="s2">"uniqueOpens"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
       </span><span class="s2">"clicks"</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w">
       </span><span class="s2">"recipientCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">515</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"contentModules"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2535,7 +2536,7 @@ Response 204
 <td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.</td>
 </tr>
 <tr>
-<td style="text-align: right"><strong>status</strong></td>
+<td style="text-align: right"><strong>status:</strong></td>
 <td><strong>string</strong></td>
 </tr>
 <tr>
@@ -2543,7 +2544,7 @@ Response 204
 <td>The Newsletter&rsquo;s current status. Must be one of &ldquo;draft&rdquo;, &ldquo;scheduled&rdquo;, &ldquo;live&rdquo;, or &ldquo;sent&rdquo;.</td>
 </tr>
 <tr>
-<td style="text-align: right"><strong>sentAt</strong></td>
+<td style="text-align: right"><strong>sentAt:</strong></td>
 <td><strong>string, optional</strong></td>
 </tr>
 <tr>
@@ -2551,12 +2552,20 @@ Response 204
 <td>When the Newsletter was fully sent, if such is the case. Is an <strong>ISO 8601</strong> encoded date.</td>
 </tr>
 <tr>
-<td style="text-align: right"><strong>stats</strong></td>
+<td style="text-align: right"><strong>stats:</strong></td>
 <td><strong>object</strong></td>
 </tr>
 <tr>
 <td style="text-align: right"></td>
 <td>An object with this Newsletter&rsquo;s stats. Included keys are described below.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>contentModules:</strong></td>
+<td><strong>array</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of the Content Modules in a Newsletter. These represent the content (copy, images, discounts, etc.) in a Newsletter. More details below.</td>
 </tr>
 </tbody></table>
 <h4 id='stats'>Stats</h4>
@@ -2609,6 +2618,49 @@ Response 204
 <td>How many recipients was this Newsletter sent to. May differ from <code class="prettyprint">sends</code> if there are sending errors.</td>
 </tr>
 </tbody></table>
+<h4 id='content-modules'>Content Modules</h4><pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"contentModules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Friday Sale!"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.epic-store.com/black-friday-img.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.epic-store.com/sale"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"alignment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"center"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"discountCoupon"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Extra Black Friday Discount"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{firstName}}, these are the last few hours of our Black Friday sale! As an extra incentive, this is a coupon for extra {{discount}} off your next purchase :)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"actionTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Start Shopping"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiresOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expires On"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"primaryColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1990FF"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryPeriod"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"emailLimit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"couponType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"backgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#f8f8f8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"onePerUser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"usageLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Each module has a <code class="prettyprint">position</code> and a <code class="prettyprint">type</code>. The 0-based position indicates where in the Newsletter the module appears (starting from top) and the type defines the kind of content.</p>
+
+<p>The module&rsquo;s content is in the <code class="prettyprint">context</code> key. This object and its keys depend on the module&rsquo;s type. These map directly to the content &amp; settings in the Newsletter editor, so we recommend referencing that in case any values are unclear.</p>
 <h2 id='list-newsletter-emails'>List Newsletter Emails</h2>
 <p>A paginated list of all the emails sent for a Newsletter. Will be empty if Newsletter has not been sent yet. Emails are returned sorted by email address, and pagination is done by providing the email address from which to return results.</p>
 

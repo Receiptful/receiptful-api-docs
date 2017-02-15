@@ -8,7 +8,7 @@ Returns all the Newsletters created in a shop.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters" \
+$ curl "https://app.conversio.com/api/v1/newsletters?limit=2&page=2" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -37,7 +37,15 @@ $ curl "https://app.conversio.com/api/v1/newsletters" \
       ],
       "status": "scheduled"
     }
-  ]
+  ],
+  "meta": {
+    "page": 2,
+    "pages": 3,
+    "total": 5,
+    "limit": 2,
+    "prevPage": "https://app.conversio.com/api/v1/newsletters?page=1&limit=2",
+    "nextPage": "https://app.conversio.com/api/v1/newsletters?page=3&limit=2"
+  }
 }
 ```
 
@@ -47,13 +55,24 @@ $ curl "https://app.conversio.com/api/v1/newsletters" \
 
 _OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
+### Query Parameters
+
+|Argument   |Details             |
+|----------:|--------------------|
+|**limit:** |**number, optional**|
+|           |How many Newsletters to return. Default is 10.
+|**page:**  |**number, optional**|
+|           |Which page of Newsletters to return. Default is 1.|
+|**status:**|**string, optional**|
+|           |Filters the Newsletters by status. Can be `sent`, `scheduled`, `live` or `draft`.|
+
 <aside class="success">
   Response 200
 </aside>
 
 ### Response Body
 
-Then endpoint returns an object with a `data` key that is an Array with all the newsletters in the shop.
+Then endpoint returns an object with a `data` key that is an Array with `limit` newsletters in the shop. The Newsletters are sorted by `sentAt` descending, `liveAt` ascending and `createdAt` descending. It also returns a `meta` key with paging info.
 
 Each newsletter object includes the following info:
 

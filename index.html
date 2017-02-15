@@ -2331,7 +2331,7 @@ Response 204
 <h2 id='list-newsletters'>List Newsletters</h2>
 <p>Returns all the Newsletters created in a shop.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters?limit=2&amp;page=2"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -2360,19 +2360,59 @@ Response 204
       </span><span class="p">],</span><span class="w">
       </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prevPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters?page=1&amp;limit=2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters?page=3&amp;limit=2"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-newsletters-get'>List all Newsletters [GET]</h3>
 <p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_template, write_newsletter_template</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Argument</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>limit:</strong></td>
+<td><strong>number, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many Newsletters to return. Default is 10.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>page:</strong></td>
+<td><strong>number, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Which page of Newsletters to return. Default is 1.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Filters the Newsletters by status. Can be <code class="prettyprint">sent</code>, <code class="prettyprint">scheduled</code>, <code class="prettyprint">live</code> or <code class="prettyprint">draft</code>.</td>
+</tr>
+</tbody></table>
 
 <p><aside class="success">
   Response 200
 </aside></p>
 <h3 id='response-body'>Response Body</h3>
-<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with all the newsletters in the shop.</p>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with <code class="prettyprint">limit</code> newsletters in the shop. The Newsletters are sorted by <code class="prettyprint">sentAt</code> descending, <code class="prettyprint">liveAt</code> ascending and <code class="prettyprint">createdAt</code> descending. It also returns a <code class="prettyprint">meta</code> key with paging info.</p>
 
 <p>Each newsletter object includes the following info:</p>
 

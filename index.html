@@ -1772,7 +1772,7 @@ Response 204 (application/json)
 </aside></p>
 
           <h1 id='abandoned-carts'>Abandoned Carts</h1>
-<p>Services related to managing <strong>Abandoned Carts</strong>.</p>
+<p>Services related to managing <strong>Abandoned Carts</strong>. For the Email Campaigns triggered by Abandoned Carts, go to <a href="#abandoned-cart-emails">the next section</a>.</p>
 <h2 id='create'>Create</h2><pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
@@ -1945,6 +1945,312 @@ DELETE https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d
 <p><aside class="success">
 Response 204 (application/json)
 </aside></p>
+
+          <h1 id='abandoned-cart-emails'>Abandoned Cart Emails</h1>
+<p>Endpoints for viewing data of emails triggered by abandoned carts, and their customer interaction stats. For the Abandoned Carts themselves, go to <a href="#abandoned-carts">the previous section</a>.</p>
+<h2 id='view-abandoned-cart-template'>View Abandoned Cart Template</h2>
+<p>Returns an Abandoned Cart Template. This contains the basis for the content of each of its emails, as well as the trigger delay for an email to be sent.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">"
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b68"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"campaignId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d89b69"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You forgot some goodies!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First Abandoned Cart Email"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rule"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"periodHours"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contentModules"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-abandoned-cart-template-get'>Show Abandoned Cart Template [GET]</h3>
+<p>Two possible endpoints:</p>
+
+<ol>
+<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}</code></li>
+<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}</code></li>
+</ol>
+
+<p><em>OAuth Scopes</em>: read_abandoned_cart_template, write_abandoned_cart_template</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Email not found. One of the following happened:
+  <ul>
+    <li>The given TEMPLATE_ID does not belong to an existing template, if provided</li>
+    <li>The given CAMPAIGN_ID does not belong to an existing email, if provided</li>
+    <li>The requested template belongs to another shop than authenticated</li>
+    <li>The requested template belongs to another campaign than indicated</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which contains an object representation of the requested abandoned cart template:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>campaignId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this template&quot;s Campaign.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subject:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The subject used in the emails triggered by this template. May have user variables (e.g.: {firstName}).</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The template&quot;s title, not customer-facing.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>rule:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Rule for triggering an email from this template. Currently only &ldquo;delay&rdquo; is supported, which is a delay from a cart being abandoned.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>period:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many days must pass after the cart is abandoned to trigger an email from this template. Accumulates with <code class="prettyprint">periodHours</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>periodHours:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many hours must pass after the cart is abandoned to trigger an email from this template. Accumulates with <code class="prettyprint">period</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>contentModules:</strong></td>
+<td><strong>array</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of the Content Modules in a template. These represent the content (copy, images, discounts, etc.) in a template. More details below.</td>
+</tr>
+</tbody></table>
+<h4 id='content-modules'>Content Modules</h4><pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"contentModules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You left all of this stuff behind!"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abandonedCart"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quantity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unitPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unit Price"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalOrder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"buttonColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1990FF"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"primaryColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1990FF"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secondaryColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#0076E4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mainBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#f8f8f8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"actionTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get All My Stuff!"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"discountCoupon"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You Stuff, At a Discount!"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{firstName}}, there"</span><span class="err">s</span><span class="w"> </span><span class="err">no</span><span class="w"> </span><span class="err">way</span><span class="w"> </span><span class="err">you</span><span class="s2">"re leaving all that stuff in the cart. Grab this discount and check-out now!"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"actionTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Start Shopping"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiresOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expires On"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"primaryColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1990FF"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryPeriod"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"emailLimit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"couponType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"backgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#f8f8f8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"onePerUser"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"usageLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Each module has a <code class="prettyprint">position</code> and a <code class="prettyprint">type</code>. The 0-based position indicates where in the email the module appears (starting from top) and the type defines the kind of content.</p>
+
+<p>The module&quot;s content is in the <code class="prettyprint">context</code> key. This object and its keys depend on the module&quot;s type. These map directly to the content &amp; settings in the Template editor, so we recommend referencing that in case any values are unclear.</p>
+<h2 id='view-abandoned-cart-email'>View Abandoned Cart Email</h2>
+<p>Returns an Abandoned Cart Email, along with its action timestamps.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">"
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b68"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"templateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d89b69"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"abandonedCartId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abf1253d89b33"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a@customer.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deliveredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:15.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"openedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"clickedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T01:01:10.000Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-abandoned-cart-email-get'>Show Abandoned Cart Email [GET]</h3>
+<p>Three possible endpoints:</p>
+
+<ol>
+<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/emails/{EMAIL_ID}</code></li>
+<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
+<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
+</ol>
+
+<p><em>OAuth Scopes</em>: read_abandoned_cart_email, write_abandoned_cart_email</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Email not found. One of the following happened:
+  <ul>
+    <li>The given EMAIL_ID does not belong to an existing email</li>
+    <li>The given TEMPLATE_ID does not belong to an existing template, if provided</li>
+    <li>The given CAMPAIGN_ID does not belong to an existing campaign, if provided</li>
+    <li>The requested email belongs to another shop than authenticated</li>
+    <li>The requested email belongs to another template than indicated</li>
+    <li>The requested email belongs to another campaign than indicated</li>
+    <li>The requested email&rsquo;s template belongs to another campaign than indicated</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which contains an object representation of the requested abandoned cart email:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>templateId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for this email&rsquo;s template.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>abandonedCartId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for the cart that triggered this email.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>to:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address to which this email was sent.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email&rsquo;s status. One of &ldquo;created&rdquo;, &ldquo;rendered&rdquo;, &ldquo;rejected&rdquo; or &ldquo;sent&rdquo;.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>sentAt:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was sent. <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>deliveredAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was delivered. <strong>ISO 8601</strong> encoded date. Can be missing if not delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>openedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last opened. <strong>ISO 8601</strong> encoded date. Can be missing if never delivered.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>clickedAt:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>When this email was last clicked. <strong>ISO 8601</strong> encoded date. Can be missing if no link was ever clicked.</td>
+</tr>
+</tbody></table>
 
           <h1 id='users'>Users</h1>
 <p>Services related to users using the <strong>Users API</strong>.</p>
@@ -2493,7 +2799,7 @@ Response 204
   </ul>
 </aside></p>
 <h3 id='response-body'>Response Body</h3>
-<p>The response body includes a <code class="prettyprint">data</code> key which contains an object representation of the requested newsletter emails. The <code class="prettyprint">rendered</code> key is included with the email&rsquo;s contents:</p>
+<p>The response body includes a <code class="prettyprint">data</code> key which contains an object representation of the requested newsletter email. The <code class="prettyprint">rendered</code> key is included with the email&rsquo;s contents:</p>
 
 <table><thead>
 <tr>

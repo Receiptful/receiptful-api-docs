@@ -9,11 +9,13 @@ Services related to managing **Abandoned Carts**. For the Email Campaigns trigge
 $ curl "https://app.conversio.com/api/v1/abandoned-carts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
   -X POST \
   -d '{
        "token":"sometoken",
        "customer":"some@customer.com",
        "currency":"USD",
+       "amount":"39.99",
        "items":[
           {
              "reference":"rct",
@@ -47,6 +49,8 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts" \
 |              |Email address of the customer to whom the cart belongs|
 |**currency:** | **string, required**                                 |
 |              |ISO 4217 currency code                                |
+|**amount:**   | **number, required**                                 |
+|              |The total amount for the cart                         |
 |**items:**    | **[object], required, _see below_**                  |
 |              |The items inside the cart.                            |
 
@@ -60,7 +64,7 @@ The items inside the cart. Object contents:
 |**variant:**     |**string, optional**       |*c_123_2*                       |
 |**description:** |**string, required**       |*Conversio Hobby Plan*         |
 |**quantity:**    |**number, optional**       |*1*                             |
-|**amount:**      |**number, optional**       |*29.00*                         |
+|**amount:**      |**number, required**       |*29.00*                         |
 |                 |A single item's price.     |                                |
 |**attributes:**  |**[object], optional**     |*[{ key: "foo", value: "bar" }]*|
 |                 |Item attributes. See below.|                                |

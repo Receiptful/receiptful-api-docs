@@ -1991,11 +1991,161 @@ Response 204 (application/json)
 
           <h1 id='abandoned-cart-emails'>Abandoned Cart Emails</h1>
 <p>Endpoints for viewing data of emails triggered by abandoned carts, and their customer interaction stats. For the Abandoned Carts themselves, go to <a href="#abandoned-carts">the previous section</a>.</p>
+<h2 id='list-abandoned-cart-campaigns'>List Abandoned Cart Campaigns</h2>
+<p>Returns a list of the Abandoned Cart Campaigns in the User&rsquo;s account.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/campaigns </span><span class="se">\</span><span class="s2">
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
+  -H "</span>Accept: application/json<span class="s2">"
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Campaign for Potential Customers"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"customerSegmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entice Existing Customers"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-campaigns-get'>List all Campaigns [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_campaign, write_newsletter_campaign</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is an Array with all the campaigns in the shop.</p>
+
+<p>Each Campaign object includes the following info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Campaigns&rsquo;s ID. Use it when calling single-campaign endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Campaign&rsquo;s title, set by the User.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegmentId:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Campaign&rsquo;s Customer Segment, if one was selected.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>enabled</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether the Campaign is enabled, i.e. sending emails to customers.</td>
+</tr>
+</tbody></table>
+<h2 id='view-abandoned-cart-campaign'>View Abandoned Cart Campaign</h2>
+<p>Returns an Abandoned Cart Campaign in the User&rsquo;s account.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
+  -H "</span>Accept: application/json<span class="s2">"
+</span></code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Campaign for Potential Customers"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerSegmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='show-single-campaign-get'>Show Single Campaign [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_newsletter_campaign, write_newsletter_campaign</p>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>Then endpoint returns an object with a <code class="prettyprint">data</code> key that is the Campaign for the ID. The Campaign has the following info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Campaigns&rsquo;s ID. Use it when calling single-campaign endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Campaign&rsquo;s title, set by the User.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegmentId:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID of the Campaign&rsquo;s Customer Segment, if one was selected.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>enabled</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether the Campaign is enabled, i.e. sending emails to customers.</td>
+</tr>
+</tbody></table>
 <h2 id='view-abandoned-cart-template'>View Abandoned Cart Template</h2>
 <p>Returns an Abandoned Cart Template. This contains the basis for the content of each of its emails, as well as the trigger delay for an email to be sent.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
-  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">"
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
+  -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
 
 <blockquote>
@@ -2165,7 +2315,8 @@ Response 204 (application/json)
 <p>Returns an Abandoned Cart Email, along with its action timestamps.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
-  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">"
+  -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
+  -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
 
 <blockquote>
@@ -2342,7 +2493,8 @@ Response 204
 <p>Returns all the Newsletters created in a shop.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters?limit=2&amp;page=2"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
 
 <blockquote>
@@ -2493,7 +2645,8 @@ Response 204
 <p>Returns the selected Newsletter and some stats regarding its sending status.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
 
 <blockquote>
@@ -2717,7 +2870,8 @@ Response 204
 <p>Note that if the Newsletter is currently live and sending, paginating results will not guarantee that all emails are returned. Wait for the &ldquo;sent&rdquo; status if an exhaustive list is required.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
 
 <blockquote>
@@ -2893,7 +3047,8 @@ Response 204
 <p>Returns a Newsletter&rsquo;s email, along with its text &amp; HTML contents.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68"</span> <span class="se">\</span>
-  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
 
 <blockquote>
@@ -3007,6 +3162,7 @@ Response 204
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X POST
 </code></pre>
 
@@ -3080,6 +3236,7 @@ Response 204
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X POST
 </code></pre>
 

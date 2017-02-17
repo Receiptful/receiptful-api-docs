@@ -2,6 +2,113 @@
 
 Endpoints for viewing data of emails triggered by abandoned carts, and their customer interaction stats. For the Abandoned Carts themselves, go to [the previous section](#abandoned-carts).
 
+## List Abandoned Cart Campaigns
+
+Returns a list of the Abandoned Cart Campaigns in the User's account.
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Accept: application/json"
+```
+
+> EXAMPLE RESPONSE
+
+```json
+{
+  "data": [
+    {
+      "id": "57b5aa3b046abfb053d80b52",
+      "title": "Campaign for Potential Customers",
+      "customerSegmentId": "57b5aa3b046abfb053d80b59",
+      "enabled": true
+    },
+    {
+      "id": "57b5aa3b046abfb053d80b59",
+      "title": "Entice Existing Customers",
+      "enabled": true
+    }
+  ]
+}
+```
+
+### List all Campaigns [GET]
+
+`https://app.conversio.com/api/v1/abandoned-carts/campaigns`
+
+_OAuth Scopes_: read_newsletter_campaign, write_newsletter_campaign
+
+<aside class="success">
+  Response 200
+</aside>
+
+### Response Body
+
+Then endpoint returns an object with a `data` key that is an Array with all the campaigns in the shop.
+
+Each Campaign object includes the following info:
+
+|Key                   |Details|
+|---------------------:|-----------|
+|**id:**               |**string**|
+|                      |The Campaigns's ID. Use it when calling single-campaign endpoints.|
+|**title:**            |**string**|
+|                      |The Campaign's title, set by the User.|
+|**customerSegmentId:**|**string, optional**|
+|                      |The ID of the Campaign's Customer Segment, if one was selected.|
+|**enabled**           |**boolean**|
+|                      |Whether the Campaign is enabled, i.e. sending emails to customers.|
+
+## View Abandoned Cart Campaign
+
+Returns an Abandoned Cart Campaign in the User's account.
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 \
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Accept: application/json"
+```
+
+> EXAMPLE RESPONSE
+
+```json
+{
+  "data": {
+    "id": "57b5aa3b046abfb053d80b52",
+    "title": "Campaign for Potential Customers",
+    "customerSegmentId": "57b5aa3b046abfb053d80b59",
+    "enabled": true
+  }
+}
+```
+
+### Show Single Campaign [GET]
+
+`https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}`
+
+_OAuth Scopes_: read_newsletter_campaign, write_newsletter_campaign
+
+<aside class="success">
+  Response 200
+</aside>
+
+### Response Body
+
+Then endpoint returns an object with a `data` key that is the Campaign for the ID. The Campaign has the following info:
+
+|Key                   |Details|
+|---------------------:|-----------|
+|**id:**               |**string**|
+|                      |The Campaigns's ID. Use it when calling single-campaign endpoints.|
+|**title:**            |**string**|
+|                      |The Campaign's title, set by the User.|
+|**customerSegmentId:**|**string, optional**|
+|                      |The ID of the Campaign's Customer Segment, if one was selected.|
+|**enabled**           |**boolean**|
+|                      |Whether the Campaign is enabled, i.e. sending emails to customers.|
+
 ## View Abandoned Cart Template
 
 Returns an Abandoned Cart Template. This contains the basis for the content of each of its emails, as well as the trigger delay for an email to be sent.
@@ -9,7 +116,8 @@ Returns an Abandoned Cart Template. This contains the basis for the content of e
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 \
-  -H "X-ApiKey: YOUR_API_KEY"
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Accept: application/json"
 ```
 
 > EXAMPLE RESPONSE
@@ -136,7 +244,8 @@ Returns an Abandoned Cart Email, along with its action timestamps.
 ```shell
 # EXAMPLE REQUEST
 $ curl "https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 \
-  -H "X-ApiKey: YOUR_API_KEY"
+  -H "X-ApiKey: YOUR_API_KEY" \
+  -H "Accept: application/json"
 ```
 
 > EXAMPLE RESPONSE

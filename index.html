@@ -1810,11 +1810,13 @@ Response 204 (application/json)
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -d <span class="s1">'{
        "token":"sometoken",
        "customer":"some@customer.com",
        "currency":"USD",
+       "amount":"39.99",
        "items":[
           {
              "reference":"rct",
@@ -1867,6 +1869,14 @@ Response 204 (application/json)
 <td>ISO 4217 currency code</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>amount:</strong></td>
+<td><strong>number, required</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The total amount for the cart</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>items:</strong></td>
 <td><strong>[object], required, <em>see below</em></strong></td>
 </tr>
@@ -1907,7 +1917,7 @@ Response 204 (application/json)
 </tr>
 <tr>
 <td style="text-align: right"><strong>amount:</strong></td>
-<td><strong>number, optional</strong></td>
+<td><strong>number, required</strong></td>
 <td><em>29.00</em></td>
 </tr>
 <tr>

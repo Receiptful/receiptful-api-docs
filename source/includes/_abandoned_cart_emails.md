@@ -22,12 +22,19 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns \
       "id": "57b5aa3b046abfb053d80b52",
       "title": "Campaign for Potential Customers",
       "customerSegmentId": "57b5aa3b046abfb053d80b59",
-      "enabled": true
+      "enabled": true,
+      "abandonedCartTemplates": [
+        { "id": "57b5aa3b046abfb053d76b79" }
+      ]
     },
     {
       "id": "57b5aa3b046abfb053d80b59",
       "title": "Entice Existing Customers",
-      "enabled": true
+      "enabled": true,
+      "abandonedCartTemplates": [
+        { "id": "57b5aa3b046abfb053d76b81" },
+        { "id": "57b5aa3b046abfb053d76b56" }
+      ]
     }
   ]
 }
@@ -49,16 +56,18 @@ Then endpoint returns an object with a `data` key that is an Array with all the 
 
 Each Campaign object includes the following info:
 
-|Key                   |Details|
-|---------------------:|-----------|
-|**id:**               |**string**|
-|                      |The Campaigns's ID. Use it when calling single-campaign endpoints.|
-|**title:**            |**string**|
-|                      |The Campaign's title, set by the User.|
-|**customerSegmentId:**|**string, optional**|
-|                      |The ID of the Campaign's Customer Segment, if one was selected.|
-|**enabled**           |**boolean**|
-|                      |Whether the Campaign is enabled, i.e. sending emails to customers.|
+|Key                        |Details|
+|--------------------------:|-----------|
+|**id:**                    |**string**|
+|                           |The Campaigns's ID. Use it when calling single-campaign endpoints.|
+|**title:**                 |**string**|
+|                           |The Campaign's title, set by the User.|
+|**customerSegmentId:**     |**string, optional**|
+|                           |The ID of the Campaign's Customer Segment, if one was selected.|
+|**enabled**                |**boolean**|
+|                           |Whether the Campaign is enabled, i.e. sending emails to customers.|
+|**abandonedCartTemplates:**|**array[object]**|
+|                           |A collection of all the Abandoned Cart Templates that belong to the campaign. Includes only the IDs of the templates.
 
 ## View Abandoned Cart Campaign
 
@@ -79,7 +88,11 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046ab
     "id": "57b5aa3b046abfb053d80b52",
     "title": "Campaign for Potential Customers",
     "customerSegmentId": "57b5aa3b046abfb053d80b59",
-    "enabled": true
+    "enabled": true,
+    "abandonedCartTemplates": [
+      { "id": "57b5aa3b046abfb053d76b81" },
+      { "id": "57b5aa3b046abfb053d76b56" }
+    ]
   }
 }
 ```
@@ -98,16 +111,18 @@ _OAuth Scopes_: read_abandoned_cart_campaign, write_abandoned_cart_campaign
 
 Then endpoint returns an object with a `data` key that is the Campaign for the ID. The Campaign has the following info:
 
-|Key                   |Details|
-|---------------------:|-----------|
-|**id:**               |**string**|
-|                      |The Campaigns's ID. Use it when calling single-campaign endpoints.|
-|**title:**            |**string**|
-|                      |The Campaign's title, set by the User.|
-|**customerSegmentId:**|**string, optional**|
-|                      |The ID of the Campaign's Customer Segment, if one was selected.|
-|**enabled**           |**boolean**|
-|                      |Whether the Campaign is enabled, i.e. sending emails to customers.|
+|Key                        |Details|
+|--------------------------:|-----------|
+|**id:**                    |**string**|
+|                           |The Campaigns's ID. Use it when calling single-campaign endpoints.|
+|**title:**                 |**string**|
+|                           |The Campaign's title, set by the User.|
+|**customerSegmentId:**     |**string, optional**|
+|                           |The ID of the Campaign's Customer Segment, if one was selected.|
+|**enabled**                |**boolean**|
+|                           |Whether the Campaign is enabled, i.e. sending emails to customers.|
+|**abandonedCartTemplates:**|**array[object]**|
+|                           |A collection of all the Abandoned Cart Templates that belong to the campaign. Includes only the IDs of the templates.
 
 ## View Abandoned Cart Template
 

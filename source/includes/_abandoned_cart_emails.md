@@ -37,7 +37,7 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns \
 
 `https://app.conversio.com/api/v1/abandoned-carts/campaigns`
 
-_OAuth Scopes_: read_newsletter_campaign, write_newsletter_campaign
+_OAuth Scopes_: read_abandoned_cart_campaign, write_abandoned_cart_campaign
 
 <aside class="success">
   Response 200
@@ -88,7 +88,7 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046ab
 
 `https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}`
 
-_OAuth Scopes_: read_newsletter_campaign, write_newsletter_campaign
+_OAuth Scopes_: read_abandoned_cart_campaign, write_abandoned_cart_campaign
 
 <aside class="success">
   Response 200

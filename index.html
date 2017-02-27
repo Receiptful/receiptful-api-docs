@@ -4672,9 +4672,10 @@ Response 204
           <h1 id='partner-apps-api'>Partner Apps API</h1>
 <p>This API comprises of management endpoints for Partner Apps. Because they&rsquo;re unrelated to any Store, authentication is done through <a href="#hmac">HMAC</a>.</p>
 <h2 id='get-partner-app'>Get Partner App</h2>
-<p>Returns the saved info for the authenticated Partner App</p>
+<p>Returns the saved info for the authenticated Partner App.</p>
 <pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
 </span></code></pre>
 
@@ -4686,7 +4687,9 @@ Response 204
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Epic Forms"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello@epicforms.com"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://epicforms.com"</span><span class="w">
+    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://epicforms.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epicforms-logo.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"redirectUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://epicforms.com/oauth/auth"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -4735,7 +4738,110 @@ Response 204
 <td style="text-align: right"></td>
 <td>The Partner App&rsquo;s homepage.</td>
 </tr>
+<tr>
+<td style="text-align: right"><strong>logo:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s logo, used in the OAuth authorize page. Can be a URL or a data URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>redirectUri:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The redirect URI used during OAuth. This value <strong>must match</strong> the argument received in the authorize call.</td>
+</tr>
 </tbody></table>
+<h2 id='update-partner-app'>Update Partner App</h2>
+<p>Updates the saved info for the authenticated Partner App. Use this to update a logo or an OAuth redirect URI.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ"</span> <span class="se">\</span>
+  -X PATCH <span class="se">\</span>
+  -d <span class="s1">'{
+        "name": "A Great Name 2",
+        "email": "another_contact@partner.com",
+        "website": "www.rebranded.com",
+        "logo": "data:image/png;base64,iVBORw0...ggg==",
+        "redirectUri": "https://www.rebranded.com/oauth/auth"
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Great Name 2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"another_contact@partner.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.rebranded.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"redirectUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.rebranded.com/oauth/auth"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='update-partner-app-patch'>Update Partner App [PATCH]</h3>
+<p>Only the attributes that are present in the body will be updated. The logo must be a base64 encoded data URI.</p>
+<h3 id='updateable-attributes'>Updateable Attributes</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>name:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The name of this Partner App.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>email:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The contact email for this Partner App.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>website:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s homepage.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>logo:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Partner App&rsquo;s logo, used in the OAuth authorize page. Must be a data URI.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>redirectUri:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The redirect URI used during OAuth. This value <strong>must match</strong> the argument received in the authorize call.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200 - Partner App Updated
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - The Partner App data is invalid. Probably one of the fields is empty or null.
+</aside></p>
 
           <h1 id='errors'>Errors</h1>
 <p>The Conversio API uses the following error codes:</p>

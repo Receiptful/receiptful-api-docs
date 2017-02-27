@@ -2008,12 +2008,19 @@ Response 204 (application/json)
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Campaign for Potential Customers"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customerSegmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"abandonedCartTemplates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d76b79"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Entice Existing Customers"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"abandonedCartTemplates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d76b81"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d76b56"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2021,7 +2028,7 @@ Response 204 (application/json)
 <h3 id='list-all-campaigns-get'>List all Campaigns [GET]</h3>
 <p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns</code></p>
 
-<p><em>OAuth Scopes</em>: read_newsletter_campaign, write_newsletter_campaign</p>
+<p><em>OAuth Scopes</em>: read_abandoned_cart_campaign, write_abandoned_cart_campaign</p>
 
 <p><aside class="success">
   Response 200
@@ -2069,6 +2076,14 @@ Response 204 (application/json)
 <td style="text-align: right"></td>
 <td>Whether the Campaign is enabled, i.e. sending emails to customers.</td>
 </tr>
+<tr>
+<td style="text-align: right"><strong>abandonedCartTemplates:</strong></td>
+<td><strong>array[object]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A collection of all the Abandoned Cart Templates that belong to the campaign. Includes only the IDs of the templates.</td>
+</tr>
 </tbody></table>
 <h2 id='view-abandoned-cart-campaign'>View Abandoned Cart Campaign</h2>
 <p>Returns an Abandoned Cart Campaign in the User&rsquo;s account.</p>
@@ -2086,14 +2101,18 @@ Response 204 (application/json)
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Campaign for Potential Customers"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customerSegmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"abandonedCartTemplates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d76b81"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d76b56"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='show-single-campaign-get'>Show Single Campaign [GET]</h3>
 <p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}</code></p>
 
-<p><em>OAuth Scopes</em>: read_newsletter_campaign, write_newsletter_campaign</p>
+<p><em>OAuth Scopes</em>: read_abandoned_cart_campaign, write_abandoned_cart_campaign</p>
 
 <p><aside class="success">
   Response 200
@@ -2138,6 +2157,14 @@ Response 204 (application/json)
 <tr>
 <td style="text-align: right"></td>
 <td>Whether the Campaign is enabled, i.e. sending emails to customers.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>abandonedCartTemplates:</strong></td>
+<td><strong>array[object]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A collection of all the Abandoned Cart Templates that belong to the campaign. Includes only the IDs of the templates.</td>
 </tr>
 </tbody></table>
 <h2 id='view-abandoned-cart-template'>View Abandoned Cart Template</h2>

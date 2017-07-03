@@ -13,6 +13,7 @@ includes:
   - receipts
   - coupons
   - products
+  - product_reviews
   - abandoned_carts
   - abandoned_cart_emails
   - users

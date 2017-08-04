@@ -17,11 +17,17 @@ $ curl "https://app.conversio.com/api/v1/customer-lists" \
 [
   {
     "id": "57b5aa3b046abfb053d80b52",
-    "title": "Weekly Newsletter Subscribers"
+    "title": "Weekly Newsletter Subscribers",
+    "subscribers": 3,
+    "pending": 2,
+    "unsubscribers": 1
   },
   {
     "id": "57b5aa3b046abfb053d80b53",
-    "title": "New Products Announcements"
+    "title": "New Products Announcements",
+    "subscribers": 3,
+    "pending": 2,
+    "unsubscribers": 1
   }
 ]
 ```
@@ -44,6 +50,12 @@ The endpoint returns an array with all the Customer Lists in the account. Object
 ||The Customer List ID. This is used whenever referencing this Customer List in other endpoints.|
 |**title:**|**string**|
 ||The title picked by the user for this List. Used in user-facing interfaces.|
+|**subscribers:**|**integer**|
+||The number of subscribers for this list.|
+|**pending:**|**integer**|
+||The number of pending subscribers for this list. A pending subscriber used an online form to sign up, but has not confirmed the subscription yet.|
+|**unsubscribers:**|**integer**|
+||The number of unsubscribers for this list.|
 
 ## Subscribe to List
 

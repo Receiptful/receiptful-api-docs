@@ -3620,6 +3620,7 @@ Response 204
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
   -d <span class="s1">'{
     "email": "an@email.com",
@@ -3684,6 +3685,10 @@ Response 204
 
 <p><aside class="success">
   Response 204
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - Invalid email address
 </aside></p>
 
           <h1 id='webhooks'>Webhooks</h1>

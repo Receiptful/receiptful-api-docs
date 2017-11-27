@@ -19,6 +19,7 @@ includes:
   - users
   - newsletters
   - customer_lists
+  - customer_segments
   - webhooks
   - async_jobs
   - partner_apps

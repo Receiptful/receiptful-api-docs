@@ -3691,6 +3691,83 @@ Response 204
   Response 400 - Invalid email address
 </aside></p>
 
+          <h1 id='customer-segments'>Customer Segments</h1>
+<p>Services related to managing <strong>Customer Segments</strong> and subscriptions.</p>
+<h2 id='export-segment-customers'>Export Segment Customers</h2>
+<p>Starts an Async Job to export a Segment&rsquo;s customers. Once completed, the job&rsquo;s result will point ot a CSV file with email addresses and subscription status.</p>
+
+<p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
+<pre><code class="highlight shell"><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/segments/57b5aa3b046abfb053d80b52/async-export"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b68"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"segments-export"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='create-export-job-post'>Create Export Job [POST]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/segments/{SEGMENT_ID}/async-export</code></p>
+
+<p><em>OAuth Scopes</em>: read_customers, read_segments</p>
+
+<p><aside class="success">
+  Response 201 - Job Created
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - Customer Segment not found. One of the following happened:
+  <ul>
+    <li>The given ID does not belong to an existing Customer Segment</li>
+    <li>The ID belongs to another shop&rsquo;s Customer Segment</li>
+    <li>The Customer Segment has been deleted</li>
+  </ul>
+</aside></p>
+<h3 id='response-body'>Response Body</h3>
+<p>The response body includes a <code class="prettyprint">data</code> key which reflects the created Async Job&rsquo;s info:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The ID for the created AsyncJob. Use this to identify this export.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>kind:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The kind of job created. Is always <code class="prettyprint">segments-export</code> on this endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The job&rsquo;s status. Always <code class="prettyprint">pending</code>.</td>
+</tr>
+</tbody></table>
+
           <h1 id='webhooks'>Webhooks</h1>
 <p>Endpoints for subscribing and configuring Webhooks triggered by events on your account.</p>
 

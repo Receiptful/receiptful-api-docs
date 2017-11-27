@@ -66,6 +66,7 @@ Subscribe an email address and optional user details to a specific customer list
 $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
   -X PUT \
   -d '{
     "email": "an@email.com",
@@ -99,4 +100,8 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 
 <aside class="success">
   Response 204
+</aside>
+
+<aside class="warning">
+  Response 400 - Invalid email address
 </aside>

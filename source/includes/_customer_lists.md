@@ -73,7 +73,8 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
     "name": "John Snow",
     "source": "Conversio",
     "sourceType": "SubscriptionForm",
-    "sourceId": "some-form-slug"
+    "sourceId": "some-form-slug",
+    "optInText": "Subscribe to receive new product updates"
   }'
 ```
 
@@ -85,18 +86,20 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 
 ### Arguments
 
-|Argument|Details|
-|-------:|-----------|
-|**email:**|**string**|
-||The email address to subscribe to this Customer List. Must be a valid email address.|
-|**name:**|**string, optional**|
-||The email address owner's name. Expects first or first and last name.|
-|**source:**|**string, optional**|
-||Where this subscription came from. Should be an App or company name.|
-|**sourceType:**|**string, optional**|
-||What type of control did the user interact for subscribing. Could be a form type, page, etc.|
-|**sourceId:**|**string, optional**|
-||A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.|
+|Argument       |Details                                                                                              |
+|--------------:|-----------------------------------------------------------------------------------------------------|
+|**email:**     |**string**                                                                                           |
+|               |The email address to subscribe to this Customer List. Must be a valid email address.                 |
+|**name:**      |**string, optional**                                                                                 |
+|               |The email address owner's name. Expects first or first and last name.                                |
+|**source:**    |**string, optional**                                                                                 |
+|               |Where this subscription came from. Should be an App or company name.                                 |
+|**sourceType:**|**string, optional**                                                                                 |
+|               |What type of control did the user interact for subscribing. Could be a form type, page, etc.         |
+|**sourceId:**  |**string, optional**                                                                                 |
+|               |A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.|
+|**optInText:** |**string, optional**                                                                                 |
+|               |What opt-in text was shown to the subscriber. This is required for GDPR compliance.                  |
 
 <aside class="success">
   Response 204

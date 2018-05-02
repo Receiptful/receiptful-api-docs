@@ -3627,7 +3627,8 @@ Response 204
     "name": "John Snow",
     "source": "Conversio",
     "sourceType": "SubscriptionForm",
-    "sourceId": "some-form-slug"
+    "sourceId": "some-form-slug",
+    "optInText": "Subscribe to receive new product updates"
   }'</span>
 </code></pre>
 <h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
@@ -3680,6 +3681,14 @@ Response 204
 <tr>
 <td style="text-align: right"></td>
 <td>A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>optInText:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>What opt-in text was shown to the subscriber. This is required for GDPR compliance.</td>
 </tr>
 </tbody></table>
 

@@ -3659,6 +3659,14 @@ Response 204
 <td>The email address owner&rsquo;s name. Expects first or first and last name.</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>properties:</strong></td>
+<td><strong>object, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, see rules below.</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>source:</strong></td>
 <td><strong>string, optional</strong></td>
 </tr>
@@ -3691,6 +3699,22 @@ Response 204
 <td>What opt-in text was shown to the subscriber. This is required for GDPR compliance.</td>
 </tr>
 </tbody></table>
+<h4 id='properties'>Properties</h4>
+<p>Property keys can have at most 100 characters in length and must match the regex <code class="prettyprint">/^[a-zA-Z0-9-_]+$/</code>. A maximum of 20 different properties are allowed per account.</p>
+
+<p>The first time a property is tracked (uniqueness is ensured by key), Conversio tries to infer its type. The following rules apply:</p>
+
+<ul>
+<li>If value is <code class="prettyprint">null</code>, no type is inferenced.</li>
+<li>If a value can be cast to a number:
+
+<ul>
+<li>If it is a whole number and the key ends with &ldquo;_at&rdquo; or &ldquo;At&rdquo;, <code class="prettyprint">date</code> is inferred.</li>
+<li>otherwise, <code class="prettyprint">number</code> is inferred.</li>
+</ul></li>
+<li>If a value can be parsed as an iso8601 date, <code class="prettyprint">date</code> is inferred.</li>
+<li>Otherwise, <code class="prettyprint">string</code> is inferred.</li>
+</ul>
 
 <p><aside class="success">
   Response 204

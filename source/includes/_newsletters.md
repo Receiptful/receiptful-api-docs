@@ -19,24 +19,27 @@ $ curl "https://app.conversio.com/api/v1/newsletters?limit=2&page=2" \
 {
   "data": [
     {
+      "id": "57b5aa3b046abfb053d80b59",
+      "title": "4th of July Sales",
+      "liveAt": "2017-07-03:00:00.000Z",
+      "audience": {
+        "lists": ["marketing", "57b5aa3b046abfb053d80b52"],
+        "customerSegmentKind": "id",
+        "customerSegmentId": "57b5aa3b046abfb053d80b57",
+        "customerSegmentInline": { "criteria": [] }
+      },
+      "customerLists": [],
+      "customerSegments": [],
+      "status": "scheduled"
+    },
+    {
       "id": "57b5aa3b046abfb053d80b52",
       "title": "Black Friday Announcement",
       "liveAt": "2016-11-20T00:00:00.000Z",
       "customerLists": ["57b5aa3b046abfb053d80b53"],
-      "customerSegments": [],
+      "customerSegments": ["57b5aa3b046abfb053d80b57"],
       "status": "sent",
       "sentAt": "2016-11-20T00:10:15.000Z"
-    },
-    {
-      "id": "57b5aa3b046abfb053d80b59",
-      "title": "4th of July Sales",
-      "liveAt": "2017-07-03:00:00.000Z",
-      "customerLists": [],
-      "customerSegments": [
-        "57b5aa3b046abfb053d80b57",
-        "57b5aa3b046abfb053d80b56"
-      ],
-      "status": "scheduled"
     }
   ],
   "meta": {
@@ -77,22 +80,39 @@ Then endpoint returns an object with a `data` key that is an Array with `limit` 
 
 Each newsletter object includes the following info:
 
-|Key                  |Details|
-|--------------------:|-----------|
-|**id:**              |**string**|
-|                     |The Newsletter's ID. Use it when calling single-newsletter endpoints.|
-|**title:**           |**string**|
-|                     |The Newsletter's title.|
-|**liveAt:**          |**string, optional**|
-|                     |When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an **ISO 8601** encoded date. Is omitted if the Newsletter is a draft.|
-|**customerLists:**   |**array[string]**|
-|                     |An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.|
-|**customerSegments:**|**array[string]**|
-|                     |An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.|
-|**status**           |**string**|
-|                     |The Newsletter's current status. Must be one of "draft", "scheduled", "live", or "sent".|
-|**sentAt**           |**string, optional**|
-|                     |When the Newsletter was fully sent, if such is the case. Is an **ISO 8601** encoded date.|
+|Key                               |Details                                                  |
+|---------------------------------:|---------------------------------------------------------|
+|**id:**                           |**string**                                               |
+|                                  |The Newsletter's ID. Use it when calling single-newsletter endpoints.|
+|**title:**                        |**string**|
+|                                  |The Newsletter's title.|
+|**audience**                      |**object**|
+|                                  |The Newsletter's audience. Can be comprised of one or more lists, a segment ID or an inline segment. See <a href="#audience">below</a>.|
+|**liveAt:**                       |**string, optional**|
+|                                  |When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an **ISO 8601** encoded date. Is omitted if the Newsletter is a draft.|
+|**status**                        |**string**|
+|                                  |The Newsletter's current status. Must be one of "draft", "scheduled", "live", or "sent".|
+|**sentAt**                        |**string, optional**|
+|                                  |When the Newsletter was fully sent, if such is the case. Is an **ISO 8601** encoded date.|
+|**customerLists (deprecated):**   |**string[]**|
+|                                  |An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty. **Deprecated in favour of `audience`.**|
+|**customerSegments (deprecated):**|**string[]**|
+|                                  |An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty. **Deprecated in favour of `audience`.**|
+
+#### Audience
+
+The Newsletter's Audience. A Newsletter can be sent to one or more Customer Lists, with an optional segment that limits the Newsletter to a subset subscribers on those lists.
+
+|Key                               |Details                                                  |
+|---------------------------------:|---------------------------------------------------------|
+|**lists:**                        |**string[]**                                             |
+|                                  |List IDs. Can only be empty for "draft" Newsletters.     |
+|**customerSegmentKind:**          |**string, optional**                                     |
+|                                  |One of `"inline"`, `"id"` or `null`.                     |
+|**customerSegmentId:**            |**string, optional**                                     |
+|                                  |A Customer Segment's ID. Ignored unless `customerSegmentKind` is `"id"`.|
+|**customerSegmentInline:**        |**object, optional**                                     |
+|                                  |An inline Customer Segment. Ignored unless `customerSegmentKind` is `"inline"`. See <a href="#customer-segments">Customer Segments</a> for structure.|
 
 ## Newsletter Report
 
@@ -113,7 +133,18 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
     "id": "57b5aa3b046abfb053d80b52",
     "title": "Black Friday Announcement",
     "liveAt": "2016-11-20T00:00:00.000Z",
-    "customerLists": ["57b5aa3b046abfb053d80b53"],
+    "audience": {
+      "lists": ["everyone"],
+      "customerSegmentKind": "inline",
+      "customerSegmentInline": {
+        "criteria": [{
+          "criteriaName": "receipt.sent",
+          "negate": true,
+          "filters": []
+        }]
+      }
+    },
+    "customerLists": [],
     "customerSegments": [],
     "status": "sent",
     "sentAt": "2016-11-20T00:10:15.000Z",
@@ -152,26 +183,28 @@ _OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
 Then endpoint returns an object with a `data` key that the Newsletter object. The included info:
 
-|Key                  |Details|
-|--------------------:|-----------|
-|**id:**              |**string**|
-|                     |The Newsletter's ID. Use it when calling single-newsletter endpoints.|
-|**title:**           |**string**|
-|                     |The Newsletter's title.|
-|**liveAt:**          |**string, optional**|
-|                     |When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an **ISO 8601** encoded date. Is omitted if the Newsletter is a draft.|
-|**customerLists:**   |**array[string]**|
-|                     |An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.|
-|**customerSegments:**|**array[string]**|
-|                     |An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.|
-|**status:**          |**string**|
-|                     |The Newsletter's current status. Must be one of "draft", "scheduled", "live", or "sent".|
-|**sentAt:**          |**string, optional**|
-|                     |When the Newsletter was fully sent, if such is the case. Is an **ISO 8601** encoded date.|
-|**stats:**           |**object**|
-|                     |An object with this Newsletter's stats. Included keys are described below.|
-|**contentModules:**  |**array**|
-|                     |An array of the Content Modules in a Newsletter. These represent the content (copy, images, discounts, etc.) in a Newsletter. More details below.|
+|Key                               |Details                                                  |
+|---------------------------------:|---------------------------------------------------------|
+|**id:**                           |**string**                                               |
+|                                  |The Newsletter's ID. Use it when calling single-newsletter endpoints.|
+|**title:**                        |**string**                                               |
+|                                  |The Newsletter's title.                                  |
+|**audience**                      |**object**|
+|                                  |The Newsletter's audience. Can be comprised of one or more lists, a segment ID or an inline segment. See <a href="#audience">above</a>.|
+|**liveAt:**                       |**string, optional**                                     |
+|                                  |When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an **ISO 8601** encoded date. Is omitted if the Newsletter is a draft.|
+|**status:**                       |**string**|
+|                                  |The Newsletter's current status. Must be one of "draft", "scheduled", "live", or "sent".|
+|**sentAt:**                       |**string, optional**|
+|                                  |When the Newsletter was fully sent, if such is the case. Is an **ISO 8601** encoded date.|
+|**stats:**                        |**object**|
+|                                  |An object with this Newsletter's stats. Included keys are described below.|
+|**contentModules:**               |**array**|
+|                                  |An array of the Content Modules in a Newsletter. These represent the content (copy, images, discounts, etc.) in a Newsletter. More details below.|
+|**customerLists (deprecated):**   |**string[]**|
+|                                  |An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty. **Deprecated in favour of `audience`.**|
+|**customerSegments (deprecated):**|**string[]**|
+|                                  |An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty. **Deprecated in favour of `audience`.**|
 
 #### Stats
 

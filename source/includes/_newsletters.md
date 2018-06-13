@@ -101,7 +101,7 @@ Each newsletter object includes the following info:
 
 #### Audience
 
-The Newsletter's Audience. A Newsletter can be sent to one or more Customer Lists, with an optional segment that limits the Newsletter to a subset subscribers on those lists.
+The Newsletter's Audience. A Newsletter can be sent to one or more Customer Lists, with an optional segment that limits the Newsletter to a subset of subscribers on those lists.
 
 |Key                               |Details                                                  |
 |---------------------------------:|---------------------------------------------------------|

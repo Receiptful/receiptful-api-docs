@@ -244,6 +244,9 @@ Below is a table of the recognized scopes. Scopes that are prefixed with `write_
 * `read_newsletter_template`: Provides access to a User's Newsletter Templates. This includes contents and sending stats.
 * `read_newsletter_email`: Provides access to the list of emails associated with a sent Newsletter Template. Includes action timestamps (sentAt, openedAt, etc.) and email address info.
 * `read_async_job`: Provides access to Async Jobs, their statuses and results.
+* `read_segments`/`write_segments`: Access to <a href="#customer-segments">Customer Segments</a>.
+* `read_customers`/`write_customers`: Allows reading customer and subscriber data. Write scope allows unsubscribing emails from lists.
+* `read_customer_list`/`write_customer_list`: Provides access to customer lists.
 
 ## HMAC
 

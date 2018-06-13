@@ -92,6 +92,8 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 |               |The email address to subscribe to this Customer List. Must be a valid email address.                 |
 |**name:**      |**string, optional**                                                                                 |
 |               |The email address owner's name. Expects first or first and last name.                                |
+|**properties:**|**object, optional**                                                                                 |
+|               |Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, see rules below.|
 |**source:**    |**string, optional**                                                                                 |
 |               |Where this subscription came from. Should be an App or company name.                                 |
 |**sourceType:**|**string, optional**                                                                                 |
@@ -100,6 +102,19 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 |               |A more granular ID of where the user subscribed. Could be the ID/slug of a form or subscription page.|
 |**optInText:** |**string, optional**                                                                                 |
 |               |What opt-in text was shown to the subscriber. This is required for GDPR compliance.                  |
+
+#### Properties
+
+Property keys can have at most 100 characters in length and must match the regex `/^[a-zA-Z0-9-_]+$/`. A maximum of 20 different properties are allowed per account.
+
+The first time a property is tracked (uniqueness is ensured by key), Conversio tries to infer its type. The following rules apply:
+
+* If value is `null`, no type is inferenced.
+* If a value can be cast to a number:
+  * If it is a whole number and the key ends with "_at" or "At", `date` is inferred.
+  * otherwise, `number` is inferred.
+* If a value can be parsed as an iso8601 date, `date` is inferred.
+* Otherwise, `string` is inferred.
 
 <aside class="success">
   Response 204

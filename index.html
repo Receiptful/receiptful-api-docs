@@ -375,6 +375,9 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 <li><code class="prettyprint">read_newsletter_template</code>: Provides access to a User&rsquo;s Newsletter Templates. This includes contents and sending stats.</li>
 <li><code class="prettyprint">read_newsletter_email</code>: Provides access to the list of emails associated with a sent Newsletter Template. Includes action timestamps (sentAt, openedAt, etc.) and email address info.</li>
 <li><code class="prettyprint">read_async_job</code>: Provides access to Async Jobs, their statuses and results.</li>
+<li><code class="prettyprint">read_segments</code>/<code class="prettyprint">write_segments</code>: Access to <a href="#customer-segments">Customer Segments</a>.</li>
+<li><code class="prettyprint">read_customers</code>/<code class="prettyprint">write_customers</code>: Allows reading customer and subscriber data. Write scope allows unsubscribing emails from lists.</li>
+<li><code class="prettyprint">read_customer_list</code>/<code class="prettyprint">write_customer_list</code>: Provides access to customer lists.</li>
 </ul>
 <h2 id='hmac'>HMAC</h2><pre class="highlight ruby"><code><span class="c1"># Ruby</span>
 <span class="nb">require</span> <span class="s1">'jwt'</span>
@@ -2729,24 +2732,27 @@ Response 204
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4th of July Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-03:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"lists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"marketing"</span><span class="p">,</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"customerSegmentKind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"customerSegmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b57"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"customerSegmentInline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"criteria"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Friday Announcement"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">],</span><span class="w">
-      </span><span class="nt">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"57b5aa3b046abfb053d80b57"</span><span class="p">],</span><span class="w">
       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sent"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:10:15.000Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b59"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4th of July Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-03:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="nt">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"57b5aa3b046abfb053d80b57"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"57b5aa3b046abfb053d80b56"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2827,28 +2833,20 @@ Response 204
 <td>The Newsletter&rsquo;s title.</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>audience</strong></td>
+<td><strong>object</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s audience. Can be comprised of one or more lists, a segment ID or an inline segment. See <a href="#audience">below</a>.</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>liveAt:</strong></td>
 <td><strong>string, optional</strong></td>
 </tr>
 <tr>
 <td style="text-align: right"></td>
 <td>When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an <strong>ISO 8601</strong> encoded date. Is omitted if the Newsletter is a draft.</td>
-</tr>
-<tr>
-<td style="text-align: right"><strong>customerLists:</strong></td>
-<td><strong>array[string]</strong></td>
-</tr>
-<tr>
-<td style="text-align: right"></td>
-<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.</td>
-</tr>
-<tr>
-<td style="text-align: right"><strong>customerSegments:</strong></td>
-<td><strong>array[string]</strong></td>
-</tr>
-<tr>
-<td style="text-align: right"></td>
-<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.</td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>status</strong></td>
@@ -2865,6 +2863,64 @@ Response 204
 <tr>
 <td style="text-align: right"></td>
 <td>When the Newsletter was fully sent, if such is the case. Is an <strong>ISO 8601</strong> encoded date.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerLists (deprecated):</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty. <strong>Deprecated in favour of <code class="prettyprint">audience</code>.</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegments (deprecated):</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty. <strong>Deprecated in favour of <code class="prettyprint">audience</code>.</strong></td>
+</tr>
+</tbody></table>
+<h4 id='audience'>Audience</h4>
+<p>The Newsletter&rsquo;s Audience. A Newsletter can be sent to one or more Customer Lists, with an optional segment that limits the Newsletter to a subset of subscribers on those lists.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>lists:</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>List IDs. Can only be empty for &ldquo;draft&rdquo; Newsletters.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegmentKind:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>One of <code class="prettyprint">&quot;inline&quot;</code>, <code class="prettyprint">&quot;id&quot;</code> or <code class="prettyprint">null</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegmentId:</strong></td>
+<td><strong>string, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A Customer Segment&rsquo;s ID. Ignored unless <code class="prettyprint">customerSegmentKind</code> is <code class="prettyprint">&quot;id&quot;</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegmentInline:</strong></td>
+<td><strong>object, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An inline Customer Segment. Ignored unless <code class="prettyprint">customerSegmentKind</code> is <code class="prettyprint">&quot;inline&quot;</code>. See <a href="#customer-segments">Customer Segments</a> for structure.</td>
 </tr>
 </tbody></table>
 <h2 id='newsletter-report'>Newsletter Report</h2>
@@ -2883,7 +2939,18 @@ Response 204
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Friday Announcement"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"liveAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"audience"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"lists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"everyone"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"customerSegmentKind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inline"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"customerSegmentInline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"criteria"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="nt">"criteriaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"receipt.sent"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"negate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customerLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nt">"customerSegments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sent"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sentAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-20T00:10:15.000Z"</span><span class="p">,</span><span class="w">
@@ -2941,28 +3008,20 @@ Response 204
 <td>The Newsletter&rsquo;s title.</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>audience</strong></td>
+<td><strong>object</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Newsletter&rsquo;s audience. Can be comprised of one or more lists, a segment ID or an inline segment. See <a href="#audience">above</a>.</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>liveAt:</strong></td>
 <td><strong>string, optional</strong></td>
 </tr>
 <tr>
 <td style="text-align: right"></td>
 <td>When the Newsletter is set to go live, if scheduled, or when it was set live, if sent or live. Is an <strong>ISO 8601</strong> encoded date. Is omitted if the Newsletter is a draft.</td>
-</tr>
-<tr>
-<td style="text-align: right"><strong>customerLists:</strong></td>
-<td><strong>array[string]</strong></td>
-</tr>
-<tr>
-<td style="text-align: right"></td>
-<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty.</td>
-</tr>
-<tr>
-<td style="text-align: right"><strong>customerSegments:</strong></td>
-<td><strong>array[string]</strong></td>
-</tr>
-<tr>
-<td style="text-align: right"></td>
-<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty.</td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>status:</strong></td>
@@ -2995,6 +3054,22 @@ Response 204
 <tr>
 <td style="text-align: right"></td>
 <td>An array of the Content Modules in a Newsletter. These represent the content (copy, images, discounts, etc.) in a Newsletter. More details below.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerLists (deprecated):</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Lists who will receive / have received this Newsletter. May be empty. <strong>Deprecated in favour of <code class="prettyprint">audience</code>.</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>customerSegments (deprecated):</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An array of IDs of Customer Segments who will receive / have received this Newsletter. May be empty. <strong>Deprecated in favour of <code class="prettyprint">audience</code>.</strong></td>
 </tr>
 </tbody></table>
 <h4 id='stats'>Stats</h4>
@@ -3530,12 +3605,13 @@ Response 204
 </tbody></table>
 
           <h1 id='customer-lists'>Customer Lists</h1>
-<p>Services related to managing <strong>Customer Lists</strong> (for newsletters) and subscriptions.</p>
+<p>Services related to managing <strong>Customer Lists</strong> (for Newsletters) and subscriptions.</p>
 <h2 id='get-customer-lists'>Get Customer Lists</h2>
 <p>Get all available customer lists.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
 
 <blockquote>
@@ -3545,6 +3621,9 @@ Response 204
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weekly Newsletter Subscribers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"singleOptIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"subscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"unsubscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
@@ -3552,18 +3631,45 @@ Response 204
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b53"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Products Announcements"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"singleOptIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"subscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"unsubscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"marketing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted Marketing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"singleOptIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"unsubscribers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-customer-lists-get'>List all Customer Lists [GET]</h3>
 <p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists</code></p>
+<h3 id='arguments'>Arguments</h3>
+<p>These are provided via query params.</p>
 
-<p><aside class="success">
-  Response 200 (application/json)
-</aside></p>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>all:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether to include lists that are not subscribable in the return (eg: Accepts Marketing)</td>
+</tr>
+</tbody></table>
 <h3 id='return'>Return</h3>
 <p>The endpoint returns an array with all the Customer Lists in the account. Object keys are:</p>
 
@@ -3590,6 +3696,30 @@ Response 204
 <td>The title picked by the user for this List. Used in user-facing interfaces.</td>
 </tr>
 <tr>
+<td style="text-align: right"><strong>singleOptIn:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is single opt-in. If not, a confirmation email is sent on subscription.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>enabled:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is enabled. Always <code class="prettyprint">true</code> except for the <code class="prettyprint">marketing</code> list where it may be <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subscribable:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether subscribers can be added to this list.</td>
+</tr>
+<tr>
 <td style="text-align: right"><strong>subscribers:</strong></td>
 <td><strong>integer</strong></td>
 </tr>
@@ -3614,6 +3744,239 @@ Response 204
 <td>The number of unsubscribers for this list.</td>
 </tr>
 </tbody></table>
+
+<p><aside class="success">
+  Response 200 (application/json)
+</aside></p>
+<h2 id='create-list'>Create List</h2>
+<p>Creates a new Customer List.</p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+       "title":"An Awesome List",
+       "singleOptIn":false
+  }'</span>
+</code></pre>
+
+<blockquote>
+<p>RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An Awesome List"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"singleOptIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='create-a-customer-list-post'>Create a Customer List [POST]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists</code></p>
+
+<p><em>OAuth Scopes</em>: read_customer_list, write_customer_list</p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The title for the new List. Used in user-facing interfaces.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>singleOptIn:</strong></td>
+<td><strong>boolean, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is single opt-in. If not, a confirmation email is sent on subscription.</td>
+</tr>
+</tbody></table>
+<h3 id='return'>Return</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key with the created list&rsquo;s data in it:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Customer List ID. This is used whenever referencing this Customer List in other endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The title picked by the user for this List. Used in user-facing interfaces.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>singleOptIn:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is single opt-in. If not, a confirmation email is sent on subscription.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>enabled:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is enabled. Always <code class="prettyprint">true</code> except for the <code class="prettyprint">marketing</code> list where it may be <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subscribable:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether subscribers can be added to this list.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 201 (application/json)
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - Invalid arguments
+</aside></p>
+<h2 id='update-list'>Update List</h2>
+<p>Updates an existing Customer List. Updates are applied partially both on PUT and PATCH requests.</p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X PATCH <span class="se">\</span>
+  -d <span class="s1">'{
+       "singleOptIn":true
+  }'</span>
+</code></pre>
+
+<blockquote>
+<p>RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An Awesome List"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"singleOptIn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscribable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='update-a-customer-list-patchput'>Update a Customer List [PATCH|PUT]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}</code></p>
+
+<p><em>OAuth Scopes</em>: read_customer_list, write_customer_list</p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A new title for the List. Used in user-facing interfaces.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>singleOptIn:</strong></td>
+<td><strong>boolean, optional</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is single opt-in.</td>
+</tr>
+</tbody></table>
+<h3 id='return'>Return</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key with the updated list&rsquo;s data in it:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Customer List ID. This is used whenever referencing this Customer List in other endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>title:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The title for this List. Used in user-facing interfaces.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>singleOptIn:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is single opt-in. If not, a confirmation email is sent on subscription.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>enabled:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this list is enabled. Always <code class="prettyprint">true</code> except for the <code class="prettyprint">marketing</code> list where it may be <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>subscribable:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether subscribers can be added to this list.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200 (application/json)
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - Invalid arguments
+</aside></p>
+
+<p><aside class="warning">
+  Response 404 - No such list
+</aside></p>
 <h2 id='subscribe-to-list'>Subscribe to List</h2>
 <p>Subscribe an email address and optional user details to a specific customer list.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
@@ -3723,9 +4086,364 @@ Response 204
 <p><aside class="warning">
   Response 400 - Invalid email address
 </aside></p>
+<h2 id='list-subscribers'>List Subscribers</h2>
+<p>Returns a list&rsquo;s accepted subscribers, pending subscribers (haven&rsquo;t opted in yet) and unsubscribers.</p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/marketing/subscribers"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"Accept: application/json"</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@email.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"searchAfter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"test@email.com"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/customer-lists/5b10ded082d2653410054ac3/subscribers?limit=10&amp;searchAfter=test%40email.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-subscribers-to-a-customer-list-get'>List all Subscribers to a Customer List [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+
+<p><em>OAuth Scopes</em>: read_customers</p>
+<h3 id='arguments'>Arguments</h3>
+<p>These are provided via query params.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>pending:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Changes the return to a list of pending subscribers.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>unsubscribers:</strong></td>
+<td><strong>boolean</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Changes the return to a list of unsubscribers.</td>
+</tr>
+</tbody></table>
+<h3 id='return'>Return</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key with the found subscribers, and a <code class="prettyprint">meta</code> key with pagination info. By default, the returned subscribers are Customer objects with event &amp; stats data.</p>
+
+<p><strong>However</strong>, when querying for <code class="prettyprint">pending</code> or <code class="prettyprint">unsubscribers</code> the returned subscribers include only the <code class="prettyprint">email</code> key. Pagination is also different. This is for legacy reasons and is likely to change (to match the default return) in the future.</p>
+
+<p>To ensure your app supports all returns and is future-proof, expect only the <code class="prettyprint">email</code> address in the return, and use <code class="prettyprint">nextPage</code> for pagination.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>email:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The email address for the subscriber. Only common field across all queries.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+<h2 id='mass-unsubscribe'>Mass Unsubscribe</h2>
+<p>Removes one or more list&rsquo;s subscribers. There are two versions of this request: one that removes a list of emails, another that removes a whole segment.</p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X DELETE <span class="se">\</span>
+  -G <span class="se">\</span>
+  -d <span class="s1">'{
+    "emails": ["an@email.com", "another@email.com"]
+  }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"unsubscribed"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"failedReasons"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='unsubscribe-via-email-list-delete'>Unsubscribe via Email List [DELETE]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+
+<p><em>OAuth Scopes</em>: write_customers</p>
+<h3 id='arguments'>Arguments</h3>
+<p>These are provided via query params.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>emails:</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The list of emails to unsubscribe from the Customer List.</td>
+</tr>
+</tbody></table>
+<h3 id='return'>Return</h3>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>unsubscribed:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many emails were successfuly unsubscribed.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>failed:</strong></td>
+<td><strong>number</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>How many emails failed to unsubscribe.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>failedReasons:</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A list of errors that explain unsubscribe failures.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - No emails provided, or is not an array
+</aside></p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
+  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+  -X DELETE <span class="se">\</span>
+  -G <span class="se">\</span>
+  -d <span class="s1">'{
+    "segment": "{\"criteria\":[{\"criteriaName\":\"receipt.sent\",\"negate\":true,\"filters\":[]}]}"
+  }'</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"asyncJobId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b10ded082d2653410054ac3"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='unsubscribe-via-customer-segment-delete'>Unsubscribe via Customer Segment [DELETE]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+
+<p><em>OAuth Scopes</em>: write_customers</p>
+<h3 id='arguments'>Arguments</h3>
+<p>These are provided via query params.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>segment:</strong></td>
+<td><strong>string[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>A Customer Segment in JSON format.</td>
+</tr>
+</tbody></table>
+<h3 id='return'>Return</h3>
+<p>There are two possible return formats: If the number of subscribers to remove is relatively low, they will be removed synchronously with the request and the return will mirror the <a href="#unsubscribe-via-email-list-delete">Unsubscribe via Email List&rsquo;s</a>. Otherwise, an <a href="#async-jobs">Async Job</a> is started and it&rsquo;s ID returned instead inside the <code class="prettyprint">data</code> key.</p>
+
+<p>The following format is returned only with status 202:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>asyncJobId:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>An Async Job&rsquo;s ID.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200 - Subscribers removed synchronously
+</aside></p>
+
+<p><aside class="success">
+  Response 202 - An async job was created to complete the mass unsubscribe
+</aside></p>
+
+<p><aside class="warning">
+  Response 400 - No segment provided
+</aside></p>
 
           <h1 id='customer-segments'>Customer Segments</h1>
-<p>Services related to managing <strong>Customer Segments</strong> and subscriptions.</p>
+<p>Services related to managing <strong>Customer Segments</strong>.</p>
+<h2 id='list-customer-segments'>List Customer Segments</h2>
+<p>Returns all segments and where they&rsquo;re used.</p>
+<pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
+<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/segments"</span> <span class="se">\</span>
+  -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
+  -H <span class="s2">"Accept: application/json"</span>
+</code></pre>
+
+<blockquote>
+<p>EXAMPLE RESPONSE</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ae9aeedc60b7e00fe9f133a"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"At Risk\" Repeat Customers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"editable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ae9aeedc60b7e00fe9f1330"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First-time Buyers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"editable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"modelName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ReceiptTemplate"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ae9aeedc60b7e00fe9f1356"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id='list-all-customer-segments-get'>List all Customer Segments [GET]</h3>
+<p><code class="prettyprint">https://app.conversio.com/api/v1/segments</code></p>
+
+<p><em>OAuth Scopes</em>: read_segments</p>
+<h3 id='return'>Return</h3>
+<p>The endpoint returns an object with a <code class="prettyprint">data</code> key that contains all the Customer Segments in the account. Object keys are:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>id:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The Customer Segment&rsquo;s ID. This is used whenever referencing this Customer Segment in other endpoints.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>name:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>The segment&rsquo; name.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>editable:</strong></td>
+<td><strong>bool</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Whether this is a default segment (<code class="prettyprint">false</code>) or a custom one (<code class="prettyprint">true</code>)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>uses:</strong></td>
+<td><strong>object[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Where this segment is currently being used, see below.</td>
+</tr>
+</tbody></table>
+<h4 id='uses'>Uses</h4>
+<table><thead>
+<tr>
+<th style="text-align: right">Key</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>modelName:</strong></td>
+<td><strong>string</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>Name of the Model where a segment is used, Possible values: <code class="prettyprint">&quot;AsyncJob&quot;</code>, <code class="prettyprint">&quot;Campaign&quot;</code>, <code class="prettyprint">&quot;FollowUpTemplate&quot;</code>, <code class="prettyprint">&quot;NewsletterTemplate&quot;</code>, <code class="prettyprint">&quot;ReceiptTemplate&quot;</code>.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>models:</strong></td>
+<td><strong>object[]</strong></td>
+</tr>
+<tr>
+<td style="text-align: right"></td>
+<td>All the objects of <code class="prettyprint">modelName</code> type where this segment is used. Format depends on model.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+  Response 200
+</aside></p>
 <h2 id='export-segment-customers'>Export Segment Customers</h2>
 <p>Starts an Async Job to export a Segment&rsquo;s customers. Once completed, the job&rsquo;s result will point ot a CSV file with email addresses and subscription status.</p>
 

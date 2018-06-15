@@ -1,6 +1,82 @@
 # Customer Segments
 
-Services related to managing **Customer Segments** and subscriptions.
+Services related to managing **Customer Segments**.
+
+## List Customer Segments
+
+Returns all segments and where they&rsquo;re used.
+
+```shell
+# EXAMPLE REQUEST
+$ curl "https://app.conversio.com/api/v1/segments" \
+  -H "X-ApiKey: YOUR_API_KEY"
+  -H "Accept: application/json"
+```
+
+> EXAMPLE RESPONSE
+
+```json
+{
+  "data": [
+    {
+      "id": "5ae9aeedc60b7e00fe9f133a",
+      "name": "\"At Risk\" Repeat Customers",
+      "editable": false,
+      "uses": []
+    },
+    {
+      "id": "5ae9aeedc60b7e00fe9f1330",
+      "name": "First-time Buyers",
+      "editable": false,
+      "uses": [
+        {
+          "modelName": "ReceiptTemplate",
+          "models": [
+            {
+                "id": "5ae9aeedc60b7e00fe9f1356",
+                "enabled": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### List all Customer Segments [GET]
+
+`https://app.conversio.com/api/v1/segments`
+
+_OAuth Scopes_: read_segments
+
+### Return
+
+The endpoint returns an object with a `data` key that contains all the Customer Segments in the account. Object keys are:
+
+|Key               |Details                                                                  |
+|-----------------:|-------------------------------------------------------------------------|
+|**id:**           |**string**                                                               |
+|                  |The Customer Segment&rsquo;s ID. This is used whenever referencing this Customer Segment in other endpoints.|
+|**name:**         |**string**                                                               |
+|                  |The segment&rsquo; name.                                                 |
+|**editable:**     |**bool**                                                                 |
+|                  |Whether this is a default segment (`false`) or a custom one (`true`)     |
+|**uses:**         |**object[]**                                                             |
+|                  |Where this segment is currently being used, see below.                   |
+
+#### Uses
+
+|Key               |Details                                                                  |
+|-----------------:|-------------------------------------------------------------------------|
+|**modelName:**    |**string**                                                               |
+|                  |Name of the Model where a segment is used, Possible values: `"AsyncJob"`, `"Campaign"`, `"FollowUpTemplate"`, `"NewsletterTemplate"`, `"ReceiptTemplate"`.|
+|**models:**       |**object[]**                                                             |
+|                  |All the objects of `modelName` type where this segment is used. Format depends on model.|
+
+<aside class="success">
+  Response 200
+</aside>
 
 ## Export Segment Customers
 

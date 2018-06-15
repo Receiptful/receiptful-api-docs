@@ -62,7 +62,7 @@ The items inside the cart. Object contents:
 |----------------:|---------------------------|--------------------------------|
 |**reference:**   |**string, optional**       |*c_123*                         |
 |**variant:**     |**string, optional**       |*c_123_2*                       |
-|**description:** |**string, required**       |*Conversio Hobby Plan*         |
+|**description:** |**string, required**       |*Conversio Hobby Plan*          |
 |**quantity:**    |**number, optional**       |*1*                             |
 |**amount:**      |**number, required**       |*29.00*                         |
 |                 |A single item's price.     |                                |

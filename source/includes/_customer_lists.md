@@ -271,7 +271,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 |**name:**      |**string, optional**                                                                                 |
 |               |The email address owner's name. Expects first or first and last name.                                |
 |**properties:**|**object, optional**                                                                                 |
-|               |Additional properties to track for this subscriber. Allowed types are `string`, `number`, `string[]`, `number[]`|
+|               |Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, We support string, number, boolean, array and date types. In the case of an array the type is infered from the first element in the array|
 |**source:**    |**string, optional**                                                                                 |
 |               |Where this subscription came from. Should be an App or company name.                                 |
 |**sourceType:**|**string, optional**                                                                                 |

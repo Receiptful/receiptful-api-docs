@@ -2,9 +2,10 @@
 # the following line to use 'https'
 source 'http://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.6.3'
 
-gem 'middleman', '~> 3.3.12'
+gem 'middleman', '~> 3.4.1'
+gem 'middleman-core', '~> 3.4.1'
 
 # For syntax highlighting
 gem 'middleman-syntax', '~> 2.0.0'
@@ -27,4 +28,4 @@ end
 
 gem 'rake', '~> 10.3.0'
 
-gem 'therubyracer', :platforms => :ruby
+gem 'mini_racer', :platforms => :ruby

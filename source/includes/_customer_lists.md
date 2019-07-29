@@ -252,7 +252,13 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
     "source": "Conversio",
     "sourceType": "SubscriptionForm",
     "sourceId": "some-form-slug",
-    "optInText": "Subscribe to receive new product updates"
+    "optInText": "Subscribe to receive new product updates",
+    "properties": {
+      "age": 42,
+      "happy": true,
+      "dob": "2001-12-23",
+      "likes": ["wine", "cinnamon", "umami"]
+    }
   }'
 ```
 
@@ -271,7 +277,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 |**name:**      |**string, optional**                                                                                 |
 |               |The email address owner's name. Expects first or first and last name.                                |
 |**properties:**|**object, optional**                                                                                 |
-|               |Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, We support string, number, boolean, array and date types. In the case of an array the type is infered from the first element in the array|
+|               |Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, We support string, number, boolean, array and date types.|
 |**source:**    |**string, optional**                                                                                 |
 |               |Where this subscription came from. Should be an App or company name.                                 |
 |**sourceType:**|**string, optional**                                                                                 |
@@ -292,6 +298,7 @@ The first time a property is tracked (uniqueness is ensured by key), Conversio t
   * If it is a whole number and the key ends with "_at" or "At", `date` is inferred.
   * otherwise, `number` is inferred.
 * If a value can be parsed as an iso8601 date, `date` is inferred.
+* If a value is an array, its first element is used to infer the type (using these rules).
 * Otherwise, `string` is inferred.
 
 <aside class="success">

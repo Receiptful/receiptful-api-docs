@@ -3991,7 +3991,13 @@ Response 204
     "source": "Conversio",
     "sourceType": "SubscriptionForm",
     "sourceId": "some-form-slug",
-    "optInText": "Subscribe to receive new product updates"
+    "optInText": "Subscribe to receive new product updates",
+    "properties": {
+      "age": 42,
+      "happy": true,
+      "dob": "2001-12-23",
+      "likes": ["wine", "cinnamon", "umami"]
+    }
   }'</span>
 </code></pre>
 <h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
@@ -4027,7 +4033,7 @@ Response 204
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, We support string, number, boolean, array and date types. In the case of an array the type is infered from the first element in the array</td>
+<td>Additional properties to track for this subscriber. Type inference applies the first time a property is tracked, We support string, number, boolean, array and date types.</td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>source:</strong></td>
@@ -4076,6 +4082,7 @@ Response 204
 <li>otherwise, <code class="prettyprint">number</code> is inferred.</li>
 </ul></li>
 <li>If a value can be parsed as an iso8601 date, <code class="prettyprint">date</code> is inferred.</li>
+<li>If a value is an array, its first element is used to infer the type (using these rules).</li>
 <li>Otherwise, <code class="prettyprint">string</code> is inferred.</li>
 </ul>
 

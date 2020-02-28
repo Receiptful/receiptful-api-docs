@@ -26,6 +26,6 @@ platforms :mri_18 do
   gem 'ruby18_source_location'
 end
 
-gem 'rake', '~> 10.3.0'
+gem 'rake', '~> 12.3.3'
 
 gem 'mini_racer', :platforms => :ruby

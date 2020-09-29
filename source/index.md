@@ -10,7 +10,6 @@ toc_footers:
 
 includes:
   - authentication
-  - receipts
   - coupons
   - products
   - product_reviews

@@ -8,7 +8,7 @@ Returns reviews from the most recently created.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/product-reviews?limit=2&page=2" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/product-reviews?limit=2&page=2" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -48,15 +48,15 @@ $ curl "https://app.conversio.com/api/v1/product-reviews?limit=2&page=2" \
     "pages": 3,
     "total": 5,
     "limit": 2,
-    "prevPage": "https://app.conversio.com/api/v1/product-reviews?page=1&limit=2",
-    "nextPage": "https://app.conversio.com/api/v1/product-reviews?page=3&limit=2"
+    "prevPage": "https://commerce.campaignmonitor.com/api/v1/product-reviews?page=1&limit=2",
+    "nextPage": "https://commerce.campaignmonitor.com/api/v1/product-reviews?page=3&limit=2"
   }
 }
 ```
 
 ### List all Product Reviews [GET]
 
-`https://app.conversio.com/api/v1/product-reviews`
+`https://commerce.campaignmonitor.com/api/v1/product-reviews`
 
 _OAuth Scopes_: read_product_reviews, write_product_reviews
 

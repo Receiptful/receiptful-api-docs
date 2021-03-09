@@ -8,7 +8,7 @@ Returns a list of the Abandoned Cart Campaigns in the User's account.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -42,7 +42,7 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns \
 
 ### List all Campaigns [GET]
 
-`https://app.conversio.com/api/v1/abandoned-carts/campaigns`
+`https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns`
 
 _OAuth Scopes_: read_abandoned_cart_campaign, write_abandoned_cart_campaign
 
@@ -75,7 +75,7 @@ Returns an Abandoned Cart Campaign in the User's account.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -99,7 +99,7 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046ab
 
 ### Show Single Campaign [GET]
 
-`https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}`
+`https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}`
 
 _OAuth Scopes_: read_abandoned_cart_campaign, write_abandoned_cart_campaign
 
@@ -130,7 +130,7 @@ Returns an Abandoned Cart Template. This contains the basis for the content of e
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -156,8 +156,8 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046ab
 
 Two possible endpoints:
 
-1. `https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}`
-2. `https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}`
+1. `https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}`
+2. `https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}`
 
 _OAuth Scopes_: read_abandoned_cart_template, write_abandoned_cart_template
 
@@ -258,7 +258,7 @@ Returns an Abandoned Cart Email, along with its action timestamps.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -285,9 +285,9 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb0
 
 Three possible endpoints:
 
-1. `https://app.conversio.com/api/v1/abandoned-carts/emails/{EMAIL_ID}`
-2. `https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}`
-3. `https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}`
+1. `https://commerce.campaignmonitor.com/api/v1/abandoned-carts/emails/{EMAIL_ID}`
+2. `https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}`
+3. `https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}`
 
 _OAuth Scopes_: read_abandoned_cart_email, write_abandoned_cart_email
 

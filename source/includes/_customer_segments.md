@@ -8,7 +8,7 @@ Returns all segments and where they&rsquo;re used.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/segments" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/segments" \
   -H "X-ApiKey: YOUR_API_KEY"
   -H "Accept: application/json"
 ```
@@ -46,7 +46,7 @@ $ curl "https://app.conversio.com/api/v1/segments" \
 
 ### List all Customer Segments [GET]
 
-`https://app.conversio.com/api/v1/segments`
+`https://commerce.campaignmonitor.com/api/v1/segments`
 
 _OAuth Scopes_: read_segments
 
@@ -86,7 +86,7 @@ Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/segments/57b5aa3b046abfb053d80b52/async-export" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/segments/57b5aa3b046abfb053d80b52/async-export" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -107,7 +107,7 @@ $ curl "https://app.conversio.com/api/v1/segments/57b5aa3b046abfb053d80b52/async
 
 ### Create Export Job [POST]
 
-`https://app.conversio.com/api/v1/segments/{SEGMENT_ID}/async-export`
+`https://commerce.campaignmonitor.com/api/v1/segments/{SEGMENT_ID}/async-export`
 
 _OAuth Scopes_: read_customers, read_segments
 

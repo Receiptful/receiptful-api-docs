@@ -8,7 +8,7 @@ Returns all the Newsletters created in a shop.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters?limit=2&page=2" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters?limit=2&page=2" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -47,15 +47,15 @@ $ curl "https://app.conversio.com/api/v1/newsletters?limit=2&page=2" \
     "pages": 3,
     "total": 5,
     "limit": 2,
-    "prevPage": "https://app.conversio.com/api/v1/newsletters?page=1&limit=2",
-    "nextPage": "https://app.conversio.com/api/v1/newsletters?page=3&limit=2"
+    "prevPage": "https://commerce.campaignmonitor.com/api/v1/newsletters?page=1&limit=2",
+    "nextPage": "https://commerce.campaignmonitor.com/api/v1/newsletters?page=3&limit=2"
   }
 }
 ```
 
 ### List all Newsletters [GET]
 
-`https://app.conversio.com/api/v1/newsletters`
+`https://commerce.campaignmonitor.com/api/v1/newsletters`
 
 _OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
@@ -120,7 +120,7 @@ Returns the selected Newsletter and some stats regarding its sending status.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -162,7 +162,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52" \
 
 ### Single Newsletter Report [GET]
 
-`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}`
+`https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}`
 
 _OAuth Scopes_: read_newsletter_template, write_newsletter_template
 
@@ -278,7 +278,7 @@ Note that if the Newsletter is currently live and sending, paginating results wi
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -304,7 +304,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
     }
   ],
   "meta": {
-    "nextPage": "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/?from=another%40email.com&limit=2",
+    "nextPage": "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/?from=another%40email.com&limit=2",
     "total": 500,
     "limit": 2,
     "pages": 250
@@ -314,7 +314,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
 
 ### Newsletter Email List [GET]
 
-`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails`
+`https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails`
 
 _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
@@ -378,7 +378,7 @@ Returns a Newsletter's email, along with its text & HTML contents.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json"
 ```
@@ -405,7 +405,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
 
 ### Show Newsletter Email [GET]
 
-`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}`
+`https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}`
 
 _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
@@ -452,7 +452,7 @@ Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -473,7 +473,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/re
 
 ### Create Export Job [POST]
 
-`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export`
+`https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export`
 
 _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 
@@ -511,7 +511,7 @@ Refer to the [Async Jobs](#async-jobs) documentation on how to access the job's 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -532,7 +532,7 @@ $ curl "https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/em
 
 ### Create Export Job [POST]
 
-`https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/async-export`
+`https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/async-export`
 
 _OAuth Scopes_: read_newsletter_email, write_newsletter_email
 

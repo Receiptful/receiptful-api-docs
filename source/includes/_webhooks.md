@@ -307,7 +307,7 @@ Returns all Webhooks registered for the current shop. If authorized through OAut
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/webhooks" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/webhooks" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -327,7 +327,7 @@ $ curl "https://app.conversio.com/api/v1/webhooks" \
 
 ### List all Webhooks [GET]
 
-`https://app.conversio.com/api/v1/webhooks`
+`https://commerce.campaignmonitor.com/api/v1/webhooks`
 
 _OAuth Scopes_: read_webhook, write_webhook
 
@@ -354,7 +354,7 @@ Each webhook includes the following info:
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -372,7 +372,7 @@ $ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
 
 ### Show Single Webhook [GET]
 
-`https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}`
+`https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}`
 
 _OAuth Scopes_: read_webhook, write_webhook
 
@@ -413,7 +413,7 @@ Only one Webhook for a unique topic & endpoint combination can exist for each Sh
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/webhooks" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/webhooks" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -447,7 +447,7 @@ $ curl "https://app.conversio.com/api/v1/webhooks" \
 
 ### Create Webhook [POST]
 
-`https://app.conversio.com/api/v1/webhooks`
+`https://commerce.campaignmonitor.com/api/v1/webhooks`
 
 _OAuth Scopes_: write_webhook
 
@@ -495,7 +495,7 @@ Update an existing webhook with new data. Can change either the topic or endpoin
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X PATCH \
@@ -528,7 +528,7 @@ $ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
 
 ### Update Webhook [PATCH/PUT]
 
-`https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}`
+`https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}`
 
 _OAuth Scopes_: write_webhook
 
@@ -592,7 +592,7 @@ Delete an existing Webhook to stop receiving data at the endpoint.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X DELETE
@@ -600,7 +600,7 @@ $ curl "https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52" \
 
 ### Delete Webhook [DELETE]
 
-`https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}`
+`https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}`
 
 _OAuth Scopes_: write_webhook
 

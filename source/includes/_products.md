@@ -6,7 +6,7 @@ These endpoints must be used to send updates about products for our reccommendat
 
 ```shell
 # EXAMPLE REQUEST (SINGLE PRODUCT)
-$ curl "https://app.conversio.com/api/v1/products" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/products" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -40,7 +40,7 @@ $ curl "https://app.conversio.com/api/v1/products" \
 
 ```shell
 # EXAMPLE REQUEST (MULTIPLE PRODUCTS)
-$ curl "https://app.conversio.com/api/v1/products" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/products" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -98,7 +98,7 @@ $ curl "https://app.conversio.com/api/v1/products" \
 
 ### Create one or more new products [POST]
 
-`POST https://app.conversio.com/api/v1/products`
+`POST https://commerce.campaignmonitor.com/api/v1/products`
 
 ### Arguments
 
@@ -186,7 +186,7 @@ Valid products are accepted and processed and should *not* be re-uploaded.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/products/{product_id}" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/products/{product_id}" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X PUT \
@@ -220,7 +220,7 @@ $ curl "https://app.conversio.com/api/v1/products/{product_id}" \
 
 ### Update a product [PUT]
 
-`PUT https://app.conversio.com/api/v1/products/{product_id}`
+`PUT https://commerce.campaignmonitor.com/api/v1/products/{product_id}`
 
 ### Arguments
 
@@ -243,13 +243,13 @@ Response 200 (application/json)
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/products/{product_id}" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/products/{product_id}" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -X DELETE'
 ```
 
-`DELETE https://app.conversio.com/api/v1/products/{product_id}`
+`DELETE https://commerce.campaignmonitor.com/api/v1/products/{product_id}`
 
 <aside class="success">
 Response 204 (application/json)

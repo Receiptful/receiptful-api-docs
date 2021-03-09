@@ -14,12 +14,12 @@ Conversio provides three types of Authentication, each with its own use case. Th
 
 ## API Key Authentication
 
-All paths should prefixed with https://app.conversio.com/api/v1 and will need the following HTTP header:
+All paths should prefixed with https://commerce.campaignmonitor.com/api/v1 and will need the following HTTP header:
 
 `X-ApiKey: YOUR_API_KEY`
 
 <aside class="notice">
-Your API Key can be found in the store's [profile page](https://app.conversio.com/profile).
+Your API Key can be found in the store's [profile page](https://commerce.campaignmonitor.com/profile).
 </aside>
 
 ## OAuth
@@ -70,7 +70,7 @@ These three steps are described in detail below.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/oauth/authorize" \
+$ curl "https://commerce.campaignmonitor.com/oauth/authorize" \
   -G \
   -X GET \
   -d client_id=57b5aa3b046abfb053d80b52 \
@@ -81,7 +81,7 @@ $ curl "https://app.conversio.com/oauth/authorize" \
 
 To begin the OAuth flow, the User is redirected to Conversio's authorize endpoint:
 
-`https://app.conversio.com/oauth/authorize`
+`https://commerce.campaignmonitor.com/oauth/authorize`
 
 Including the following parameters in the URL query string:
 
@@ -143,7 +143,7 @@ The `code` can now be used to request an Access Token from Conversio.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/oauth/access-token" \
+$ curl "https://commerce.campaignmonitor.com/oauth/access-token" \
   -H "Authorization: Basic NTdiNWFhM2IwNDZhYmZiMDUzZDgwYjUyOndhdGNodS1sb29raW4tYXQ=" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -X POST \
@@ -228,7 +228,7 @@ We support three HMAC algorithms, `HS256`, `HS384` and `HS512`.
 
 ```shell
 # Example authorized request
-$ curl https://app.conversio.com/api/v1 \
+$ curl https://commerce.campaignmonitor.com/api/v1 \
   -H "Authorization: PoP eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo
 ```
 
@@ -275,7 +275,7 @@ const popToken = jws.sign({ header, payload, secret: clientSecret });
 
 ```shell
 # Example authorized request
-$ curl https://app.conversio.com/api/v1/partners/ \
+$ curl https://commerce.campaignmonitor.com/api/v1/partners/ \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
 ```
 

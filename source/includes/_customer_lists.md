@@ -8,7 +8,7 @@ Get all available customer lists.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists" \
   -H "X-ApiKey: YOUR_API_KEY"
   -H "Accept: application/json"
 ```
@@ -52,7 +52,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists" \
 
 ### List all Customer Lists [GET]
 
-`https://app.conversio.com/api/v1/customer-lists`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists`
 
 ### Arguments
 
@@ -96,7 +96,7 @@ Creates a new Customer List.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -123,7 +123,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists" \
 
 ### Create a Customer List [POST]
 
-`https://app.conversio.com/api/v1/customer-lists`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists`
 
 _OAuth Scopes_: read_customer_list, write_customer_list
 
@@ -167,7 +167,7 @@ Updates an existing Customer List. Updates are applied partially both on PUT and
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -193,7 +193,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52
 
 ### Update a Customer List [PATCH|PUT]
 
-`https://app.conversio.com/api/v1/customer-lists/{LIST_ID}`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}`
 
 _OAuth Scopes_: read_customer_list, write_customer_list
 
@@ -241,7 +241,7 @@ Subscribe an email address and optional user details to a specific customer list
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -264,7 +264,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 
 ### Subscribe an Email to a Customer List [PUT]
 
-`https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions`
 
 `LIST_ID` should be the `id` returned in the [list](#get-customer-lists) response.
 
@@ -315,7 +315,7 @@ Returns a list's accepted subscribers, pending subscribers (haven&rsquo;t opted 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists/marketing/subscribers" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/marketing/subscribers" \
   -H "X-ApiKey: YOUR_API_KEY"
   -H "Accept: application/json"
 ```
@@ -335,14 +335,14 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/marketing/subscribers" \
     "total": 1,
     "limit": 10,
     "searchAfter": ["test@email.com"],
-    "nextPage": "https://app.conversio.com/api/v1/customer-lists/5b10ded082d2653410054ac3/subscribers?limit=10&searchAfter=test%40email.com"
+    "nextPage": "https://commerce.campaignmonitor.com/api/v1/customer-lists/5b10ded082d2653410054ac3/subscribers?limit=10&searchAfter=test%40email.com"
   }
 }
 ```
 
 ### List all Subscribers to a Customer List [GET]
 
-`https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers`
 
 _OAuth Scopes_: read_customers
 
@@ -380,7 +380,7 @@ Removes one or more list's subscribers. There are two versions of this request: 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json" \
   -X DELETE \
@@ -404,7 +404,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 
 ### Unsubscribe via Email List [DELETE]
 
-`https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers`
 
 _OAuth Scopes_: write_customers
 
@@ -438,7 +438,7 @@ These are provided via query params.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Accept: application/json" \
   -X DELETE \
@@ -460,7 +460,7 @@ $ curl "https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions" \
 
 ### Unsubscribe via Customer Segment [DELETE]
 
-`https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers`
+`https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers`
 
 _OAuth Scopes_: write_customers
 

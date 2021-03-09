@@ -6,7 +6,7 @@ Services related to managing **Abandoned Carts**. For the Email Campaigns trigge
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
@@ -37,7 +37,7 @@ $ curl "https://app.conversio.com/api/v1/abandoned-carts" \
 
 ### Create or Update a Cart [POST]
 
-`https://app.conversio.com/api/v1/abandoned-carts`
+`https://commerce.campaignmonitor.com/api/v1/abandoned-carts`
 
 ### Arguments
 
@@ -86,15 +86,15 @@ Response 200 (application/json)
 
 ```shell
 # DEFINITION
-DELETE https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d
+DELETE https://commerce.campaignmonitor.com/api/v1/abandoned-carts/1a2b3c4d
 
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X DELETE
 ```
 
-`https://app.conversio.com/api/v1/abandoned-carts/{TOKEN}`
+`https://commerce.campaignmonitor.com/api/v1/abandoned-carts/{TOKEN}`
 
 ### Arguments
 

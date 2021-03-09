@@ -5,10 +5,10 @@ Services related to retreiving coupons using the **Coupons API**
 
 ```shell
 # DEFINITION
-GET https://app.conversio.com/api/v1/coupons
+GET https://commerce.campaignmonitor.com/api/v1/coupons
 
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/coupons" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/coupons" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -45,7 +45,7 @@ $ curl "https://app.conversio.com/api/v1/coupons" \
 }
 ```
 
-`https://app.conversio.com/api/v1/coupons`
+`https://commerce.campaignmonitor.com/api/v1/coupons`
 
 Get a list of all coupons
 
@@ -57,10 +57,10 @@ Response 200 (application/json)
 
 ```shell
 # DEFINITION
-GET https://app.conversio.com/api/v1/coupons/1a2b3c4d
+GET https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d
 
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/coupons/1a2b3c4d" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -77,7 +77,7 @@ $ curl "https://app.conversio.com/api/v1/coupons/1a2b3c4d" \
 }
 ```
 
-`https://app.conversio.com/api/v1/coupons/{COUPON_ID}`
+`https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}`
 
 A single coupon with all of its details
 
@@ -96,15 +96,15 @@ Response 200 (application/json)
 
 ```shell
 # DEFINITION
-DELETE https://app.conversio.com/api/v1/coupons/1a2b3c4d
+DELETE https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d
 
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/coupons/1a2b3c4d" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X DELETE
 ```
 
-`https://app.conversio.com/api/v1/coupons/{COUPON_ID}`
+`https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}`
 
 ### Arguments
 
@@ -121,10 +121,10 @@ Response 204 (application/json)
 
 ```shell
 # DEFINITION
-PUT https://app.conversio.com/api/v1/coupons/1a2b3c4d/use
+PUT https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d/use
 
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/coupons/1a2b3c4d/use" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d/use" \
   -H "X-ApiKey: YOUR_API_KEY" \
   -X PUT
   -d '{
@@ -155,7 +155,7 @@ $ curl "https://app.conversio.com/api/v1/coupons/1a2b3c4d/use" \
 }
 ```
 
-`https://app.conversio.com/api/v1/coupons/{COUPON_ID}/use`
+`https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}/use`
 
 ### Arguments
 

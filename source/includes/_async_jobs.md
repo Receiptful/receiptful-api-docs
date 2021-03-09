@@ -14,7 +14,7 @@ Returns all the Async Jobs created for the authenticated shop. When using OAuth,
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/async-jobs" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/async-jobs" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -29,7 +29,7 @@ $ curl "https://app.conversio.com/api/v1/async-jobs" \
       "status": "done",
       "startedAt": "2017-01-03T16:32:27.741Z",
       "completedAt": "2017-01-03T16:37:20.417Z",
-      "result": "https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"
+      "result": "https://commerce.campaignmonitor.com/async-jobs/57b5aa3b046abfb053d80b52.csv"
     },
     {
       "id": "57b5aa3b046abfb053d80b54",
@@ -50,7 +50,7 @@ $ curl "https://app.conversio.com/api/v1/async-jobs" \
 
 ### List all Jobs [GET]
 
-`https://app.conversio.com/api/v1/async-jobs`
+`https://commerce.campaignmonitor.com/api/v1/async-jobs`
 
 _OAuth Scopes_: read_async_job
 
@@ -89,7 +89,7 @@ Returns the requested Async Job. When using OAuth, only jobs started by the auth
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
@@ -103,14 +103,14 @@ $ curl "https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52" \
     "status": "done",
     "startedAt": "2017-01-03T16:32:27.741Z",
     "completedAt": "2017-01-03T16:37:20.417Z",
-    "result": "https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"
+    "result": "https://commerce.campaignmonitor.com/async-jobs/57b5aa3b046abfb053d80b52.csv"
   }
 }
 ```
 
 ### Get an Async Job [GET]
 
-`https://app.conversio.com/api/v1/async-jobs/{ASYNC_JOB_ID}`
+`https://commerce.campaignmonitor.com/api/v1/async-jobs/{ASYNC_JOB_ID}`
 
 _OAuth Scopes_: read_async_job
 

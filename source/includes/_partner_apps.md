@@ -8,7 +8,7 @@ Returns the saved info for the authenticated Partner App.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl https://app.conversio.com/api/v1/partners/ \
+$ curl https://commerce.campaignmonitor.com/api/v1/partners/ \
   -H "Accept: application/json" \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
 ```
@@ -59,7 +59,7 @@ Updates the saved info for the authenticated Partner App. Use this to update a l
 
 ```shell
 # EXAMPLE REQUEST
-$ curl https://app.conversio.com/api/v1/partners/ \
+$ curl https://commerce.campaignmonitor.com/api/v1/partners/ \
   -H "Accept: application/json" \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ" \
   -X PATCH \

@@ -37,7 +37,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://app.conversio.com'>Sign Up for an API Key</a></li>
+            <li><a href='https://commerce.campaignmonitor.com'>Sign Up for an API Key</a></li>
             <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -58,12 +58,12 @@
 <li><strong>HMAC</strong>: For Partner Apps only. Used for accessing the Partner App API.</li>
 </ol>
 <h2 id='api-key-authentication'>API Key Authentication</h2>
-<p>All paths should prefixed with https://app.conversio.com/api/v1 and will need the following HTTP header:</p>
+<p>All paths should prefixed with https://commerce.campaignmonitor.com/api/v1 and will need the following HTTP header:</p>
 
 <p><code class="prettyprint">X-ApiKey: YOUR_API_KEY</code></p>
 
 <p><aside class="notice">
-Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.com/profile">profile page</a>.
+Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaignmonitor.com/profile">profile page</a>.
 </aside></p>
 <h2 id='oauth'>OAuth</h2>
 <p>Conversio implements the Authorization Code Grant of the <a href="https://tools.ietf.org/html/rfc6749">OAuth v2.0</a> standard, with <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Tokens</a> (Proof of Possession).</p>
@@ -115,7 +115,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 
 <p>These three steps are described in detail below.</p>
 <h4 id='step-1-get-user-authorization'>Step 1: Get User Authorization</h4><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/oauth/authorize"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/oauth/authorize"</span> <span class="se">\</span>
   -G <span class="se">\</span>
   -X GET <span class="se">\</span>
   -d <span class="nv">client_id</span><span class="o">=</span>57b5aa3b046abfb053d80b52 <span class="se">\</span>
@@ -126,7 +126,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 
 <p>To begin the OAuth flow, the User is redirected to Conversio&rsquo;s authorize endpoint:</p>
 
-<p><code class="prettyprint">https://app.conversio.com/oauth/authorize</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/oauth/authorize</code></p>
 
 <p>Including the following parameters in the URL query string:</p>
 
@@ -249,7 +249,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 
 <p>The <code class="prettyprint">code</code> can now be used to request an Access Token from Conversio.</p>
 <h4 id='step-3-exchange-code-for-access-token'>Step 3: Exchange Code for Access Token</h4><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/oauth/access-token"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/oauth/access-token"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Basic NTdiNWFhM2IwNDZhYmZiMDUzZDgwYjUyOndhdGNodS1sb29raW4tYXQ="</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -360,7 +360,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 
 <p>We support three HMAC algorithms, <code class="prettyprint">HS256</code>, <code class="prettyprint">HS384</code> and <code class="prettyprint">HS512</code>.</p>
 <pre class="highlight shell"><code><span class="c"># Example authorized request</span>
-<span class="gp">$ </span>curl https://app.conversio.com/api/v1 <span class="se">\</span>
+<span class="gp">$ </span>curl https://commerce.campaignmonitor.com/api/v1 <span class="se">\</span>
   -H <span class="s2">"Authorization: PoP eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo
 </span></code></pre>
 
@@ -399,7 +399,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
 <span class="c1">// &gt; 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ'</span>
 </code></pre>
 <pre class="highlight shell"><code><span class="c"># Example authorized request</span>
-<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+<span class="gp">$ </span>curl https://commerce.campaignmonitor.com/api/v1/partners/ <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
 </span></code></pre>
 
@@ -412,10 +412,10 @@ Your API Key can be found in the store&rsquo;s <a href="https://app.conversio.co
           <h1 id='coupons'>Coupons</h1>
 <p>Services related to retreiving coupons using the <strong>Coupons API</strong></p>
 <h2 id='all-coupons'>All Coupons</h2><pre class="highlight shell"><code><span class="c"># DEFINITION</span>
-GET https://app.conversio.com/api/v1/coupons
+GET https://commerce.campaignmonitor.com/api/v1/coupons
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/coupons"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -452,7 +452,7 @@ GET https://app.conversio.com/api/v1/coupons
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/coupons</code></p>
 
 <p>Get a list of all coupons</p>
 
@@ -460,10 +460,10 @@ GET https://app.conversio.com/api/v1/coupons
 Response 200 (application/json)
 </aside></p>
 <h2 id='get-a-coupon'>Get a coupon</h2><pre class="highlight shell"><code><span class="c"># DEFINITION</span>
-GET https://app.conversio.com/api/v1/coupons/1a2b3c4d
+GET https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -480,7 +480,7 @@ GET https://app.conversio.com/api/v1/coupons/1a2b3c4d
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}</code></p>
 
 <p>A single coupon with all of its details</p>
 <h3 id='arguments'>Arguments</h3>
@@ -504,15 +504,15 @@ GET https://app.conversio.com/api/v1/coupons/1a2b3c4d
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-a-coupon'>Delete a coupon</h2><pre class="highlight shell"><code><span class="c"># DEFINITION</span>
-DELETE https://app.conversio.com/api/v1/coupons/1a2b3c4d
+DELETE https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 
-<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -534,10 +534,10 @@ DELETE https://app.conversio.com/api/v1/coupons/1a2b3c4d
 Response 204 (application/json)
 </aside></p>
 <h2 id='mark-coupon-as-used'>Mark coupon as used</h2><pre class="highlight shell"><code><span class="c"># DEFINITION</span>
-PUT https://app.conversio.com/api/v1/coupons/1a2b3c4d/use
+PUT https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d/use
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/coupons/1a2b3c4d/use"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/coupons/1a2b3c4d/use"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X PUT
   -d <span class="s1">'{
@@ -568,7 +568,7 @@ PUT https://app.conversio.com/api/v1/coupons/1a2b3c4d/use
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">https://app.conversio.com/api/v1/coupons/{COUPON_ID}/use</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/coupons/{COUPON_ID}/use</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -618,7 +618,7 @@ Response 200 (application/json)
 <p>Services related to sending product updates using the <strong>Products API</strong>.
 These endpoints must be used to send updates about products for our reccommendation engine.</p>
 <h2 id='create-product'>Create product</h2><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST (SINGLE PRODUCT)</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/products"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -650,7 +650,7 @@ These endpoints must be used to send updates about products for our reccommendat
   }'</span>
 </code></pre>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST (MULTIPLE PRODUCTS)</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/products"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -706,7 +706,7 @@ These endpoints must be used to send updates about products for our reccommendat
   }]'</span>
 </code></pre>
 <h3 id='create-one-or-more-new-products-post'>Create one or more new products [POST]</h3>
-<p><code class="prettyprint">POST https://app.conversio.com/api/v1/products</code></p>
+<p><code class="prettyprint">POST https://commerce.campaignmonitor.com/api/v1/products</code></p>
 <h3 id='arguments'>Arguments</h3>
 <p><aside class="notice">
 The endpoint accepts a <em>single</em> product object or <em>multiple</em> products in an
@@ -908,7 +908,7 @@ products failed to validate.</p>
 <p>Valid products are accepted and processed and should <em>not</em> be re-uploaded.
 </aside></p>
 <h2 id='update-product'>Update product</h2><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X PUT <span class="se">\</span>
@@ -940,7 +940,7 @@ products failed to validate.</p>
   }'</span>
 </code></pre>
 <h3 id='update-a-product-put'>Update a product [PUT]</h3>
-<p><code class="prettyprint">PUT https://app.conversio.com/api/v1/products/{product_id}</code></p>
+<p><code class="prettyprint">PUT https://commerce.campaignmonitor.com/api/v1/products/{product_id}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <p><aside class="notice">
 The product structure is the same as for <a href="#create-product">Create a product</a>
@@ -955,13 +955,13 @@ partial. The API does not support partial updates.
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-product'>Delete product</h2><h3 id='delete-a-product-delete'>Delete a product [DELETE]</h3><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/products/{product_id}"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X DELETE<span class="s1">'
 </span></code></pre>
 
-<p><code class="prettyprint">DELETE https://app.conversio.com/api/v1/products/{product_id}</code></p>
+<p><code class="prettyprint">DELETE https://commerce.campaignmonitor.com/api/v1/products/{product_id}</code></p>
 
 <p><aside class="success">
 Response 204 (application/json)
@@ -972,7 +972,7 @@ Response 204 (application/json)
 <h2 id='list-product-reviews'>List Product Reviews</h2>
 <p>Returns reviews from the most recently created.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/product-reviews?limit=2&amp;page=2"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/product-reviews?limit=2&amp;page=2"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -1012,13 +1012,13 @@ Response 204 (application/json)
     </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"prevPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/product-reviews?page=1&amp;limit=2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/product-reviews?page=3&amp;limit=2"</span><span class="w">
+    </span><span class="nt">"prevPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/product-reviews?page=1&amp;limit=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/product-reviews?page=3&amp;limit=2"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-product-reviews-get'>List all Product Reviews [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/product-reviews</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/product-reviews</code></p>
 
 <p><em>OAuth Scopes</em>: read_product_reviews, write_product_reviews</p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -1169,7 +1169,7 @@ Response 204 (application/json)
           <h1 id='abandoned-carts'>Abandoned Carts</h1>
 <p>Services related to managing <strong>Abandoned Carts</strong>. For the Email Campaigns triggered by Abandoned Carts, go to <a href="#abandoned-cart-emails">the next section</a>.</p>
 <h2 id='create'>Create</h2><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1198,7 +1198,7 @@ Response 204 (application/json)
 <pre class="highlight json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
 <h3 id='create-or-update-a-cart-post'>Create or Update a Cart [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1321,15 +1321,15 @@ Response 204 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='delete-an-abandoned-cart'>Delete an abandoned cart</h2><pre class="highlight shell"><code><span class="c"># DEFINITION</span>
-DELETE https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d
+DELETE https://commerce.campaignmonitor.com/api/v1/abandoned-carts/1a2b3c4d
 
 <span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/1a2b3c4d"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts/1a2b3c4d"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 
-<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/{TOKEN}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/{TOKEN}</code></p>
 <h3 id='arguments'>Arguments</h3>
 <table><thead>
 <tr>
@@ -1356,7 +1356,7 @@ Response 204 (application/json)
 <h2 id='list-abandoned-cart-campaigns'>List Abandoned Cart Campaigns</h2>
 <p>Returns a list of the Abandoned Cart Campaigns in the User&rsquo;s account.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/campaigns </span><span class="se">\</span><span class="s2">
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns </span><span class="se">\</span><span class="s2">
   -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
   -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
@@ -1388,7 +1388,7 @@ Response 204 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-campaigns-get'>List all Campaigns [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns</code></p>
 
 <p><em>OAuth Scopes</em>: read_abandoned_cart_campaign, write_abandoned_cart_campaign</p>
 
@@ -1450,7 +1450,7 @@ Response 204 (application/json)
 <h2 id='view-abandoned-cart-campaign'>View Abandoned Cart Campaign</h2>
 <p>Returns an Abandoned Cart Campaign in the User&rsquo;s account.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
   -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
   -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
@@ -1472,7 +1472,7 @@ Response 204 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='show-single-campaign-get'>Show Single Campaign [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_abandoned_cart_campaign, write_abandoned_cart_campaign</p>
 
@@ -1532,7 +1532,7 @@ Response 204 (application/json)
 <h2 id='view-abandoned-cart-template'>View Abandoned Cart Template</h2>
 <p>Returns an Abandoned Cart Template. This contains the basis for the content of each of its emails, as well as the trigger delay for an email to be sent.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
   -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
   -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
@@ -1557,8 +1557,8 @@ Response 204 (application/json)
 <p>Two possible endpoints:</p>
 
 <ol>
-<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}</code></li>
-<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}</code></li>
+<li><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}</code></li>
+<li><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}</code></li>
 </ol>
 
 <p><em>OAuth Scopes</em>: read_abandoned_cart_template, write_abandoned_cart_template</p>
@@ -1703,7 +1703,7 @@ Response 204 (application/json)
 <h2 id='view-abandoned-cart-email'>View Abandoned Cart Email</h2>
 <p>Returns an Abandoned Cart Email, along with its action timestamps.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/abandoned-carts/emails/57b5aa3b046abfb053d80b52 </span><span class="se">\</span><span class="s2">
   -H "</span>X-ApiKey: YOUR_API_KEY<span class="s2">" </span><span class="se">\</span><span class="s2">
   -H "</span>Accept: application/json<span class="s2">"
 </span></code></pre>
@@ -1729,9 +1729,9 @@ Response 204 (application/json)
 <p>Three possible endpoints:</p>
 
 <ol>
-<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/emails/{EMAIL_ID}</code></li>
-<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
-<li><code class="prettyprint">https://app.conversio.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
+<li><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/emails/{EMAIL_ID}</code></li>
+<li><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
+<li><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/abandoned-carts/campaigns/{CAMPAIGN_ID}/templates/{TEMPLATE_ID}/emails/{EMAIL_ID}</code></li>
 </ol>
 
 <p><em>OAuth Scopes</em>: read_abandoned_cart_email, write_abandoned_cart_email</p>
@@ -1838,7 +1838,7 @@ Response 204 (application/json)
           <h1 id='users'>Users</h1>
 <p>Services related to users using the <strong>Users API</strong>.</p>
 <h2 id='current-user'>Current user</h2><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/users/current"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/users/current"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -1854,7 +1854,7 @@ Response 204 (application/json)
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='retrieve-user-information-get'>Retrieve user information [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/users/current</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/users/current</code></p>
 
 <p>The current API user.</p>
 
@@ -1862,12 +1862,12 @@ Response 204 (application/json)
 Response 200 (application/json)
 </aside></p>
 <h2 id='uninstall'>Uninstall</h2><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/users/uninstall"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/users/uninstall"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 <h3 id='uninstall-the-userapp-post'>Uninstall the user/app [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/users/uninstall</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/users/uninstall</code></p>
 
 <p>Tells Conversio to uninstall the user associated with the given API key. Among
 other things, this automatically unsubscribes the user from a premium plan.</p>
@@ -1881,7 +1881,7 @@ Response 204
 <h2 id='list-newsletters'>List Newsletters</h2>
 <p>Returns all the Newsletters created in a shop.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters?limit=2&amp;page=2"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters?limit=2&amp;page=2"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -1920,13 +1920,13 @@ Response 204
     </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"prevPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters?page=1&amp;limit=2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters?page=3&amp;limit=2"</span><span class="w">
+    </span><span class="nt">"prevPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters?page=1&amp;limit=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters?page=3&amp;limit=2"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-newsletters-get'>List all Newsletters [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_template, write_newsletter_template</p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -2086,7 +2086,7 @@ Response 204
 <h2 id='newsletter-report'>Newsletter Report</h2>
 <p>Returns the selected Newsletter and some stats regarding its sending status.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -2126,7 +2126,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='single-newsletter-report-get'>Single Newsletter Report [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_template, write_newsletter_template</p>
 
@@ -2330,7 +2330,7 @@ Response 204
 
 <p>Note that if the Newsletter is currently live and sending, paginating results will not guarantee that all emails are returned. Wait for the &ldquo;sent&rdquo; status if an exhaustive list is required.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails?limit=2"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -2356,7 +2356,7 @@ Response 204
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/?from=another%40email.com&amp;limit=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/?from=another%40email.com&amp;limit=2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
     </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="w">
@@ -2364,7 +2364,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='newsletter-email-list-get'>Newsletter Email List [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_email, write_newsletter_email</p>
 <h3 id='request-query-params'>Request Query Params</h3>
@@ -2507,7 +2507,7 @@ Response 204
 <h2 id='view-newsletter-email'>View Newsletter Email</h2>
 <p>Returns a Newsletter&rsquo;s email, along with its text &amp; HTML contents.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/57b5aa3b046abfb053d80b68"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -2532,7 +2532,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='show-newsletter-email-get'>Show Newsletter Email [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/{EMAIL_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_email, write_newsletter_email</p>
 
@@ -2620,7 +2620,7 @@ Response 204
 
 <p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/recipients/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2639,7 +2639,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-export-job-post'>Create Export Job [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/recipients/async-export</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_email, write_newsletter_email</p>
 
@@ -2694,7 +2694,7 @@ Response 204
 
 <p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/newsletters/57b5aa3b046abfb053d80b52/emails/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2713,7 +2713,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-export-job-post'>Create Export Job [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/async-export</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/newsletters/{NEWSLETTER_ID}/emails/async-export</code></p>
 
 <p><em>OAuth Scopes</em>: read_newsletter_email, write_newsletter_email</p>
 
@@ -2769,7 +2769,7 @@ Response 204
 <h2 id='get-customer-lists'>Get Customer Lists</h2>
 <p>Get all available customer lists.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -2811,7 +2811,7 @@ Response 204
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-customer-lists-get'>List all Customer Lists [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists</code></p>
 <h3 id='arguments'>Arguments</h3>
 <p>These are provided via query params.</p>
 
@@ -2911,7 +2911,7 @@ Response 204
 <h2 id='create-list'>Create List</h2>
 <p>Creates a new Customer List.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2936,7 +2936,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-a-customer-list-post'>Create a Customer List [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists</code></p>
 
 <p><em>OAuth Scopes</em>: read_customer_list, write_customer_list</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3024,7 +3024,7 @@ Response 204
 <h2 id='update-list'>Update List</h2>
 <p>Updates an existing Customer List. Updates are applied partially both on PUT and PATCH requests.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3048,7 +3048,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='update-a-customer-list-patchput'>Update a Customer List [PATCH|PUT]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_customer_list, write_customer_list</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3140,7 +3140,7 @@ Response 204
 <h2 id='subscribe-to-list'>Subscribe to List</h2>
 <p>Subscribe an email address and optional user details to a specific customer list.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3161,7 +3161,7 @@ Response 204
   }'</span>
 </code></pre>
 <h3 id='subscribe-an-email-to-a-customer-list-put'>Subscribe an Email to a Customer List [PUT]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions</code></p>
 
 <p><code class="prettyprint">LIST_ID</code> should be the <code class="prettyprint">id</code> returned in the <a href="#get-customer-lists">list</a> response.</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3256,7 +3256,7 @@ Response 204
 <h2 id='list-subscribers'>List Subscribers</h2>
 <p>Returns a list&rsquo;s accepted subscribers, pending subscribers (haven&rsquo;t opted in yet) and unsubscribers.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/marketing/subscribers"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/marketing/subscribers"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -3276,12 +3276,12 @@ Response 204
     </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
     </span><span class="nt">"searchAfter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"test@email.com"</span><span class="p">],</span><span class="w">
-    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/api/v1/customer-lists/5b10ded082d2653410054ac3/subscribers?limit=10&amp;searchAfter=test%40email.com"</span><span class="w">
+    </span><span class="nt">"nextPage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/5b10ded082d2653410054ac3/subscribers?limit=10&amp;searchAfter=test%40email.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-subscribers-to-a-customer-list-get'>List all Subscribers to a Customer List [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
 
 <p><em>OAuth Scopes</em>: read_customers</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3339,7 +3339,7 @@ Response 204
 <h2 id='mass-unsubscribe'>Mass Unsubscribe</h2>
 <p>Removes one or more list&rsquo;s subscribers. There are two versions of this request: one that removes a list of emails, another that removes a whole segment.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X DELETE <span class="se">\</span>
@@ -3361,7 +3361,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='unsubscribe-via-email-list-delete'>Unsubscribe via Email List [DELETE]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
 
 <p><em>OAuth Scopes</em>: write_customers</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3423,7 +3423,7 @@ Response 204
   Response 400 - No emails provided, or is not an array
 </aside></p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X DELETE <span class="se">\</span>
@@ -3443,7 +3443,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='unsubscribe-via-customer-segment-delete'>Unsubscribe via Customer Segment [DELETE]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/customer-lists/{LIST_ID}/subscribers</code></p>
 
 <p><em>OAuth Scopes</em>: write_customers</p>
 <h3 id='arguments'>Arguments</h3>
@@ -3502,7 +3502,7 @@ Response 204
 <h2 id='list-customer-segments'>List Customer Segments</h2>
 <p>Returns all segments and where they&rsquo;re used.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/segments"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/segments"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre>
@@ -3538,7 +3538,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-customer-segments-get'>List all Customer Segments [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/segments</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/segments</code></p>
 
 <p><em>OAuth Scopes</em>: read_segments</p>
 <h3 id='return'>Return</h3>
@@ -3616,7 +3616,7 @@ Response 204
 
 <p>Refer to the <a href="#async-jobs">Async Jobs</a> documentation on how to access the job&rsquo;s result.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/segments/57b5aa3b046abfb053d80b52/async-export"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/segments/57b5aa3b046abfb053d80b52/async-export"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3635,7 +3635,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-export-job-post'>Create Export Job [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/segments/{SEGMENT_ID}/async-export</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/segments/{SEGMENT_ID}/async-export</code></p>
 
 <p><em>OAuth Scopes</em>: read_customers, read_segments</p>
 
@@ -4227,7 +4227,7 @@ Response 204
 <h2 id='view-webhooks'>View Webhooks</h2>
 <p>Returns all Webhooks registered for the current shop. If authorized through OAuth, only those webhooks created by the authorized PartnerApp will be listed.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/webhooks"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -4245,7 +4245,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-webhooks-get'>List all Webhooks [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/webhooks</code></p>
 
 <p><em>OAuth Scopes</em>: read_webhook, write_webhook</p>
 
@@ -4297,7 +4297,7 @@ Response 204
 </tr>
 </tbody></table>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -4313,7 +4313,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='show-single-webhook-get'>Show Single Webhook [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_webhook, write_webhook</p>
 
@@ -4377,7 +4377,7 @@ Response 204
 
 <p>Only one Webhook for a unique topic &amp; endpoint combination can exist for each Shop. Thus, trying to create multiple webhooks for the same topic and endpoint will result in errors.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/webhooks"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X POST <span class="se">\</span>
@@ -4409,7 +4409,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='create-webhook-post'>Create Webhook [POST]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/webhooks</code></p>
 
 <p><em>OAuth Scopes</em>: write_webhook</p>
 <h3 id='request-body'>Request Body</h3>
@@ -4495,7 +4495,7 @@ Response 204
 <h2 id='update-webhooks'>Update Webhooks</h2>
 <p>Update an existing webhook with new data. Can change either the topic or endpoint of an existing webhook.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X PATCH <span class="se">\</span>
@@ -4526,7 +4526,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='update-webhook-patchput'>Update Webhook [PATCH/PUT]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: write_webhook</p>
 
@@ -4628,13 +4628,13 @@ Response 204
 <h2 id='delete-webhook'>Delete Webhook</h2>
 <p>Delete an existing Webhook to stop receiving data at the endpoint.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/webhooks/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -X DELETE
 </code></pre>
 <h3 id='delete-webhook-delete'>Delete Webhook [DELETE]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/webhooks/{WEBHOOK_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: write_webhook</p>
 
@@ -4667,7 +4667,7 @@ Response 204
 <h2 id='list-async-jobs'>List Async Jobs</h2>
 <p>Returns all the Async Jobs created for the authenticated shop. When using OAuth, only jobs started by the authenticated app are returned.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/async-jobs"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -4682,7 +4682,7 @@ Response 204
       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"startedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:32:27.741Z"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"completedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:37:20.417Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
+      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b54"</span><span class="p">,</span><span class="w">
@@ -4701,7 +4701,7 @@ Response 204
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='list-all-jobs-get'>List all Jobs [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/async-jobs</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/async-jobs</code></p>
 
 <p><em>OAuth Scopes</em>: read_async_job</p>
 
@@ -4787,7 +4787,7 @@ Response 204
 <h2 id='get-async-job'>Get Async Job</h2>
 <p>Returns the requested Async Job. When using OAuth, only jobs started by the authenticated app can be accessed.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://app.conversio.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/async-jobs/57b5aa3b046abfb053d80b52"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
@@ -4801,12 +4801,12 @@ Response 204
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"startedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:32:27.741Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"completedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-03T16:37:20.417Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.conversio.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
+    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://commerce.campaignmonitor.com/async-jobs/57b5aa3b046abfb053d80b52.csv"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id='get-an-async-job-get'>Get an Async Job [GET]</h3>
-<p><code class="prettyprint">https://app.conversio.com/api/v1/async-jobs/{ASYNC_JOB_ID}</code></p>
+<p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/async-jobs/{ASYNC_JOB_ID}</code></p>
 
 <p><em>OAuth Scopes</em>: read_async_job</p>
 
@@ -4903,7 +4903,7 @@ Response 204
 <h2 id='get-partner-app'>Get Partner App</h2>
 <p>Returns the saved info for the authenticated Partner App.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+<span class="gp">$ </span>curl https://commerce.campaignmonitor.com/api/v1/partners/ <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ
 </span></code></pre>
@@ -4987,7 +4987,7 @@ Response 204
 <h2 id='update-partner-app'>Update Partner App</h2>
 <p>Updates the saved info for the authenticated Partner App. Use this to update a logo or an OAuth redirect URI.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl https://app.conversio.com/api/v1/partners/ <span class="se">\</span>
+<span class="gp">$ </span>curl https://commerce.campaignmonitor.com/api/v1/partners/ <span class="se">\</span>
   -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2I1YWEzYjA0NmFiZmIwNTNkODBiNTIifQ.sxd8uG4EkeIXHsIIVELrfGTIZcaTFE9a9YY-8HGHuOQ"</span> <span class="se">\</span>
   -X PATCH <span class="se">\</span>

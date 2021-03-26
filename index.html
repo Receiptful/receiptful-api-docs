@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Conversio V1 API</title>
+    <title>CM Commerce V1 API</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
@@ -50,11 +50,11 @@
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span>
 </code></pre>
 
-<p>Conversio provides three types of Authentication, each with its own use case. These are:</p>
+<p>CM Commerce provides three types of Authentication, each with its own use case. These are:</p>
 
 <ol>
 <li><strong>API Key</strong>: For store owners or someone affiliated with a store owner (typically a developer). This is the fastest way to get access to a store&rsquo;s data and actions;</li>
-<li><strong>OAuth</strong>: For Partner Apps that wish to authenticate with their users&#39; accounts in Conversio. This gives access to Conversio on behalf of one or more users.</li>
+<li><strong>OAuth</strong>: For Partner Apps that wish to authenticate with their users&#39; accounts in CM Commerce. This gives access to CM Commerce on behalf of one or more users.</li>
 <li><strong>HMAC</strong>: For Partner Apps only. Used for accessing the Partner App API.</li>
 </ol>
 <h2 id='api-key-authentication'>API Key Authentication</h2>
@@ -66,7 +66,7 @@
 Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaignmonitor.com/profile">profile page</a>.
 </aside></p>
 <h2 id='oauth'>OAuth</h2>
-<p>Conversio implements the Authorization Code Grant of the <a href="https://tools.ietf.org/html/rfc6749">OAuth v2.0</a> standard, with <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Tokens</a> (Proof of Possession).</p>
+<p>CM Commerce implements the Authorization Code Grant of the <a href="https://tools.ietf.org/html/rfc6749">OAuth v2.0</a> standard, with <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Tokens</a> (Proof of Possession).</p>
 
 <p>The standard is followed to spec, except for these cases:</p>
 
@@ -77,7 +77,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 <li><code class="prettyprint">state</code> is required and must have a minimum length.</li>
 </ul>
 
-<p>In general terms, the OAuth process involves a Partner App getting authorization from the User to access their account. When authorized, an Access Token must be requested from Conversio. This token can then be included in requests to Conversio to Authenticate &amp; Authorize the App to access a User&rsquo;s account.</p>
+<p>In general terms, the OAuth process involves a Partner App getting authorization from the User to access their account. When authorized, an Access Token must be requested from CM Commerce. This token can then be included in requests to CM Commerce to Authenticate &amp; Authorize the App to access a User&rsquo;s account.</p>
 
 <p>This section has the following structure:</p>
 
@@ -95,21 +95,21 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 </ul>
 <h3 id='terminology'>Terminology</h3>
 <ul>
-<li>User: Someone who owns an account in Conversio, and on whose behalf the API is used;</li>
-<li>Partner App: An app, authorized by Conversio, that can access a User&rsquo;s API when authorized by that User;</li>
+<li>User: Someone who owns an account in CM Commerce, and on whose behalf the API is used;</li>
+<li>Partner App: An app, authorized by CM Commerce, that can access a User&rsquo;s API when authorized by that User;</li>
 <li>Access Token: A 30 character string that, when included in an API request, Authenticates its associated User and Authorizes access according to it associated scopes.</li>
 <li>Scope: A string that represents permission to access a resource. Listed <a href="#scopes">here</a>.</li>
-<li>PoP Token: Proof of Possession Token. The only type of Access Token issued by Conversio.</li>
+<li>PoP Token: Proof of Possession Token. The only type of Access Token issued by CM Commerce.</li>
 <li>Code: A short-lived 60 character string that can be exchanged for an Access Token.</li>
 <li>Client Secret: A 60 character string that acts as password when Authenticating a Partner App and as symmetric key when signing a PoP Token.</li>
 <li>JWS: <a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature</a></li>
 </ul>
 <h3 id='issuing-access-token'>Issuing Access Token</h3>
-<p>Conversio uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:</p>
+<p>CM Commerce uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:</p>
 
 <ol>
-<li>Redirecting the User to Conversio, where they can authorize the Partner App</li>
-<li>Conversio redirects the User back to the Partner App, including a <code class="prettyprint">code</code></li>
+<li>Redirecting the User to CM Commerce, where they can authorize the Partner App</li>
+<li>CM Commerce redirects the User back to the Partner App, including a <code class="prettyprint">code</code></li>
 <li>The Partner App exchanges the <code class="prettyprint">code</code> for an <code class="prettyprint">access_token</code></li>
 </ol>
 
@@ -124,7 +124,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
   -d <span class="nv">state</span><span class="o">=</span>2034590283
 </code></pre>
 
-<p>To begin the OAuth flow, the User is redirected to Conversio&rsquo;s authorize endpoint:</p>
+<p>To begin the OAuth flow, the User is redirected to CM Commerce&rsquo;s authorize endpoint:</p>
 
 <p><code class="prettyprint">https://commerce.campaignmonitor.com/oauth/authorize</code></p>
 
@@ -142,7 +142,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 </tr>
 <tr>
 <td style="text-align: right"></td>
-<td>The Partner App&rsquo;s ID. Should be provided by Conversio.</td>
+<td>The Partner App&rsquo;s ID. Should be provided by CM Commerce.</td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>redirect_uri:</strong></td>
@@ -170,7 +170,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 </tr>
 </tbody></table>
 
-<p>The User will be required to log-in to Conversio as needed.</p>
+<p>The User will be required to log-in to CM Commerce as needed.</p>
 
 <p>If all required parameters are present and valid, the User can then review what permissions (scopes) are requested by which App. Conversely, any missing or invalid parameters will instead show an error page with a description of each problem.</p>
 
@@ -247,7 +247,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 
 <p>The <code class="prettyprint">state</code> param&rsquo;s value should be validated. It is exactly the same value as was sent in the first step. This ensures that the User is coming from the original request, and that the <code class="prettyprint">code</code> isn&rsquo;t from an earlier request intercepted by an attacker.</p>
 
-<p>The <code class="prettyprint">code</code> can now be used to request an Access Token from Conversio.</p>
+<p>The <code class="prettyprint">code</code> can now be used to request an Access Token from CM Commerce.</p>
 <h4 id='step-3-exchange-code-for-access-token'>Step 3: Exchange Code for Access Token</h4><pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
 <span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/oauth/access-token"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Basic NTdiNWFhM2IwNDZhYmZiMDUzZDgwYjUyOndhdGNodS1sb29raW4tYXQ="</span> <span class="se">\</span>
@@ -266,9 +266,9 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>To issue an <code class="prettyprint">access_token</code>, the received <code class="prettyprint">code</code> must be <code class="prettyprint">POST</code>ed to Conversio.</p>
+<p>To issue an <code class="prettyprint">access_token</code>, the received <code class="prettyprint">code</code> must be <code class="prettyprint">POST</code>ed to CM Commerce.</p>
 
-<p>This request must use HTTPS and be Authenticated using <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic Access Authentication</a> using the App&rsquo;s ID as the username and the App&rsquo;s Client Secret as password. Both are provided by Conversio.</p>
+<p>This request must use HTTPS and be Authenticated using <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic Access Authentication</a> using the App&rsquo;s ID as the username and the App&rsquo;s Client Secret as password. Both are provided by CM Commerce.</p>
 
 <p>The POST body must have the <code class="prettyprint">application/x-www-form-urlencoded</code> MIME type and the following parameters:</p>
 
@@ -296,7 +296,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 </tr>
 </tbody></table>
 
-<p>If the App is successfully authenticated, the <code class="prettyprint">redirect_uri</code> matches the App and the <code class="prettyprint">code</code> is valid, Conversio will return a new <code class="prettyprint">access_token</code> in JSON:</p>
+<p>If the App is successfully authenticated, the <code class="prettyprint">redirect_uri</code> matches the App and the <code class="prettyprint">code</code> is valid, CM Commerce will return a new <code class="prettyprint">access_token</code> in JSON:</p>
 
 <table><thead>
 <tr>
@@ -324,7 +324,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 
 <p>This <code class="prettyprint">access_token</code> can then be used to <a href="#authorizing-requests">authorize</a> any client when accessing the User&rsquo;s data.</p>
 <h3 id='authorizing-requests'>Authorizing Requests</h3>
-<p>As mentioned above, Conversio issues <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Access Tokens</a>. These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.</p>
+<p>As mentioned above, CM Commerce issues <a href="https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03">PoP Access Tokens</a>. These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.</p>
 
 <p>Reading the Tokens draft &amp; JWS RFC will provide deeper understanding of what&rsquo;s going on, but to get started quickly we&rsquo;d recommend using a lib for the language being used. Some examples:</p>
 
@@ -354,7 +354,7 @@ Your API Key can be found in the store&rsquo;s <a href="https://commerce.campaig
 <span class="c1">// &gt; 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo'</span>
 </code></pre>
 
-<p>As a first step, the Access Token received from Conversio must be included in an Object (Hash for Ruby) at the key <code class="prettyprint">at</code>. In that object, the current Unix time must be defined at the key <code class="prettyprint">ts</code>. This timestamp is validated by Conversio to be within 3 minutes of current time, in an effort to prevent header reuse by attackers.</p>
+<p>As a first step, the Access Token received from CM Commerce must be included in an Object (Hash for Ruby) at the key <code class="prettyprint">at</code>. In that object, the current Unix time must be defined at the key <code class="prettyprint">ts</code>. This timestamp is validated by CM Commerce to be within 3 minutes of current time, in an effort to prevent header reuse by attackers.</p>
 
 <p>This object is then signed with HMAC, generating 3 Base64 encoded strings, separated by a period. This is the PoP Token.</p>
 
@@ -1183,7 +1183,7 @@ Response 204 (application/json)
           {
              "reference":"rct",
              "variant":"rct2",
-             "description":"Conversio subscription",
+             "description":"CM Commerce subscription",
              "quantity":1,
              "amount":"39.99",
              "attributes":[{ "key": "foo", "value": "bar" }]
@@ -1270,7 +1270,7 @@ Response 204 (application/json)
 <tr>
 <td style="text-align: right"><strong>description:</strong></td>
 <td><strong>string, required</strong></td>
-<td><em>Conversio Hobby Plan</em></td>
+<td><em>CM Commerce Hobby Plan</em></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>quantity:</strong></td>
@@ -1869,7 +1869,7 @@ Response 200 (application/json)
 <h3 id='uninstall-the-userapp-post'>Uninstall the user/app [POST]</h3>
 <p><code class="prettyprint">https://commerce.campaignmonitor.com/api/v1/users/uninstall</code></p>
 
-<p>Tells Conversio to uninstall the user associated with the given API key. Among
+<p>Tells CM Commerce to uninstall the user associated with the given API key. Among
 other things, this automatically unsubscribes the user from a premium plan.</p>
 
 <p><aside class="success">
@@ -3148,7 +3148,7 @@ Response 204
   -d <span class="s1">'{
     "email": "an@email.com",
     "name": "John Snow",
-    "source": "Conversio",
+    "source": "CM Commerce",
     "sourceType": "SubscriptionForm",
     "sourceId": "some-form-slug",
     "optInText": "Subscribe to receive new product updates",
@@ -3231,7 +3231,7 @@ Response 204
 <h4 id='properties'>Properties</h4>
 <p>Property keys can have at most 100 characters in length and must match the regex <code class="prettyprint">/^[a-zA-Z0-9-_]+$/</code>. A maximum of 20 different properties are allowed per account.</p>
 
-<p>The first time a property is tracked (uniqueness is ensured by key), Conversio tries to infer its type. The following rules apply:</p>
+<p>The first time a property is tracked (uniqueness is ensured by key), CM Commerce tries to infer its type. The following rules apply:</p>
 
 <ul>
 <li>If value is <code class="prettyprint">null</code>, no type is inferenced.</li>
@@ -3689,11 +3689,11 @@ Response 204
           <h1 id='webhooks'>Webhooks</h1>
 <p>Endpoints for subscribing and configuring Webhooks triggered by events on your account.</p>
 
-<p>You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will <code class="prettyprint">POST</code> some data related to that event to the endpoints registered in webhooks that subscribed to that event&rsquo;s topic.</p>
+<p>You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), CM Commerce will <code class="prettyprint">POST</code> some data related to that event to the endpoints registered in webhooks that subscribed to that event&rsquo;s topic.</p>
 
 <p>When Webhook delivery fails (your endpoint can&rsquo;t be reached or returns an error status code), we&rsquo;ll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponential back-off fashion. Details are described <a href="#retry-mechanism">below</a>.</p>
 
-<p>For security purposes, all our webhooks use JSON Web Signatures (<a href="https://tools.ietf.org/html/rfc7515">JWS</a>). These allow recipients to validate that each webhook originates from Conversio. More details on the validation are <a href="#security-signature">below</a>.</p>
+<p>For security purposes, all our webhooks use JSON Web Signatures (<a href="https://tools.ietf.org/html/rfc7515">JWS</a>). These allow recipients to validate that each webhook originates from CM Commerce. More details on the validation are <a href="#security-signature">below</a>.</p>
 <h3 id='subscribable-topics'>Subscribable Topics</h3>
 <ul>
 <li><code class="prettyprint">newsletter-template/sent</code>: Triggered when all emails for a Newsletter have been sent.</li>
@@ -4221,7 +4221,7 @@ Response 204
 
 <p>This token is then serialized using <a href="https://tools.ietf.org/html/rfc7515#page-19">JWS Compact Serialization</a> and included in the Authorization header using the Bearer schema.</p>
 
-<p>Webhooks recipients should validate that every request is properly signed. This acts as guarantee that the webhook is valid and was sent by Conversio.</p>
+<p>Webhooks recipients should validate that every request is properly signed. This acts as guarantee that the webhook is valid and was sent by CM Commerce.</p>
 
 <p>Validating the signatures is a process made simple by programming libraries. The same library used during <a href="#authorizing-requests">OAuth</a> can be used here, just follow the examples on the right.</p>
 <h2 id='view-webhooks'>View Webhooks</h2>
@@ -4239,7 +4239,7 @@ Response 204
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57b5aa3b046abfb053d80b52"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newsletter-email/sent"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.endpoint.com/conversio-webhook"</span><span class="w">
+      </span><span class="nt">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.endpoint.com/cmcommerce-webhook"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5073,7 +5073,7 @@ Response 204
 </aside></p>
 
           <h1 id='errors'>Errors</h1>
-<p>The Conversio API uses the following error codes:</p>
+<p>The CM Commerce API uses the following error codes:</p>
 
 <table><thead>
 <tr>

@@ -6,10 +6,10 @@ $ curl "api_endpoint_here" \
   -H "X-ApiKey: YOUR_API_KEY"
 ```
 
-Conversio provides three types of Authentication, each with its own use case. These are:
+CM Commerce provides three types of Authentication, each with its own use case. These are:
 
 1. **API Key**: For store owners or someone affiliated with a store owner (typically a developer). This is the fastest way to get access to a store's data and actions;
-2. **OAuth**: For Partner Apps that wish to authenticate with their users' accounts in Conversio. This gives access to Conversio on behalf of one or more users.
+2. **OAuth**: For Partner Apps that wish to authenticate with their users' accounts in CM Commerce. This gives access to CM Commerce on behalf of one or more users.
 3. **HMAC**: For Partner Apps only. Used for accessing the Partner App API.
 
 ## API Key Authentication
@@ -24,7 +24,7 @@ Your API Key can be found in the store's [profile page](https://commerce.campaig
 
 ## OAuth
 
-Conversio implements the Authorization Code Grant of the [OAuth v2.0](https://tools.ietf.org/html/rfc6749) standard, with [PoP Tokens](https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03) (Proof of Possession).
+CM Commerce implements the Authorization Code Grant of the [OAuth v2.0](https://tools.ietf.org/html/rfc6749) standard, with [PoP Tokens](https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03) (Proof of Possession).
 
 The standard is followed to spec, except for these cases:
 
@@ -33,7 +33,7 @@ The standard is followed to spec, except for these cases:
 * `accessType` is not a required query parameter.
 * `state` is required and must have a minimum length.
 
-In general terms, the OAuth process involves a Partner App getting authorization from the User to access their account. When authorized, an Access Token must be requested from Conversio. This token can then be included in requests to Conversio to Authenticate & Authorize the App to access a User's account.
+In general terms, the OAuth process involves a Partner App getting authorization from the User to access their account. When authorized, an Access Token must be requested from CM Commerce. This token can then be included in requests to CM Commerce to Authenticate & Authorize the App to access a User's account.
 
 This section has the following structure:
 
@@ -47,21 +47,21 @@ This section has the following structure:
 
 ### Terminology
 
-* User: Someone who owns an account in Conversio, and on whose behalf the API is used;
-* Partner App: An app, authorized by Conversio, that can access a User's API when authorized by that User;
+* User: Someone who owns an account in CM Commerce, and on whose behalf the API is used;
+* Partner App: An app, authorized by CM Commerce, that can access a User's API when authorized by that User;
 * Access Token: A 30 character string that, when included in an API request, Authenticates its associated User and Authorizes access according to it associated scopes.
 * Scope: A string that represents permission to access a resource. Listed [here](#scopes).
-* PoP Token: Proof of Possession Token. The only type of Access Token issued by Conversio.
+* PoP Token: Proof of Possession Token. The only type of Access Token issued by CM Commerce.
 * Code: A short-lived 60 character string that can be exchanged for an Access Token.
 * Client Secret: A 60 character string that acts as password when Authenticating a Partner App and as symmetric key when signing a PoP Token.
 * JWS: [JSON Web Signature](https://tools.ietf.org/html/rfc7515)
 
 ### Issuing Access Token
 
-Conversio uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:
+CM Commerce uses the Authorization Code Grant flow from OAuth 2.0 to issue Access Tokens. This involves three requests:
 
-1. Redirecting the User to Conversio, where they can authorize the Partner App
-2. Conversio redirects the User back to the Partner App, including a `code`
+1. Redirecting the User to CM Commerce, where they can authorize the Partner App
+2. CM Commerce redirects the User back to the Partner App, including a `code`
 3. The Partner App exchanges the `code` for an `access_token`
 
 These three steps are described in detail below.
@@ -79,7 +79,7 @@ $ curl "https://commerce.campaignmonitor.com/oauth/authorize" \
   -d state=2034590283
 ```
 
-To begin the OAuth flow, the User is redirected to Conversio's authorize endpoint:
+To begin the OAuth flow, the User is redirected to CM Commerce's authorize endpoint:
 
 `https://commerce.campaignmonitor.com/oauth/authorize`
 
@@ -88,7 +88,7 @@ Including the following parameters in the URL query string:
 |Parameter        |Details|
 |----------------:|-----------|
 |**client_id:**   |**string** |
-|                 |The Partner App's ID. Should be provided by Conversio.|
+|                 |The Partner App's ID. Should be provided by CM Commerce.|
 |**redirect_uri:**|**string** |
 |                 |Where the User will be redirected. Must match the value saved for the Partner App.|
 |**scope:**       |**string, optional** |
@@ -96,7 +96,7 @@ Including the following parameters in the URL query string:
 |**state:**       |**string** |
 |                 |A random string, at least 10 characters long, that is unique. This will be passed on to `redirect_uri` when the User accepts or rejects the authorization, and should be validated to be the same.|
 
-The User will be required to log-in to Conversio as needed.
+The User will be required to log-in to CM Commerce as needed.
 
 If all required parameters are present and valid, the User can then review what permissions (scopes) are requested by which App. Conversely, any missing or invalid parameters will instead show an error page with a description of each problem.
 
@@ -137,7 +137,7 @@ At this point the User has authorized the Partner App to access their account on
 
 The `state` param's value should be validated. It is exactly the same value as was sent in the first step. This ensures that the User is coming from the original request, and that the `code` isn't from an earlier request intercepted by an attacker.
 
-The `code` can now be used to request an Access Token from Conversio.
+The `code` can now be used to request an Access Token from CM Commerce.
 
 #### Step 3: Exchange Code for Access Token
 
@@ -160,9 +160,9 @@ $ curl "https://commerce.campaignmonitor.com/oauth/access-token" \
 }
 ```
 
-To issue an `access_token`, the received `code` must be `POST`ed to Conversio.
+To issue an `access_token`, the received `code` must be `POST`ed to CM Commerce.
 
-This request must use HTTPS and be Authenticated using [Basic Access Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) using the App's ID as the username and the App's Client Secret as password. Both are provided by Conversio.
+This request must use HTTPS and be Authenticated using [Basic Access Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) using the App's ID as the username and the App's Client Secret as password. Both are provided by CM Commerce.
 
 The POST body must have the `application/x-www-form-urlencoded` MIME type and the following parameters:
 
@@ -173,7 +173,7 @@ The POST body must have the `application/x-www-form-urlencoded` MIME type and th
 |**redirect_uri:**     |**string** |
 |                      |The Partner App's redirect URI. It must be the exact same value as used to generate the `code`.|
 
-If the App is successfully authenticated, the `redirect_uri` matches the App and the `code` is valid, Conversio will return a new `access_token` in JSON:
+If the App is successfully authenticated, the `redirect_uri` matches the App and the `code` is valid, CM Commerce will return a new `access_token` in JSON:
 
 |Parameter             |Details|
 |---------------------:|-----------|
@@ -186,7 +186,7 @@ This `access_token` can then be used to [authorize](#authorizing-requests) any c
 
 ### Authorizing Requests
 
-As mentioned above, Conversio issues [PoP Access Tokens](https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03). These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.
+As mentioned above, CM Commerce issues [PoP Access Tokens](https://tools.ietf.org/html/draft-ietf-oauth-signed-http-request-03). These add a layer of security on top of Bearer tokens, requiring Partner Apps to sign every request using their Client Secret.
 
 Reading the Tokens draft & JWS RFC will provide deeper understanding of what's going on, but to get started quickly we'd recommend using a lib for the language being used. Some examples:
 
@@ -220,7 +220,7 @@ const popToken = jws.sign({ header, payload, secret: clientSecret });
 // > 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdCI6IjEyMzQ1NiIsInRzIjoxMjM0NTY3OH0.Pocf1CzRha25nwCfoZynProYLcV1UE5SlcRGa3qzZXo'
 ```
 
-As a first step, the Access Token received from Conversio must be included in an Object (Hash for Ruby) at the key `at`. In that object, the current Unix time must be defined at the key `ts`. This timestamp is validated by Conversio to be within 3 minutes of current time, in an effort to prevent header reuse by attackers.
+As a first step, the Access Token received from CM Commerce must be included in an Object (Hash for Ruby) at the key `at`. In that object, the current Unix time must be defined at the key `ts`. This timestamp is validated by CM Commerce to be within 3 minutes of current time, in an effort to prevent header reuse by attackers.
 
 This object is then signed with HMAC, generating 3 Base64 encoded strings, separated by a period. This is the PoP Token.
 

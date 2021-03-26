@@ -249,7 +249,7 @@ $ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subsc
   -d '{
     "email": "an@email.com",
     "name": "John Snow",
-    "source": "Conversio",
+    "source": "CM Commerce",
     "sourceType": "SubscriptionForm",
     "sourceId": "some-form-slug",
     "optInText": "Subscribe to receive new product updates",
@@ -291,7 +291,7 @@ $ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subsc
 
 Property keys can have at most 100 characters in length and must match the regex `/^[a-zA-Z0-9-_]+$/`. A maximum of 20 different properties are allowed per account.
 
-The first time a property is tracked (uniqueness is ensured by key), Conversio tries to infer its type. The following rules apply:
+The first time a property is tracked (uniqueness is ensured by key), CM Commerce tries to infer its type. The following rules apply:
 
 * If value is `null`, no type is inferenced.
 * If a value can be cast to a number:

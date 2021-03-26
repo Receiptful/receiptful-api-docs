@@ -2,11 +2,11 @@
 
 Endpoints for subscribing and configuring Webhooks triggered by events on your account.
 
-You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), Conversio will `POST` some data related to that event to the endpoints registered in webhooks that subscribed to that event's topic.
+You should use webhooks to get near real-time updates on events in a shop. When one of the supported events happens (eg: a newsletter email is sent), CM Commerce will `POST` some data related to that event to the endpoints registered in webhooks that subscribed to that event's topic.
 
 When Webhook delivery fails (your endpoint can't be reached or returns an error status code), we'll keep trying to re-send the failed Webhooks up to a limited number of tries, in an exponential back-off fashion. Details are described [below](#retry-mechanism).
 
-For security purposes, all our webhooks use JSON Web Signatures ([JWS](https://tools.ietf.org/html/rfc7515)). These allow recipients to validate that each webhook originates from Conversio. More details on the validation are [below](#security-signature).
+For security purposes, all our webhooks use JSON Web Signatures ([JWS](https://tools.ietf.org/html/rfc7515)). These allow recipients to validate that each webhook originates from CM Commerce. More details on the validation are [below](#security-signature).
 
 ### Subscribable Topics
 
@@ -297,7 +297,7 @@ The token's body itself includes the following keys:
 
 This token is then serialized using [JWS Compact Serialization](https://tools.ietf.org/html/rfc7515#page-19) and included in the Authorization header using the Bearer schema.
 
-Webhooks recipients should validate that every request is properly signed. This acts as guarantee that the webhook is valid and was sent by Conversio.
+Webhooks recipients should validate that every request is properly signed. This acts as guarantee that the webhook is valid and was sent by CM Commerce.
 
 Validating the signatures is a process made simple by programming libraries. The same library used during [OAuth](#authorizing-requests) can be used here, just follow the examples on the right.
 
@@ -319,7 +319,7 @@ $ curl "https://commerce.campaignmonitor.com/api/v1/webhooks" \
     {
       "id": "57b5aa3b046abfb053d80b52",
       "topic": "newsletter-email/sent",
-      "endpoint": "https://www.endpoint.com/conversio-webhook"
+      "endpoint": "https://www.endpoint.com/cmcommerce-webhook"
     }
   ]
 }

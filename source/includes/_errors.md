@@ -1,6 +1,6 @@
 # Errors
 
-The Conversio API uses the following error codes:
+The CM Commerce API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------

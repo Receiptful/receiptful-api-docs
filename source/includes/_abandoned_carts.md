@@ -20,7 +20,7 @@ $ curl "https://commerce.campaignmonitor.com/api/v1/abandoned-carts" \
           {
              "reference":"rct",
              "variant":"rct2",
-             "description":"Conversio subscription",
+             "description":"CM Commerce subscription",
              "quantity":1,
              "amount":"39.99",
              "attributes":[{ "key": "foo", "value": "bar" }]
@@ -62,7 +62,7 @@ The items inside the cart. Object contents:
 |----------------:|---------------------------|--------------------------------|
 |**reference:**   |**string, optional**       |*c_123*                         |
 |**variant:**     |**string, optional**       |*c_123_2*                       |
-|**description:** |**string, required**       |*Conversio Hobby Plan*          |
+|**description:** |**string, required**       |*CM Commerce Hobby Plan*        |
 |**quantity:**    |**number, optional**       |*1*                             |
 |**amount:**      |**number, required**       |*29.00*                         |
 |                 |A single item's price.     |                                |

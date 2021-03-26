@@ -44,7 +44,7 @@ $ curl "https://commerce.campaignmonitor.com/api/v1/users/uninstall" \
 
 `https://commerce.campaignmonitor.com/api/v1/users/uninstall`
 
-Tells Conversio to uninstall the user associated with the given API key. Among
+Tells CM Commerce to uninstall the user associated with the given API key. Among
 other things, this automatically unsubscribes the user from a premium plan.
 
 <aside class="success">

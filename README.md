@@ -1,5 +1,9 @@
-Slate
+CM Commerce API Documentation
 ========
+
+Deployment
+------------------------------
+This repository is deployed to Github Pages using [Codeship](https://app.codeship.com/projects/e569c180-4c7e-0132-836b-56f215a90c58). The Github Page is aliased by the [CM Commerce developers](https://developers.commerce.campaignmonitor.com) sub-domain, which is managed by the CM infrastructure team. In the event it needs to change, the `source/CNAME` file also needs to be updated to tell Github to accept requests on the new domain.
 
 Getting Started with Slate
 ------------------------------

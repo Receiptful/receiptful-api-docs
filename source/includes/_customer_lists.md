@@ -380,14 +380,13 @@ Removes one or more list's subscribers. There are two versions of this request: 
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscribers" \
   -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
   -X DELETE \
   -G \
-  -d '{
-    "emails": ["an@email.com", "another@email.com"]
-  }'
+  -d "emails[]=email1@example.org" \
+  -d "emails[]=email2@example.org" \
+  -d "emails[]=email3@example.org"
 ```
 
 > EXAMPLE RESPONSE
@@ -438,14 +437,11 @@ These are provided via query params.
 
 ```shell
 # EXAMPLE REQUEST
-$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions" \
+$ curl "https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscribers" \
   -H "X-ApiKey: YOUR_API_KEY" \
-  -H "Accept: application/json" \
   -X DELETE \
   -G \
-  -d '{
-    "segment": "{\"criteria\":[{\"criteriaName\":\"receipt.sent\",\"negate\":true,\"filters\":[]}]}"
-  }'
+  -d "segment={\"criteria\":[{\"criteriaName\":\"receipt.sent\",\"negate\":true,\"filters\":[]}]}"
 ```
 
 > EXAMPLE RESPONSE
@@ -470,7 +466,7 @@ These are provided via query params.
 
 |Key               |Details                                                                  |
 |-----------------:|-------------------------------------------------------------------------|
-|**segment:**      |**string[]**                                                             |
+|**segment:**      |**string**                                                               |
 |                  |A Customer Segment in JSON format.                                       |
 
 ### Return

@@ -3339,14 +3339,13 @@ Response 204
 <h2 id='mass-unsubscribe'>Mass Unsubscribe</h2>
 <p>Removes one or more list&rsquo;s subscribers. There are two versions of this request: one that removes a list of emails, another that removes a whole segment.</p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscribers"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X DELETE <span class="se">\</span>
   -G <span class="se">\</span>
-  -d <span class="s1">'{
-    "emails": ["an@email.com", "another@email.com"]
-  }'</span>
+  -d <span class="s2">"emails[]=email1@example.org"</span> <span class="se">\</span>
+  -d <span class="s2">"emails[]=email2@example.org"</span> <span class="se">\</span>
+  -d <span class="s2">"emails[]=email3@example.org"</span>
 </code></pre>
 
 <blockquote>
@@ -3423,14 +3422,11 @@ Response 204
   Response 400 - No emails provided, or is not an array
 </aside></p>
 <pre class="highlight shell"><code><span class="c"># EXAMPLE REQUEST</span>
-<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscriptions"</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s2">"https://commerce.campaignmonitor.com/api/v1/customer-lists/LIST_ID/subscribers"</span> <span class="se">\</span>
   -H <span class="s2">"X-ApiKey: YOUR_API_KEY"</span> <span class="se">\</span>
-  -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
   -X DELETE <span class="se">\</span>
   -G <span class="se">\</span>
-  -d <span class="s1">'{
-    "segment": "{\"criteria\":[{\"criteriaName\":\"receipt.sent\",\"negate\":true,\"filters\":[]}]}"
-  }'</span>
+  -d <span class="s2">"segment={</span><span class="se">\"</span><span class="s2">criteria</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">criteriaName</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">receipt.sent</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">negate</span><span class="se">\"</span><span class="s2">:true,</span><span class="se">\"</span><span class="s2">filters</span><span class="se">\"</span><span class="s2">:[]}]}"</span>
 </code></pre>
 
 <blockquote>
@@ -3457,7 +3453,7 @@ Response 204
 </thead><tbody>
 <tr>
 <td style="text-align: right"><strong>segment:</strong></td>
-<td><strong>string[]</strong></td>
+<td><strong>string</strong></td>
 </tr>
 <tr>
 <td style="text-align: right"></td>
